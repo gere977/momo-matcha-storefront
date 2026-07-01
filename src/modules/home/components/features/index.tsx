@@ -57,7 +57,7 @@ const Features = () => {
     <section className="bg-matcha-bg py-20 px-6">
       <div className="content-container grid grid-cols-1 small:grid-cols-3 gap-12 text-center">
         {FEATURES.map((f) => (
-          <div key={f.title} data-reveal-col>
+          <div key={f.title} data-reveal-col className="opacity-0 translate-y-[40px]">
             <div className="w-14 h-14 mx-auto mb-5 text-matcha">{f.icon}</div>
             <h3 className="font-heading text-3xl text-matcha-text mb-2">{f.title}</h3>
             <p className="text-sm text-matcha-text/70 leading-relaxed">{f.body}</p>

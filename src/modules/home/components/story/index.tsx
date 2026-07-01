@@ -18,20 +18,20 @@ const Story = () => {
         }}
       />
       <div data-story-content className="relative z-10 text-center max-w-2xl mx-auto">
-        <span className="block text-xs tracking-[4px] uppercase text-white/60 mb-5">
+        <span className="opacity-0 translate-y-[30px] block text-xs tracking-[4px] uppercase text-white/60 mb-5">
           A mi történetünk
         </span>
-        <h2 className="font-heading text-6xl small:text-7xl leading-none text-matcha-bg mb-6">
+        <h2 className="opacity-0 translate-y-[30px] font-heading text-6xl small:text-7xl leading-none text-matcha-bg mb-6">
           Az Uji dombjain született.
         </h2>
-        <p className="text-lg text-white/80 leading-relaxed mb-8">
+        <p className="opacity-0 translate-y-[30px] text-lg text-white/80 leading-relaxed mb-8">
           Japán, Uji ősi teakertjeinek mélyén évszázadok óta termesztenek ceremoniális
           matchát. Mi megtaláltuk ezeket a kerteket — és elhozzuk rituáléjukat a
           reggeleitekbe.
         </p>
         <a
           href="/pages/about"
-          className="inline-block text-matcha-bg font-semibold tracking-wide text-sm border-b border-white/50 pb-1 hover:text-matcha-kraft hover:border-matcha-kraft transition-colors"
+          className="opacity-0 translate-y-[30px] inline-block text-matcha-bg font-semibold tracking-wide text-sm border-b border-white/50 pb-1 hover:text-matcha-kraft hover:border-matcha-kraft transition-colors"
         >
           Ismerje meg a matchát →
         </a>
