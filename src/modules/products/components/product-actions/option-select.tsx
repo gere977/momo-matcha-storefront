@@ -1,0 +1,55 @@
+import { HttpTypes } from "@medusajs/types"
+import { clx } from "@medusajs/ui"
+import React from "react"
+
+type OptionSelectProps = {
+  option: HttpTypes.StoreProductOption
+  current: string | undefined
+  updateOption: (title: string, value: string) => void
+  title: string
+  disabled: boolean
+  "data-testid"?: string
+}
+
+const OptionSelect: React.FC<OptionSelectProps> = ({
+  option,
+  current,
+  updateOption,
+  title,
+  "data-testid": dataTestId,
+  disabled,
+}) => {
+  const filteredOptions = (option.values ?? []).map((v) => v.value)
+
+  return (
+    <div className="flex flex-col gap-y-3">
+      <span className="text-sm font-semibold text-matcha-text">Válassz {title}</span>
+      <div
+        className="flex flex-wrap justify-between gap-2"
+        data-testid={dataTestId}
+      >
+        {filteredOptions.map((v) => {
+          return (
+            <button
+              onClick={() => updateOption(option.id, v)}
+              key={v}
+              className={clx(
+                "border-matcha-kraft bg-white border text-small-regular font-semibold h-10 rounded-full p-2 flex-1 transition-colors",
+                {
+                  "border-matcha text-matcha bg-matcha/5": v === current,
+                  "hover:border-matcha/50 text-matcha-text": v !== current,
+                }
+              )}
+              disabled={disabled}
+              data-testid="option-button"
+            >
+              {v}
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+export default OptionSelect
