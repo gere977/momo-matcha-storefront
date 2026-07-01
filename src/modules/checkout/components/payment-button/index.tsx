@@ -78,6 +78,7 @@ const RedirectPaymentButton = ({
       isLoading={submitting}
       onClick={handlePayment}
       size="large"
+      className="bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider border-none"
       data-testid={dataTestId}
     >
       Tovább a fizetéshez
@@ -180,9 +181,10 @@ const StripePaymentButton = ({
         onClick={handlePayment}
         size="large"
         isLoading={submitting}
+        className="bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider border-none"
         data-testid={dataTestId}
       >
-        Place order
+        Megrendelés leadása
       </Button>
       <ErrorMessage
         error={errorMessage}
@@ -219,9 +221,10 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
         isLoading={submitting}
         onClick={handlePayment}
         size="large"
+        className="bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider border-none"
         data-testid="submit-order-button"
       >
-        Place order
+        Megrendelés leadása
       </Button>
       <ErrorMessage
         error={errorMessage}
