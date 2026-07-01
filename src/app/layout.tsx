@@ -19,7 +19,7 @@ const quicksand = Quicksand({
 })
 
 export const metadata: Metadata = {
-  title: "Momo Matcha | Find Your Ritual",
+  title: "Momo Matcha | Találd meg a rituálédat",
   metadataBase: new URL(getBaseURL()),
 }
 

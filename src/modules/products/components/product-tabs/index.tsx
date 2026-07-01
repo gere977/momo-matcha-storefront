@@ -14,11 +14,11 @@ type ProductTabsProps = {
 const ProductTabs = ({ product }: ProductTabsProps) => {
   const tabs = [
     {
-      label: "Product Information",
+      label: "Termékinformáció",
       component: <ProductInfoTab product={product} />,
     },
     {
-      label: "Shipping & Returns",
+      label: "Szállítás és visszaküldés",
       component: <ShippingInfoTab />,
     },
   ]
@@ -47,25 +47,25 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
       <div className="grid grid-cols-2 gap-x-8">
         <div className="flex flex-col gap-y-4">
           <div>
-            <span className="font-semibold">Material</span>
+            <span className="font-semibold">Anyag</span>
             <p>{product.material ? product.material : "-"}</p>
           </div>
           <div>
-            <span className="font-semibold">Country of origin</span>
+            <span className="font-semibold">Származási ország</span>
             <p>{product.origin_country ? product.origin_country : "-"}</p>
           </div>
           <div>
-            <span className="font-semibold">Type</span>
+            <span className="font-semibold">Típus</span>
             <p>{product.type ? product.type.value : "-"}</p>
           </div>
         </div>
         <div className="flex flex-col gap-y-4">
           <div>
-            <span className="font-semibold">Weight</span>
+            <span className="font-semibold">Súly</span>
             <p>{product.weight ? `${product.weight} g` : "-"}</p>
           </div>
           <div>
-            <span className="font-semibold">Dimensions</span>
+            <span className="font-semibold">Méretek</span>
             <p>
               {product.length && product.width && product.height
                 ? `${product.length}L x ${product.width}W x ${product.height}H`
@@ -85,31 +85,30 @@ const ShippingInfoTab = () => {
         <div className="flex items-start gap-x-2">
           <FastDelivery />
           <div>
-            <span className="font-semibold">Fast delivery</span>
+            <span className="font-semibold">Gyors kiszállítás</span>
             <p className="max-w-sm">
-              Your package will arrive in 3-5 business days at your pick up
-              location or in the comfort of your home.
+              A csomagod 3-5 munkanapon belül megérkezik a választott
+              átvételi pontra vagy kényelmesen otthonodba.
             </p>
           </div>
         </div>
         <div className="flex items-start gap-x-2">
           <Refresh />
           <div>
-            <span className="font-semibold">Simple exchanges</span>
+            <span className="font-semibold">Egyszerű csere</span>
             <p className="max-w-sm">
-              Is the fit not quite right? No worries - we&apos;ll exchange your
-              product for a new one.
+              Nem megfelelő a termék? Semmi gond - kicseréljük egy újra.
             </p>
           </div>
         </div>
         <div className="flex items-start gap-x-2">
           <Back />
           <div>
-            <span className="font-semibold">Easy returns</span>
+            <span className="font-semibold">Egyszerű visszaküldés</span>
             <p className="max-w-sm">
-              Just return your product and we&apos;ll refund your money. No
-              questions asked – we&apos;ll do our best to make sure your return
-              is hassle-free.
+              Egyszerűen küldd vissza a terméket, és visszatérítjük a
+              vételárat. Nincs szükség indoklásra - mindent megteszünk, hogy a
+              visszaküldés zökkenőmentes legyen.
             </p>
           </div>
         </div>

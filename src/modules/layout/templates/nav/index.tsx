@@ -30,7 +30,7 @@ export default async function Nav() {
               <LocalizedClientLink className="hover:text-matcha" href="/collections/matcha">
                 Matcha Teák
               </LocalizedClientLink>
-              <LocalizedClientLink className="hover:text-matcha" href="/collections/accessories">
+              <LocalizedClientLink className="hover:text-matcha" href="/categories/kiegeszitok">
                 Kiegészítők
               </LocalizedClientLink>
             </div>
