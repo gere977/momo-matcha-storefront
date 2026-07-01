@@ -1,6 +1,6 @@
 "use client"
 
-import { isManual, isStripeLike } from "@lib/constants"
+import { isManual, isRedirectGateway, isStripeLike } from "@lib/constants"
 import { placeOrder } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
@@ -39,9 +39,50 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
       return (
         <ManualTestPaymentButton notReady={notReady} data-testid={dataTestId} />
       )
+    case isRedirectGateway(paymentSession?.provider_id):
+      return (
+        <RedirectPaymentButton
+          notReady={notReady}
+          gatewayUrl={
+            (paymentSession?.data?.gateway_url as string) ??
+            (paymentSession?.data?.payment_url as string)
+          }
+          data-testid={dataTestId}
+        />
+      )
     default:
-      return <Button disabled>Select a payment method</Button>
+      return <Button disabled>Válassz fizetési módot</Button>
   }
+}
+
+const RedirectPaymentButton = ({
+  notReady,
+  gatewayUrl,
+  "data-testid": dataTestId,
+}: {
+  notReady: boolean
+  gatewayUrl?: string
+  "data-testid"?: string
+}) => {
+  const [submitting, setSubmitting] = useState(false)
+
+  const handlePayment = () => {
+    if (!gatewayUrl) return
+    setSubmitting(true)
+    window.location.href = gatewayUrl
+  }
+
+  return (
+    <Button
+      disabled={notReady || !gatewayUrl}
+      isLoading={submitting}
+      onClick={handlePayment}
+      size="large"
+      data-testid={dataTestId}
+    >
+      Tovább a fizetéshez
+    </Button>
+  )
 }
 
 const StripePaymentButton = ({

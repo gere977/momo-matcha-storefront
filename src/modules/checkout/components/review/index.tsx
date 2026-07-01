@@ -24,24 +24,24 @@ const Review = ({ cart }: { cart: any }) => {
         <Heading
           level="h2"
           className={clx(
-            "flex flex-row text-3xl-regular gap-x-2 items-baseline",
+            "flex flex-row font-heading text-3xl text-matcha-accent gap-x-2 items-baseline",
             {
               "opacity-50 pointer-events-none select-none": !isOpen,
             }
           )}
         >
-          Review
+          Összesítés
         </Heading>
       </div>
       {isOpen && previousStepsCompleted && (
         <>
           <div className="flex items-start gap-x-1 w-full mb-6">
             <div className="w-full">
-              <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                By clicking the Place Order button, you confirm that you have
-                read, understand and accept our Terms of Use, Terms of Sale and
-                Returns Policy and acknowledge that you have read Medusa
-                Store&apos;s Privacy Policy.
+              <Text className="txt-medium-plus text-matcha-text/70 mb-1">
+                A Rendelés leadása gombra kattintva elfogadod az Általános
+                Szerződési Feltételeinket és a Visszaküldési szabályzatunkat,
+                valamint megerősíted, hogy elolvastad az Adatvédelmi
+                szabályzatunkat.
               </Text>
             </div>
           </div>

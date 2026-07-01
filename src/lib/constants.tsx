@@ -34,6 +34,10 @@ export const paymentInfoMap: Record<
     title: "Manual Payment",
     icon: <CreditCard />,
   },
+  pp_barion_barion: {
+    title: "Barion",
+    icon: <CreditCard />,
+  },
   // Add more payment providers here
 }
 
@@ -49,6 +53,12 @@ export const isPaypal = (providerId?: string) => {
 }
 export const isManual = (providerId?: string) => {
   return providerId?.startsWith("pp_system_default")
+}
+
+// Barion is redirect-based: the customer is sent to the gateway's hosted page,
+// then redirected back to /checkout/payment-return to finalize the order.
+export const isRedirectGateway = (providerId?: string) => {
+  return providerId?.startsWith("pp_barion_")
 }
 
 // Add currencies that don't need to be divided by 100
