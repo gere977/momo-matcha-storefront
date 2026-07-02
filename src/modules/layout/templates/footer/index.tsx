@@ -17,7 +17,7 @@ export default async function Footer() {
           <div>
             <LocalizedClientLink
               href="/"
-              className="font-heading text-4xl text-matcha hover:text-matcha"
+              className="font-heading font-bold text-4xl text-matcha hover:text-matcha"
             >
               Momo Matcha
             </LocalizedClientLink>

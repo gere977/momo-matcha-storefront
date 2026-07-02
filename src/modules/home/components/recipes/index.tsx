@@ -42,7 +42,7 @@ const Recipes = () => {
           <span className="block text-xs font-bold tracking-[3px] text-matcha mb-2">
             RECEPTEK
           </span>
-          <h2 className="font-heading text-4xl small:text-5xl text-matcha-text mb-2">
+          <h2 className="font-heading font-bold text-4xl small:text-5xl text-matcha-text mb-2">
             Készítsd el te is
           </h2>
           <p className="text-matcha-text/50">Három módja, hogy élvezd a matchádat.</p>

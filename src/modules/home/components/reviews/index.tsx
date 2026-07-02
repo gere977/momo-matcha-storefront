@@ -45,7 +45,7 @@ const Reviews = () => {
             <span className="block text-xs font-bold tracking-[3px] text-matcha mb-2">
               VÉLEMÉNYEK
             </span>
-            <h2 className="font-heading text-4xl small:text-5xl text-matcha-text leading-tight">
+            <h2 className="font-heading font-bold text-4xl small:text-5xl text-matcha-text leading-tight">
               Mit mondanak vásárlóink
             </h2>
           </div>

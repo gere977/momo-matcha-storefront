@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <html lang="hu" data-mode="light" className={`${fredoka.variable} ${quicksand.variable}`}>
+    <html lang="hu" data-mode="light" className={`${nunito.variable} ${quicksand.variable}`}>
       <body>
         <GsapScrollEffects />
         <main className="relative">{props.children}</main>

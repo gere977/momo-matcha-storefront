@@ -23,7 +23,7 @@ const Story = () => {
         <span className="opacity-0 translate-y-[30px] block text-xs tracking-[4px] uppercase text-white/60 mb-5">
           A mi történetünk
         </span>
-        <h2 className="opacity-0 translate-y-[30px] font-heading text-6xl small:text-7xl leading-none text-matcha-bg mb-6">
+        <h2 className="opacity-0 translate-y-[30px] font-heading font-bold text-6xl small:text-7xl leading-none text-matcha-bg mb-6">
           Az Uji dombjain született.
         </h2>
         <p className="opacity-0 translate-y-[30px] text-lg text-white/80 leading-relaxed mb-8">

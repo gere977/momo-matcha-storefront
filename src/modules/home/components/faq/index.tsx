@@ -33,7 +33,7 @@ const Faq = () => {
       <div className="content-container">
         <div className="text-center mb-12">
           <span className="block text-xs font-bold tracking-[3px] text-matcha mb-2">GYIK</span>
-          <h2 className="font-heading text-4xl small:text-5xl text-matcha-text">
+          <h2 className="font-heading font-bold text-4xl small:text-5xl text-matcha-text">
             Amit tudni érdemes
           </h2>
         </div>
