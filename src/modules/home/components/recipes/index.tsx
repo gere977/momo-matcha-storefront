@@ -52,10 +52,10 @@ const Recipes = () => {
           {RECIPES.map((r) => (
             <div
               key={r.title}
-              className="bg-white rounded-2xl overflow-hidden border border-matcha-kraft/30 hover:shadow-lg hover:-translate-y-1 transition-all"
+              className="bg-white rounded-large overflow-hidden border border-matcha-kraft/40 hover:shadow-lg hover:-translate-y-1 transition-all"
             >
               <div
-                className="h-36 flex items-center justify-center text-4xl"
+                className="h-40 flex items-center justify-center text-6xl"
                 style={{ background: r.gradient }}
               >
                 🍵
@@ -67,7 +67,7 @@ const Recipes = () => {
                     Egyszerű
                   </span>
                 </div>
-                <h3 className="font-heading text-2xl text-matcha-text mb-2">{r.title}</h3>
+                <h3 className="font-heading font-bold text-2xl text-matcha-dark mb-2">{r.title}</h3>
                 <p className="text-sm text-matcha-text/60 leading-relaxed mb-4">{r.desc}</p>
                 <ol className="list-decimal list-inside flex flex-col gap-1.5">
                   {r.steps.map((s) => (

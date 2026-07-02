@@ -36,8 +36,10 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
               className={clx(
                 "border-matcha-kraft bg-white border text-small-regular font-semibold h-10 rounded-full p-2 flex-1 transition-colors",
                 {
-                  "border-matcha text-matcha bg-matcha/5": v === current,
-                  "hover:border-matcha/50 text-matcha-text": v !== current,
+                  "border-matcha-accent text-matcha-accent bg-matcha-accent/10":
+                    v === current,
+                  "hover:border-matcha-accent/50 text-matcha-text":
+                    v !== current,
                 }
               )}
               disabled={disabled}
