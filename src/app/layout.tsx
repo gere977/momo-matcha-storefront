@@ -1,15 +1,15 @@
 import { getBaseURL } from "@lib/util/env"
 import { Metadata } from "next"
-import { Baloo_2, Quicksand } from "next/font/google"
+import { Nunito, Quicksand } from "next/font/google"
 import GsapScrollEffects from "@modules/common/components/gsap-scroll-effects"
 import "styles/globals.css"
 
-// Chunky, rounded, friendly genZ display font for headings + the wordmark.
-// Baloo 2 has strong latin-ext coverage, so Hungarian double-acutes (ő, ű)
-// render properly instead of looking out of place.
-const baloo = Baloo_2({
+// Rounded, friendly genZ display font for headings + the wordmark. Nunito has
+// complete, well-tested Hungarian coverage, so the double-acutes (ő, ű) render
+// correctly — unlike Fredoka / Baloo 2, whose ő fell back to a mismatched glyph.
+const nunito = Nunito({
   subsets: ["latin", "latin-ext"],
-  weight: ["500", "600", "700"],
+  weight: ["600", "700", "800"],
   variable: "--font-heading",
   display: "swap",
 })
