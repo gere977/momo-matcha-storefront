@@ -18,7 +18,7 @@ export default async function Nav() {
   return (
     <div className="sticky top-0 inset-x-0 z-50 group">
       <header className="relative h-16 mx-auto border-b duration-200 bg-matcha-bg/85 backdrop-blur-md border-matcha-kraft/40">
-        <nav className="content-container txt-xsmall-plus text-matcha-text flex items-center justify-between w-full h-full text-small-regular">
+        <nav className="content-container text-matcha-text flex items-center justify-between w-full h-full text-[15px] font-body font-semibold">
           <div className="flex-1 basis-0 h-full flex items-center gap-x-6">
             <div className="h-full">
               <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
@@ -47,7 +47,7 @@ export default async function Nav() {
               <img
                 src="/images/logo.jpg"
                 alt="Momo Matcha"
-                className="h-12 w-auto"
+                className="h-14 w-auto"
                 style={{ mixBlendMode: "multiply" }}
               />
             </LocalizedClientLink>
