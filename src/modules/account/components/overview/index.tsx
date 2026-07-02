@@ -44,7 +44,7 @@ const Overview = ({ customer, orders }: OverviewProps) => {
         <div
           className="relative overflow-hidden rounded-2xl text-white p-8 mb-10"
           style={{
-            background: "linear-gradient(135deg, #5a7d44 0%, #2D4A1E 100%)",
+            background: "linear-gradient(135deg, #7C9B5E 0%, #3B5A2E 100%)",
           }}
         >
           <p className="text-xs font-semibold tracking-[2px] uppercase text-white/75 mb-2">
