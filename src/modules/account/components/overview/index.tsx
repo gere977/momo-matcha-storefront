@@ -146,7 +146,7 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                               data-testid="open-order-button"
                             >
                               <span className="sr-only">
-                                Go to order #{order.display_id}
+                                Ugrás a #{order.display_id} rendeléshez
                               </span>
                               <ChevronDown className="-rotate-90" />
                             </button>
