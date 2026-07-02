@@ -21,6 +21,7 @@ export function SubmitButton({
     <Button
       size="large"
       className={clx(
+        "rounded-full",
         (variant || "primary") === "primary" &&
           "bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider border-none",
         className
