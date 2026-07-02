@@ -51,6 +51,10 @@ export const listProducts = async ({
 
   const next = {
     ...(await getCacheOptions("products")),
+    // Time-based revalidation (30s) so newly published / edited products show up
+    // without a manual on-demand revalidation webhook (not wired up yet). The
+    // default `force-cache` alone froze the list on an empty snapshot.
+    revalidate: 30,
   }
 
   return sdk.client
@@ -68,7 +72,6 @@ export const listProducts = async ({
         },
         headers,
         next,
-        cache: "force-cache",
       }
     )
     .then(({ products, count }) => {
