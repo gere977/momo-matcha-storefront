@@ -6,7 +6,7 @@ const Story = () => {
       data-story-section
       className="relative py-28 px-6 bg-cover overflow-hidden"
       style={{
-        backgroundColor: "#2D4A1E",
+        backgroundColor: "#3B5A2E",
         // Swap this file (public/images/story.jpg) for your own brand photo.
         backgroundImage: "url('/images/story.jpg')",
         backgroundPosition: "center 30%",
@@ -16,7 +16,7 @@ const Story = () => {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(135deg, rgba(45,74,30,0.75) 0%, rgba(20,35,12,0.82) 100%)",
+            "linear-gradient(135deg, rgba(59,90,46,0.74) 0%, rgba(30,45,22,0.85) 100%)",
         }}
       />
       <div data-story-content className="relative z-10 text-center max-w-2xl mx-auto">
@@ -33,9 +33,9 @@ const Story = () => {
         </p>
         <LocalizedClientLink
           href="/pages/about"
-          className="opacity-0 translate-y-[30px] inline-block text-matcha-bg font-semibold tracking-wide text-sm border-b border-white/50 pb-1 hover:text-matcha-kraft hover:border-matcha-kraft transition-colors"
+          className="opacity-0 translate-y-[30px] inline-block mt-2 px-8 py-3.5 rounded-full bg-matcha-cream text-matcha-dark font-bold uppercase tracking-wider text-xs hover:bg-white hover:-translate-y-0.5 transition-all"
         >
-          Ismerje meg a matchát →
+          Ismerje meg a matchát
         </LocalizedClientLink>
       </div>
     </section>

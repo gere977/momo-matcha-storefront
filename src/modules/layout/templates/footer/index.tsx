@@ -13,7 +13,7 @@ export default async function Footer() {
   return (
     <footer className="border-t border-matcha-kraft/50 bg-matcha-kraft/20 w-full">
       <div className="content-container flex flex-col w-full">
-        <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between py-40">
+        <div className="flex flex-col gap-y-8 xsmall:flex-row items-start justify-between py-20">
           <div>
             <LocalizedClientLink
               href="/"

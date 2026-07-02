@@ -52,14 +52,31 @@ const FEATURES = [
   },
 ]
 
+// Flavor-tinted icon circle per feature.
+const ICON_STYLES = [
+  "bg-matcha/15 text-matcha",
+  "bg-strawberry/20 text-strawberry",
+  "bg-sun/15 text-sun",
+]
+
 const Features = () => {
   return (
-    <section className="bg-matcha-bg py-20 px-6">
-      <div className="content-container grid grid-cols-1 small:grid-cols-3 gap-12 text-center">
-        {FEATURES.map((f) => (
-          <div key={f.title} data-reveal-col className="opacity-0 translate-y-[40px]">
-            <div className="w-14 h-14 mx-auto mb-5 text-matcha">{f.icon}</div>
-            <h3 className="font-heading text-3xl text-matcha-text mb-2">{f.title}</h3>
+    <section className="bg-matcha-bg py-20 sm:py-24 px-6">
+      <div className="content-container grid grid-cols-1 small:grid-cols-3 gap-6 sm:gap-8">
+        {FEATURES.map((f, i) => (
+          <div
+            key={f.title}
+            data-reveal-col
+            className="opacity-0 translate-y-[40px] text-center bg-matcha-cream rounded-large border border-matcha-kraft/50 p-8 hover:-translate-y-1 hover:shadow-lg hover:shadow-matcha-kraft/40 transition-all"
+          >
+            <div
+              className={`w-16 h-16 mx-auto mb-5 rounded-full flex items-center justify-center ${ICON_STYLES[i % ICON_STYLES.length]}`}
+            >
+              <div className="w-9 h-9">{f.icon}</div>
+            </div>
+            <h3 className="font-heading font-semibold text-2xl text-matcha-dark mb-2">
+              {f.title}
+            </h3>
             <p className="text-sm text-matcha-text/70 leading-relaxed">{f.body}</p>
           </div>
         ))}

@@ -38,7 +38,7 @@ const Faq = () => {
           </h2>
         </div>
 
-        <div className="max-w-2xl mx-auto flex flex-col border-t border-matcha-kraft/40">
+        <div className="max-w-2xl mx-auto flex flex-col bg-matcha-cream rounded-large border border-matcha-kraft/50 px-6 sm:px-8">
           {FAQS.map((item, i) => {
             const isOpen = openIndex === i
             return (
