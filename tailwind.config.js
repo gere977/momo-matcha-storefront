@@ -34,15 +34,22 @@ module.exports = {
           80: "#1F2937",
           90: "#111827",
         },
+        // Warm, cozy genZ palette (Matchy-Matcha inspired): cream/kraft base,
+        // sage green as one of several flavor accents, soft pink pop.
         matcha: {
-          bg: "#F9F7F2",
-          text: "#333333",
-          accent: "#D94E41",
-          DEFAULT: "#6A8D53",
-          dark: "#2D4A1E",
-          kraft: "#E3D6C4",
-          cream: "#FAF8F3",
+          bg: "#F7F3E9", // warm cream base
+          text: "#3A362E", // warm near-black
+          accent: "#E06B85", // rose-pink — CTAs & pops (genZ)
+          DEFAULT: "#7C9B5E", // sage green (primary)
+          dark: "#3B5A2E", // deep Fuji green
+          kraft: "#E3D6C4", // kraft (pouch tone)
+          cream: "#FBF8F1", // lightest cream (cards)
         },
+        // Per-flavor accent tokens for badges / theming.
+        sun: "#E23B2E", // rising-sun red (from the logo)
+        strawberry: "#E58BA9",
+        chocolate: "#6F4E37",
+        vanilla: "#EADFBE",
       },
       borderRadius: {
         none: "0px",
@@ -78,7 +85,7 @@ module.exports = {
           "Ubuntu",
           "sans-serif",
         ],
-        heading: ["var(--font-heading)", "cursive"],
+        heading: ["var(--font-heading)", "Quicksand", "sans-serif"],
         body: ["var(--font-body)", "sans-serif"],
       },
       keyframes: {

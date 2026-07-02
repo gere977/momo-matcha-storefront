@@ -39,10 +39,17 @@ export default async function Nav() {
           <div className="flex items-center h-full">
             <LocalizedClientLink
               href="/"
-              className="font-heading text-3xl text-matcha-accent hover:text-matcha-accent leading-none"
+              className="flex items-center leading-none"
               data-testid="nav-store-link"
             >
-              Momo Matcha
+              {/* mix-blend-multiply drops the logo's white background into the
+                  cream nav bar without needing a transparent PNG. */}
+              <img
+                src="/images/logo.jpg"
+                alt="Momo Matcha"
+                className="h-12 w-auto"
+                style={{ mixBlendMode: "multiply" }}
+              />
             </LocalizedClientLink>
           </div>
 

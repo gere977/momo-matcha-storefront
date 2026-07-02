@@ -14,23 +14,30 @@ const Hero = () => {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(160deg, rgba(45,74,30,0.12) 0%, rgba(0,0,0,0.18) 100%)",
+            "linear-gradient(160deg, rgba(247,243,233,0.30) 0%, rgba(59,90,46,0.40) 100%)",
         }}
       />
-      <div className="relative z-10 bg-matcha-bg/90 backdrop-blur-sm px-14 py-14 rounded text-center max-w-[520px] shadow-2xl mx-4">
+      <div className="relative z-10 bg-matcha-cream/92 backdrop-blur-sm px-10 py-12 sm:px-14 sm:py-14 rounded-large text-center max-w-[540px] shadow-2xl mx-4 border border-matcha-kraft/60">
+        <span
+          data-hero-el
+          className="opacity-0 translate-y-[30px] inline-block mb-5 px-4 py-1.5 rounded-full bg-strawberry/25 text-[11px] font-bold uppercase tracking-[2px] text-matcha-accent"
+        >
+          Új · ízesített matchák 🍓
+        </span>
         <h1
           data-hero-el
-          className="opacity-0 translate-y-[30px] font-heading text-6xl md:text-8xl leading-none text-matcha-accent -tracking-wide"
+          className="opacity-0 translate-y-[30px] font-heading font-bold text-6xl md:text-7xl leading-[1.05] text-matcha-dark"
         >
           Találd meg a rituálédat
         </h1>
-        <p data-hero-el className="opacity-0 translate-y-[30px] mt-4 text-lg text-matcha-text/70 tracking-wide">
-          Prémium, bio szertartásos matcha Ujiból, Japánból
+        <p data-hero-el className="opacity-0 translate-y-[30px] mt-4 text-lg text-matcha-text/75">
+          Prémium, bio matcha Japánból — a klasszikus szertartásostól a
+          gyümölcsös ízesítettekig.
         </p>
         <LocalizedClientLink
           data-hero-el
           href="/store"
-          className="opacity-0 translate-y-[30px] inline-block mt-6 px-10 py-4 rounded-full bg-matcha-accent text-white font-bold uppercase tracking-wider text-sm hover:bg-matcha hover:-translate-y-0.5 transition-all"
+          className="opacity-0 translate-y-[30px] inline-block mt-7 px-10 py-4 rounded-full bg-matcha-accent text-white font-bold uppercase tracking-wider text-sm hover:bg-matcha hover:-translate-y-0.5 transition-all shadow-lg shadow-matcha-accent/25"
         >
           Vásárolj most
         </LocalizedClientLink>
