@@ -19,7 +19,7 @@ const Login = ({ setCurrentView }: Props) => {
     >
       <h1 className="font-heading text-5xl text-matcha-accent mb-4">Bejelentkezés</h1>
       <p className="text-center text-base-regular text-matcha-text/70 mb-8">
-        Jelentkezz be a MoMo Matcha közösségbe.
+        Jelentkezz be a Momo Matcha közösségbe.
       </p>
       <form className="w-full" action={formAction}>
         <div className="flex flex-col w-full gap-y-2">

@@ -1,3 +1,5 @@
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
+
 const Story = () => {
   return (
     <section
@@ -5,8 +7,8 @@ const Story = () => {
       className="relative py-28 px-6 bg-cover overflow-hidden"
       style={{
         backgroundColor: "#2D4A1E",
-        backgroundImage:
-          "url('https://images.unsplash.com/photo-1634302200795-ca6b96458476?w=2000&auto=format&fit=crop&q=80')",
+        // Swap this file (public/images/story.jpg) for your own brand photo.
+        backgroundImage: "url('/images/story.jpg')",
         backgroundPosition: "center 30%",
       }}
     >
@@ -29,12 +31,12 @@ const Story = () => {
           matchát. Mi megtaláltuk ezeket a kerteket — és elhozzuk rituáléjukat a
           reggeleitekbe.
         </p>
-        <a
+        <LocalizedClientLink
           href="/pages/about"
           className="opacity-0 translate-y-[30px] inline-block text-matcha-bg font-semibold tracking-wide text-sm border-b border-white/50 pb-1 hover:text-matcha-kraft hover:border-matcha-kraft transition-colors"
         >
           Ismerje meg a matchát →
-        </a>
+        </LocalizedClientLink>
       </div>
     </section>
   )

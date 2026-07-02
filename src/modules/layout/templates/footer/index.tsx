@@ -28,8 +28,8 @@ export default async function Footer() {
           <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3">
             {productCategories && productCategories?.length > 0 && (
               <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Categories
+                <span className="txt-small-plus text-matcha-text">
+                  Kategóriák
                 </span>
                 <ul
                   className="grid grid-cols-1 gap-2"
@@ -86,8 +86,8 @@ export default async function Footer() {
             )}
             {collections && collections.length > 0 && (
               <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Collections
+                <span className="txt-small-plus text-matcha-text">
+                  Kollekciók
                 </span>
                 <ul
                   className={clx(
@@ -113,6 +113,11 @@ export default async function Footer() {
             <div className="flex flex-col gap-y-2">
               <span className="txt-small-plus text-matcha-text">Momo Matcha</span>
               <ul className="grid grid-cols-1 gap-y-2 text-matcha-text/70 txt-small">
+                <li>
+                  <LocalizedClientLink href="/pages/about" className="hover:text-matcha">
+                    Rólunk
+                  </LocalizedClientLink>
+                </li>
                 <li>
                   <LocalizedClientLink href="/pages/aszf" className="hover:text-matcha">
                     ÁSZF

@@ -6,8 +6,8 @@ const Hero = () => {
       data-hero-section
       className="h-[90vh] min-h-[560px] w-full relative flex items-center justify-center bg-cover bg-top"
       style={{
-        backgroundImage:
-          "url('https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=2000&auto=format&fit=crop')",
+        // Swap this file (public/images/hero.jpg) for your own brand photo — 2400px wide, landscape.
+        backgroundImage: "url('/images/hero.jpg')",
       }}
     >
       <div

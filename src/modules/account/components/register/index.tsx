@@ -24,7 +24,7 @@ const Register = ({ setCurrentView }: Props) => {
         Regisztráció
       </h1>
       <p className="text-center text-base-regular text-matcha-text/70 mb-4">
-        Csatlakozz a MoMo Matcha közösséghez és gyűjts MoMo Pontokat minden
+        Csatlakozz a Momo Matcha közösséghez és gyűjts MoMo Pontokat minden
         vásárlással.
       </p>
       <form className="w-full flex flex-col" action={formAction}>

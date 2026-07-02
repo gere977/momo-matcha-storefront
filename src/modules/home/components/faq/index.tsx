@@ -16,7 +16,7 @@ const FAQS = [
     a: "Egy adag matcha (1–2g) kb. 35–70mg koffeint tartalmaz — nagyjából fele egy kávénak. De a matchában van L-teanin is, egy aminosav, amely lelassítja a koffein felszívódását és nyugodt fókuszt biztosít. Nincs remegés, nincs összeomlás — csak egyenletes, tiszta energia 4–6 órán át.",
   },
   {
-    q: "Honnan származik a MoMo Matcha?",
+    q: "Honnan származik a Momo Matcha?",
     a: "Matchánk közvetlenül Uji, Japán ősi teakertjeiből érkezik — a japán matcha kultúra szülőhelyéről, ahol 800 éve termesztenek teát. Uji éghajlata, talaja és árnyékolási hagyományai a világ legjobb matcháit teremtik.",
   },
   {
@@ -68,10 +68,13 @@ const Faq = () => {
                   </svg>
                 </button>
                 <div
-                  className="overflow-hidden transition-all duration-300"
-                  style={{ maxHeight: isOpen ? "300px" : "0px" }}
+                  className={`grid overflow-hidden transition-all duration-300 ${
+                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
                 >
-                  <p className="text-sm text-matcha-text/70 leading-relaxed pb-6">{item.a}</p>
+                  <p className="min-h-0 text-sm text-matcha-text/70 leading-relaxed pb-6">
+                    {item.a}
+                  </p>
                 </div>
               </div>
             )
