@@ -17,20 +17,20 @@ export default async function Nav() {
 
   return (
     <div className="sticky top-0 inset-x-0 z-50 group">
-      <header className="relative h-16 mx-auto border-b duration-200 bg-matcha-bg/85 backdrop-blur-md border-matcha-kraft/40">
+      <header className="relative h-20 mx-auto border-b duration-200 bg-matcha-bg/85 backdrop-blur-md border-matcha-kraft/40">
         <nav className="content-container text-matcha-text flex items-center justify-between w-full h-full text-[15px] font-body font-semibold">
           <div className="flex-1 basis-0 h-full flex items-center gap-x-6">
             <div className="h-full">
               <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
             </div>
             <div className="hidden small:flex items-center gap-x-6 h-full">
-              <LocalizedClientLink className="hover:text-matcha" href="/">
+              <LocalizedClientLink className="hover:text-matcha-accent transition-colors" href="/">
                 Főoldal
               </LocalizedClientLink>
-              <LocalizedClientLink className="hover:text-matcha" href="/collections/matcha">
+              <LocalizedClientLink className="hover:text-matcha-accent transition-colors" href="/collections/matcha">
                 Matcha Teák
               </LocalizedClientLink>
-              <LocalizedClientLink className="hover:text-matcha" href="/categories/kiegeszitok">
+              <LocalizedClientLink className="hover:text-matcha-accent transition-colors" href="/categories/kiegeszitok">
                 Kiegészítők
               </LocalizedClientLink>
             </div>
@@ -56,7 +56,7 @@ export default async function Nav() {
           <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
             <div className="hidden small:flex items-center gap-x-6 h-full">
               <LocalizedClientLink
-                className="hover:text-matcha font-semibold text-matcha"
+                className="hover:text-matcha-accent transition-colors text-matcha-text"
                 href="/account"
                 data-testid="nav-account-link"
               >

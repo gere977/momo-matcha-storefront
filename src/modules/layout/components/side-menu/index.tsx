@@ -11,12 +11,14 @@ import LanguageSelect from "../language-select"
 import { HttpTypes } from "@medusajs/types"
 import { Locale } from "@lib/data/locales"
 
-const SideMenuItems = {
-  Főoldal: "/",
-  Bolt: "/store",
-  Fiókom: "/account",
-  Kosár: "/cart",
-}
+const SideMenuItems = [
+  { label: "Főoldal", href: "/" },
+  { label: "Matcha Teák", href: "/collections/matcha" },
+  { label: "Kiegészítők", href: "/categories/kiegeszitok" },
+  { label: "Minden termék", href: "/store" },
+  { label: "Fiókom", href: "/account" },
+  { label: "Kosár", href: "/cart" },
+]
 
 type SideMenuProps = {
   regions: HttpTypes.StoreRegion[] | null
@@ -37,15 +39,20 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
               <div className="relative flex h-full">
                 <Popover.Button
                   data-testid="nav-menu-button"
-                  className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none text-matcha-text hover:text-matcha-accent"
+                  className="relative h-full flex items-center gap-x-2 font-semibold transition-colors duration-200 focus:outline-none text-matcha-text hover:text-matcha-accent"
                 >
+                  <span className="flex flex-col gap-[3.5px]">
+                    <span className="block w-5 h-[2px] rounded-full bg-current" />
+                    <span className="block w-5 h-[2px] rounded-full bg-current" />
+                    <span className="block w-3.5 h-[2px] rounded-full bg-current" />
+                  </span>
                   Menü
                 </Popover.Button>
               </div>
 
               {open && (
                 <div
-                  className="fixed inset-0 z-[50] bg-black/0 pointer-events-auto"
+                  className="fixed inset-0 z-[50] bg-matcha-dark/25 backdrop-blur-sm pointer-events-auto"
                   onClick={close}
                   data-testid="side-menu-backdrop"
                 />
@@ -54,40 +61,53 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
               <Transition
                 show={open}
                 as={Fragment}
-                enter="transition ease-out duration-150"
-                enterFrom="opacity-0"
-                enterTo="opacity-100 backdrop-blur-2xl"
+                enter="transition ease-out duration-200"
+                enterFrom="opacity-0 -translate-x-6"
+                enterTo="opacity-100 translate-x-0"
                 leave="transition ease-in duration-150"
-                leaveFrom="opacity-100 backdrop-blur-2xl"
-                leaveTo="opacity-0"
+                leaveFrom="opacity-100 translate-x-0"
+                leaveTo="opacity-0 -translate-x-6"
               >
-                <PopoverPanel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-[51] inset-x-0 text-sm text-matcha-text m-2 backdrop-blur-2xl">
+                <PopoverPanel className="flex flex-col fixed top-0 left-0 w-full sm:w-[380px] h-screen z-[51] text-matcha-text">
                   <div
                     data-testid="nav-menu-popup"
-                    className="flex flex-col h-full bg-matcha-bg/90 border border-matcha-kraft/60 rounded-rounded justify-between p-6 shadow-lg"
+                    className="flex flex-col h-full bg-matcha-cream border-r border-matcha-kraft/60 justify-between p-8 shadow-2xl"
                   >
-                    <div className="flex justify-end" id="xmark">
-                      <button data-testid="close-menu-button" onClick={close} className="hover:text-matcha-accent">
-                        <XMark />
-                      </button>
-                    </div>
-                    <ul className="flex flex-col gap-6 items-start justify-start">
-                      {Object.entries(SideMenuItems).map(([name, href]) => {
-                        return (
-                          <li key={name}>
+                    <div>
+                      <div className="flex justify-between items-center mb-10">
+                        <img
+                          src="/images/logo.jpg"
+                          alt="Momo Matcha"
+                          className="h-12 w-auto"
+                          style={{ mixBlendMode: "multiply" }}
+                        />
+                        <button
+                          data-testid="close-menu-button"
+                          onClick={close}
+                          className="text-matcha-text/50 hover:text-matcha-accent transition-colors"
+                        >
+                          <XMark />
+                        </button>
+                      </div>
+
+                      <ul className="flex flex-col">
+                        {SideMenuItems.map((item) => (
+                          <li key={item.label}>
                             <LocalizedClientLink
-                              href={href}
-                              className="font-heading text-3xl leading-10 hover:text-matcha-accent"
+                              href={item.href}
                               onClick={close}
-                              data-testid={`${name.toLowerCase()}-link`}
+                              data-testid={`${item.label.toLowerCase()}-link`}
+                              className="group flex items-center justify-between font-heading text-2xl py-2.5 text-matcha-dark hover:text-matcha-accent transition-colors"
                             >
-                              {name}
+                              {item.label}
+                              <ArrowRightMini className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-matcha-accent" />
                             </LocalizedClientLink>
                           </li>
-                        )
-                      })}
-                    </ul>
-                    <div className="flex flex-col gap-y-6">
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div className="flex flex-col gap-y-5">
                       {!!locales?.length && (
                         <div
                           className="flex justify-between"
@@ -125,8 +145,8 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                           )}
                         />
                       </div>
-                      <Text className="flex justify-between txt-compact-small text-matcha-text/70">
-                        © {new Date().getFullYear()} Momo Matcha. Minden jog fenntartva.
+                      <Text className="txt-compact-small text-matcha-text/50">
+                        © {new Date().getFullYear()} Momo Matcha
                       </Text>
                     </div>
                   </div>
