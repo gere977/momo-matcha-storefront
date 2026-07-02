@@ -31,6 +31,16 @@ const nextConfig = {
         hostname: "localhost",
       },
       {
+        // Brand/product images hosted in this storefront's own public/ folder
+        // and referenced by absolute momomatcha.hu URLs from Medusa products.
+        protocol: "https",
+        hostname: "momomatcha.hu",
+      },
+      {
+        protocol: "https",
+        hostname: "www.momomatcha.hu",
+      },
+      {
         protocol: "https",
         hostname: "medusa-public-images.s3.eu-west-1.amazonaws.com",
       },
