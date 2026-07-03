@@ -2,6 +2,7 @@ import { getBaseURL } from "@lib/util/env"
 import { Metadata } from "next"
 import { Nunito, Quicksand } from "next/font/google"
 import GsapScrollEffects from "@modules/common/components/gsap-scroll-effects"
+import AnalyticsTracker from "@modules/common/components/analytics-tracker"
 import "styles/globals.css"
 
 // Rounded, friendly genZ display font for headings + the wordmark. Nunito has
@@ -31,6 +32,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     <html lang="hu" data-mode="light" className={`${nunito.variable} ${quicksand.variable}`}>
       <body>
         <GsapScrollEffects />
+        <AnalyticsTracker />
         <main className="relative">{props.children}</main>
       </body>
     </html>
