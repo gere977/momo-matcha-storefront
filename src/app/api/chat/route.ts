@@ -15,9 +15,10 @@ A MÁRKA:
 - Kiegészítő: Matcha Szett (tál, habverő, tartó, szűrő) – 12 990 Ft. Web: momomatcha.hu
 
 SZÁLLÍTÁS:
-- Magyarországra: GLS házhozszállítás és FoxPost csomagpont.
+- Magyarországra: GLS házhozszállítás – 1 490 Ft, FoxPost házhozszállítás – 1 290 Ft.
+- Utánvéttel (fizetés a futárnál): GLS – 1 990 Ft, FoxPost – 1 790 Ft.
+- 15 000 Ft feletti rendelésnél a szállítás ingyenes.
 - Idő: általában 1–3 munkanap a visszaigazolástól.
-- Egy meghatározott összeg felett ingyenes (a pontos küszöböt a pénztárban látni).
 
 ELÁLLÁS / VISSZAKÜLDÉS:
 - 14 naptári napon belül indokolás nélkül elállhatsz. Zárt csomagolású, higiéniai okból felbontott termék kivétel.

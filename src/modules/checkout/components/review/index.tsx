@@ -19,8 +19,12 @@ const Review = ({ cart }: { cart: any }) => {
     (cart.payment_collection || paidByGiftcard)
 
   return (
-    <div className="bg-white">
-      <div className="flex flex-row items-center justify-between mb-6">
+    <div className="bg-white rounded-2xl border border-matcha-kraft/60 shadow-sm p-6 small:p-8">
+      <div
+        className={clx("flex flex-row items-center justify-between", {
+          "mb-6": isOpen && previousStepsCompleted,
+        })}
+      >
         <Heading
           level="h2"
           className={clx(

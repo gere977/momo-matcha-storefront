@@ -11,11 +11,11 @@ export const paymentInfoMap: Record<
   { title: string; icon: React.JSX.Element }
 > = {
   pp_stripe_stripe: {
-    title: "Credit card",
+    title: "Bankkártya",
     icon: <CreditCard />,
   },
   "pp_medusa-payments_default": {
-    title: "Credit card",
+    title: "Bankkártya",
     icon: <CreditCard />,
   },
   "pp_stripe-ideal_stripe": {
@@ -31,11 +31,11 @@ export const paymentInfoMap: Record<
     icon: <PayPal />,
   },
   pp_system_default: {
-    title: "Manual Payment",
+    title: "Utánvét / banki átutalás",
     icon: <CreditCard />,
   },
   pp_barion_barion: {
-    title: "Barion",
+    title: "Barion (bankkártya)",
     icon: <CreditCard />,
   },
   // Add more payment providers here

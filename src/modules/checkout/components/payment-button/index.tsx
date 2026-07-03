@@ -78,7 +78,7 @@ const RedirectPaymentButton = ({
       isLoading={submitting}
       onClick={handlePayment}
       size="large"
-      className="bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider border-none"
+      className="rounded-full bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider border-none"
       data-testid={dataTestId}
     >
       Tovább a fizetéshez
@@ -181,7 +181,7 @@ const StripePaymentButton = ({
         onClick={handlePayment}
         size="large"
         isLoading={submitting}
-        className="bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider border-none"
+        className="rounded-full bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider border-none"
         data-testid={dataTestId}
       >
         Megrendelés leadása
@@ -221,7 +221,7 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
         isLoading={submitting}
         onClick={handlePayment}
         size="large"
-        className="bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider border-none"
+        className="rounded-full bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider border-none"
         data-testid="submit-order-button"
       >
         Megrendelés leadása

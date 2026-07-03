@@ -26,18 +26,25 @@ export default async function OrderCompletedTemplate({
       <div className="content-container flex flex-col justify-center items-center gap-y-10 max-w-4xl h-full w-full">
         {isOnboarding && <OnboardingCta orderId={order.id} />}
         <div
-          className="flex flex-col gap-4 max-w-4xl h-full bg-white w-full py-10"
+          className="flex flex-col gap-4 max-w-4xl h-full bg-white w-full rounded-2xl border border-matcha-kraft/60 shadow-sm p-6 small:p-10"
           data-testid="order-complete-container"
         >
           <Heading
             level="h1"
-            className="flex flex-col gap-y-3 text-ui-fg-base text-3xl mb-4"
+            className="flex flex-col gap-y-2 mb-4"
           >
-            <span>Köszönjük!</span>
-            <span>A rendelésed sikeresen leadva.</span>
+            <span className="font-heading font-bold text-4xl text-matcha-accent">
+              Köszönjük! 🍵
+            </span>
+            <span className="font-heading text-2xl text-matcha-dark">
+              A rendelésed sikeresen leadva.
+            </span>
           </Heading>
           <OrderDetails order={order} />
-          <Heading level="h2" className="flex flex-row text-3xl-regular">
+          <Heading
+            level="h2"
+            className="flex flex-row font-heading text-2xl text-matcha-dark mt-4"
+          >
             Összesítő
           </Heading>
           <Items order={order} />

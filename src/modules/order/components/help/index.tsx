@@ -5,14 +5,24 @@ import React from "react"
 const Help = () => {
   return (
     <div className="mt-6">
-      <Heading className="text-base-semi">Segítségre van szükséged?</Heading>
+      <Heading className="font-heading text-xl text-matcha-dark">
+        Segítségre van szükséged?
+      </Heading>
       <div className="text-base-regular my-2">
         <ul className="gap-y-2 flex flex-col">
           <li>
-            <LocalizedClientLink href="/contact">Kapcsolat</LocalizedClientLink>
+            <a
+              href="mailto:info@momomatcha.hu"
+              className="text-matcha hover:text-matcha-accent font-semibold"
+            >
+              Írj nekünk: info@momomatcha.hu
+            </a>
           </li>
           <li>
-            <LocalizedClientLink href="/contact">
+            <LocalizedClientLink
+              href="/pages/refunds"
+              className="text-matcha hover:text-matcha-accent font-semibold"
+            >
               Visszaküldés és csere
             </LocalizedClientLink>
           </li>

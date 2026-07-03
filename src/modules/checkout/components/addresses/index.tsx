@@ -5,7 +5,6 @@ import compareAddresses from "@lib/util/compare-addresses"
 import { CheckCircleSolid } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
 import { Heading, Text, useToggleState } from "@medusajs/ui"
-import Divider from "@modules/common/components/divider"
 import Spinner from "@modules/common/icons/spinner"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useActionState } from "react"
@@ -40,7 +39,7 @@ const Addresses = ({
   const [message, formAction] = useActionState(setAddresses, null)
 
   return (
-    <div className="bg-white">
+    <div className="bg-white rounded-2xl border border-matcha-kraft/60 shadow-sm p-6 small:p-8">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
@@ -179,7 +178,6 @@ const Addresses = ({
           </div>
         </div>
       )}
-      <Divider className="mt-8" />
     </div>
   )
 }

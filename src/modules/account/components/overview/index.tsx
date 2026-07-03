@@ -126,7 +126,9 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                                 Összeg
                               </span>
                               <span data-testid="order-created-date">
-                                {new Date(order.created_at).toDateString()}
+                                {new Date(order.created_at).toLocaleDateString(
+                                  "hu-HU"
+                                )}
                               </span>
                               <span
                                 data-testid="order-id"

@@ -9,7 +9,6 @@ import ErrorMessage from "@modules/checkout/components/error-message"
 import PaymentContainer, {
   StripeCardContainer,
 } from "@modules/checkout/components/payment-container"
-import Divider from "@modules/common/components/divider"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
 
@@ -105,8 +104,12 @@ const Payment = ({
   }, [isOpen])
 
   return (
-    <div className="bg-white">
-      <div className="flex flex-row items-center justify-between mb-6">
+    <div className="bg-white rounded-2xl border border-matcha-kraft/60 shadow-sm p-6 small:p-8">
+      <div
+        className={clx("flex flex-row items-center justify-between", {
+          "mb-6": isOpen || paymentReady,
+        })}
+      >
         <Heading
           level="h2"
           className={clx(
@@ -185,7 +188,14 @@ const Payment = ({
 
           <Button
             size="large"
-            className="mt-6"
+            className={clx(
+              "mt-6 rounded-full",
+              !(
+                (isStripeLike(selectedPaymentMethod) && !cardComplete) ||
+                (!selectedPaymentMethod && !paidByGiftcard)
+              ) &&
+                "bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider border-none"
+            )}
             onClick={handleSubmit}
             isLoading={isLoading}
             disabled={
@@ -251,7 +261,6 @@ const Payment = ({
           ) : null}
         </div>
       </div>
-      <Divider className="mt-8" />
     </div>
   )
 }
