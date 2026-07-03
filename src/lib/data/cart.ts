@@ -24,7 +24,7 @@ import { getLocale } from "@lib/data/locale-actions"
 export async function retrieveCart(cartId?: string, fields?: string) {
   const id = cartId || (await getCartId())
   fields ??=
-    "*items, *region, *items.product, *items.variant, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name"
+    "*items, *region, *items.product, *items.variant, *items.thumbnail, *items.metadata, +items.total, *promotions, +shipping_methods.name, +metadata"
 
   if (!id) {
     return null
@@ -235,6 +235,74 @@ export async function setShippingMethod({
       revalidateTag(cartCacheTag)
     })
     .catch(medusaError)
+}
+
+const COD_SUFFIX = " + utánvét"
+
+/**
+ * COD ("utánvét") is priced as a hidden "+ utánvét" twin of each shipping
+ * option (+590 Ft). When the customer picks the COD payment method, swap the
+ * cart's shipping method to the twin; when they pick another method, swap back.
+ */
+export async function syncCodShippingMethod(useCod: boolean) {
+  const cartId = await getCartId()
+  if (!cartId) {
+    return
+  }
+
+  const cart = await retrieveCart(cartId)
+  const current = cart?.shipping_methods?.at(-1)
+  if (!current?.name) {
+    return
+  }
+
+  const isCod = current.name.endsWith(COD_SUFFIX)
+  if (isCod === useCod) {
+    return
+  }
+
+  const targetName = useCod
+    ? `${current.name}${COD_SUFFIX}`
+    : current.name.slice(0, -COD_SUFFIX.length)
+
+  const headers = {
+    ...(await getAuthHeaders()),
+  }
+
+  const options = await sdk.client
+    .fetch<HttpTypes.StoreShippingOptionListResponse>(
+      `/store/shipping-options`,
+      {
+        method: "GET",
+        query: { cart_id: cartId },
+        headers,
+        cache: "no-store",
+      }
+    )
+    .then(({ shipping_options }) => shipping_options)
+    .catch(() => null)
+
+  const target = options?.find((o) => o.name === targetName)
+  if (!target) {
+    return
+  }
+
+  await setShippingMethod({ cartId, shippingMethodId: target.id })
+}
+
+/**
+ * Stores the chosen GLS/FoxPost pickup point on the cart so it lands on the
+ * order (metadata), where the admin can see which locker to send the parcel to.
+ */
+export async function setPickupPoint(
+  point: {
+    carrier: string
+    id: string
+    name: string
+    address: string
+  } | null
+) {
+  await updateCart({ metadata: { pickup_point: point } } as any)
 }
 
 export async function initiatePaymentSession(

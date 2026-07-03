@@ -66,6 +66,12 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
             })}
             )
           </Text>
+          {(order.metadata as any)?.pickup_point && (
+            <Text className="txt-medium text-matcha-text/60">
+              📍 {(order.metadata as any).pickup_point.name} –{" "}
+              {(order.metadata as any).pickup_point.address}
+            </Text>
+          )}
         </div>
       </div>
       <Divider className="mt-8" />

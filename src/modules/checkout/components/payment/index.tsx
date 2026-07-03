@@ -2,7 +2,7 @@
 
 import { RadioGroup } from "@headlessui/react"
 import { isStripeLike, paymentInfoMap } from "@lib/constants"
-import { initiatePaymentSession } from "@lib/data/cart"
+import { initiatePaymentSession, syncCodShippingMethod } from "@lib/data/cart"
 import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
 import { Button, Container, Heading, Text, clx } from "@medusajs/ui"
 import ErrorMessage from "@modules/checkout/components/error-message"
@@ -40,6 +40,12 @@ const Payment = ({
   const setPaymentMethod = async (method: string) => {
     setError(null)
     setSelectedPaymentMethod(method)
+
+    // COD carries a +590 Ft fee via the "+ utánvét" shipping-option twin -
+    // swap the cart's shipping method to keep the total honest.
+    await syncCodShippingMethod(method === "pp_cod_cod").catch(() => {})
+    router.refresh()
+
     if (isStripeLike(method)) {
       await initiatePaymentSession(cart, {
         provider_id: method,

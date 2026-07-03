@@ -31,7 +31,11 @@ export const paymentInfoMap: Record<
     icon: <PayPal />,
   },
   pp_system_default: {
-    title: "Utánvét / banki átutalás",
+    title: "Banki átutalás",
+    icon: <CreditCard />,
+  },
+  pp_cod_cod: {
+    title: "Utánvét – fizetés átvételkor (+590 Ft)",
     icon: <CreditCard />,
   },
   pp_barion_barion: {
@@ -52,7 +56,12 @@ export const isPaypal = (providerId?: string) => {
   return providerId?.startsWith("pp_paypal")
 }
 export const isManual = (providerId?: string) => {
-  return providerId?.startsWith("pp_system_default")
+  // System default (bank transfer) and COD both complete the order without an
+  // external gateway step.
+  return (
+    providerId?.startsWith("pp_system_default") ||
+    providerId?.startsWith("pp_cod")
+  )
 }
 
 // Barion is redirect-based: the customer is sent to the gateway's hosted page,

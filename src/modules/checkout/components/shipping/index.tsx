@@ -1,8 +1,11 @@
 "use client"
 
 import { Radio, RadioGroup } from "@headlessui/react"
-import { setShippingMethod } from "@lib/data/cart"
+import { setPickupPoint, setShippingMethod } from "@lib/data/cart"
 import { calculatePriceForShippingOption } from "@lib/data/fulfillment"
+import PickupPointSelector, {
+  PickupPoint,
+} from "@modules/checkout/components/pickup-point-selector"
 import { convertToLocale } from "@lib/util/money"
 import { CheckCircleSolid, Loader } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
@@ -69,8 +72,12 @@ const Shipping: React.FC<ShippingProps> = ({
 
   const isOpen = searchParams.get("step") === "delivery"
 
+  // The "+ utánvét" twins carry the COD fee and are selected automatically at
+  // the payment step - they must not show up in the delivery list.
   const _shippingMethods = availableShippingMethods?.filter(
-    (sm) => sm.service_zone?.fulfillment_set?.type !== "pickup"
+    (sm) =>
+      sm.service_zone?.fulfillment_set?.type !== "pickup" &&
+      !sm.name?.includes("utánvét")
   )
 
   const _pickupMethods = availableShippingMethods?.filter(
@@ -78,6 +85,37 @@ const Shipping: React.FC<ShippingProps> = ({
   )
 
   const hasPickupOptions = !!_pickupMethods?.length
+
+  const [pickupPoint, setPickupPointState] = useState<PickupPoint | null>(
+    ((cart as any).metadata?.pickup_point as PickupPoint) ?? null
+  )
+
+  const pickupCarrierForOption = (
+    name?: string | null
+  ): "gls" | "foxpost" | null => {
+    if (!name) return null
+    if (name.includes("GLS csomagpont")) return "gls"
+    if (name.includes("FoxPost csomagautomata")) return "foxpost"
+    return null
+  }
+
+  const selectedOption = _shippingMethods?.find(
+    (o) => o.id === shippingMethodId
+  )
+  const pickupCarrier = pickupCarrierForOption(selectedOption?.name)
+  const needsPickupPoint =
+    !!pickupCarrier &&
+    (!pickupPoint || pickupPoint.carrier !== pickupCarrier)
+
+  const handlePickupPointSelect = async (point: PickupPoint) => {
+    setPickupPointState(point)
+    await setPickupPoint(point).catch(() => {})
+  }
+
+  const clearPickupPoint = async () => {
+    setPickupPointState(null)
+    await setPickupPoint(null).catch(() => {})
+  }
 
   useEffect(() => {
     setIsLoadingPrices(true)
@@ -133,6 +171,14 @@ const Shipping: React.FC<ShippingProps> = ({
     })
 
     await setShippingMethod({ cartId: cart.id, shippingMethodId: id })
+      .then(async () => {
+        // A stored pickup point only makes sense for the carrier it belongs to
+        const chosen = _shippingMethods?.find((o) => o.id === id)
+        const carrier = pickupCarrierForOption(chosen?.name)
+        if (pickupPoint && pickupPoint.carrier !== carrier) {
+          await clearPickupPoint()
+        }
+      })
       .catch((err) => {
         setShippingMethodId(currentId)
 
@@ -294,6 +340,34 @@ const Shipping: React.FC<ShippingProps> = ({
                     )
                   })}
                 </RadioGroup>
+
+                {pickupCarrier &&
+                  (needsPickupPoint ? (
+                    <div className="mt-4">
+                      <PickupPointSelector
+                        carrier={pickupCarrier}
+                        onSelect={handlePickupPointSelect}
+                      />
+                    </div>
+                  ) : (
+                    <div className="mt-4 flex items-center justify-between rounded-xl border border-matcha bg-matcha/5 px-6 py-4">
+                      <div className="flex flex-col">
+                        <span className="text-sm font-semibold text-matcha-dark">
+                          📍 {pickupPoint?.name}
+                        </span>
+                        <span className="text-sm text-matcha-text/60">
+                          {pickupPoint?.address}
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={clearPickupPoint}
+                        className="text-sm font-semibold text-matcha hover:text-matcha-accent"
+                      >
+                        Másik pont
+                      </button>
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
@@ -376,14 +450,17 @@ const Shipping: React.FC<ShippingProps> = ({
               className={clx(
                 "mt-2 rounded-full",
                 cart.shipping_methods?.[0] &&
+                  !needsPickupPoint &&
                   "bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider border-none"
               )}
               onClick={handleSubmit}
               isLoading={isLoading}
-              disabled={!cart.shipping_methods?.[0]}
+              disabled={!cart.shipping_methods?.[0] || needsPickupPoint}
               data-testid="submit-delivery-option-button"
             >
-              Tovább a fizetéshez
+              {needsPickupPoint
+                ? "Válassz átvételi pontot a térképen"
+                : "Tovább a fizetéshez"}
             </Button>
           </div>
         </>
@@ -402,6 +479,11 @@ const Shipping: React.FC<ShippingProps> = ({
                     currency_code: cart?.currency_code,
                   })}
                 </Text>
+                {pickupPoint && (
+                  <Text className="txt-medium text-matcha-text/60">
+                    📍 {pickupPoint.name} – {pickupPoint.address}
+                  </Text>
+                )}
               </div>
             )}
           </div>
