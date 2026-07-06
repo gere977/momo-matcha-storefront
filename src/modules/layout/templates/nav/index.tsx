@@ -17,6 +17,11 @@ export default async function Nav() {
 
   return (
     <div className="sticky top-0 inset-x-0 z-50 group">
+      {/* Announcement bar - the current promotion (matches the automatic
+          INGYENSZALLITAS15000 promotion configured in Medusa). */}
+      <div className="bg-matcha text-white text-center text-sm font-heading font-bold tracking-wide py-2 px-4">
+        🍵 Ingyenes szállítás 15 000 Ft feletti rendelésre!
+      </div>
       <header className="relative h-20 mx-auto border-b duration-200 bg-matcha-bg/85 backdrop-blur-md border-matcha-kraft/40">
         <nav className="content-container text-matcha-text flex items-center justify-between w-full h-full text-lg font-heading font-bold">
           <div className="flex-1 basis-0 h-full flex items-center gap-x-6">

@@ -23,7 +23,7 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
       <div className="text-small-regular text-ui-fg-base my-2">
         <div className="flex items-center justify-between text-base-regular text-ui-fg-base mb-2">
           <span>Részösszeg</span>
-          <span>{getAmount(order.subtotal)}</span>
+          <span>{getAmount(order.item_total)}</span>
         </div>
         <div className="flex flex-col gap-y-1">
           {order.discount_total > 0 && (
@@ -42,16 +42,15 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
             <span>Szállítás</span>
             <span>{getAmount(order.shipping_total)}</span>
           </div>
-          <div className="flex items-center justify-between">
-            <span>Adó</span>
-            <span>{getAmount(order.tax_total)}</span>
-          </div>
         </div>
         <div className="h-px w-full border-b border-gray-200 border-dashed my-4" />
         <div className="flex items-center justify-between text-base-regular text-ui-fg-base mb-2">
           <span>Összesen</span>
           <span>{getAmount(order.total)}</span>
         </div>
+        <p className="text-small-regular text-ui-fg-subtle">
+          Az árak tartalmazzák az áfát.
+        </p>
       </div>
     </div>
   )
