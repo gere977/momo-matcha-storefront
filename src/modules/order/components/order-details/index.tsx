@@ -1,3 +1,4 @@
+import { publicOrderNumber } from "@lib/util/order-number"
 import { HttpTypes } from "@medusajs/types"
 import { Text } from "@medusajs/ui"
 
@@ -60,7 +61,7 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
       <Text className="mt-2 text-matcha-text">
         Rendelésszám:{" "}
         <span data-testid="order-id" className="font-semibold text-matcha-accent">
-          #{order.display_id}
+          #{publicOrderNumber(order.display_id)}
         </span>
       </Text>
 

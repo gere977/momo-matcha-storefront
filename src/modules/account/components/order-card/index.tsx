@@ -4,6 +4,7 @@ import { useMemo } from "react"
 import Thumbnail from "@modules/products/components/thumbnail"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { convertToLocale } from "@lib/util/money"
+import { publicOrderNumber } from "@lib/util/order-number"
 import { HttpTypes } from "@medusajs/types"
 
 type OrderCardProps = {
@@ -26,7 +27,10 @@ const OrderCard = ({ order }: OrderCardProps) => {
   return (
     <div className="bg-white flex flex-col" data-testid="order-card">
       <div className="uppercase text-large-semi mb-1">
-        #<span data-testid="order-display-id">{order.display_id}</span>
+        #
+        <span data-testid="order-display-id">
+          {publicOrderNumber(order.display_id)}
+        </span>
       </div>
       <div className="flex items-center divide-x divide-gray-200 text-small-regular text-ui-fg-base">
         <span className="pr-2" data-testid="order-created-at">

@@ -11,6 +11,21 @@ type OptionSelectProps = {
   "data-testid"?: string
 }
 
+// Hungarian needs the accusative here ("Válassz kiszerelést", not "Válassz
+// kiszerelés"). Option titles come from product data, so map the known ones
+// and fall back to a colon form that stays grammatical for anything new.
+const OPTION_TITLE_ACCUSATIVE: Record<string, string> = {
+  kiszerelés: "kiszerelést",
+  méret: "méretet",
+  szín: "színt",
+  íz: "ízt",
+}
+
+const selectLabel = (title: string) => {
+  const accusative = OPTION_TITLE_ACCUSATIVE[title.trim().toLowerCase()]
+  return accusative ? `Válassz ${accusative}` : `Válassz: ${title}`
+}
+
 const OptionSelect: React.FC<OptionSelectProps> = ({
   option,
   current,
@@ -23,7 +38,9 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
 
   return (
     <div className="flex flex-col gap-y-3">
-      <span className="text-sm font-semibold text-matcha-text">Válassz {title}</span>
+      <span className="text-sm font-semibold text-matcha-text">
+        {selectLabel(title)}
+      </span>
       <div
         className="flex flex-wrap justify-between gap-2"
         data-testid={dataTestId}

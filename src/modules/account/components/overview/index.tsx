@@ -3,6 +3,7 @@ import { Container } from "@medusajs/ui"
 import ChevronDown from "@modules/common/icons/chevron-down"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { convertToLocale } from "@lib/util/money"
+import { publicOrderNumber } from "@lib/util/order-number"
 import { HttpTypes } from "@medusajs/types"
 
 type OverviewProps = {
@@ -134,7 +135,7 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                                 data-testid="order-id"
                                 data-value={order.display_id}
                               >
-                                #{order.display_id}
+                                #{publicOrderNumber(order.display_id)}
                               </span>
                               <span data-testid="order-amount" className="font-semibold text-matcha-dark">
                                 {convertToLocale({
@@ -148,7 +149,8 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                               data-testid="open-order-button"
                             >
                               <span className="sr-only">
-                                Ugrás a #{order.display_id} rendeléshez
+                                Ugrás a #{publicOrderNumber(order.display_id)}{" "}
+                                rendeléshez
                               </span>
                               <ChevronDown className="-rotate-90" />
                             </button>
