@@ -130,7 +130,7 @@ export async function addToCart({
   const cart = await getOrSetCart(countryCode)
 
   if (!cart) {
-    throw new Error("Error retrieving or creating cart")
+    throw new Error("Nem sikerült betölteni a kosarat.")
   }
 
   const headers = {

@@ -8,8 +8,8 @@ import StoreTemplate from "@modules/store/templates"
 export const dynamic = "force-dynamic"
 
 export const metadata: Metadata = {
-  title: "Store",
-  description: "Explore all of our products.",
+  title: "Termékek",
+  description: "Fedezd fel az összes termékünket.",
 }
 
 type Params = {
