@@ -25,6 +25,9 @@ const quicksand = Quicksand({
 export const metadata: Metadata = {
   title: "Momo Matcha | Találd meg a rituálédat",
   metadataBase: new URL(getBaseURL()),
+  verification: {
+    google: "pdOdBZAicMDNQqsQs_FWuVNKuqFOV5rRMeZzNzKLm20",
+  },
 }
 
 export default function RootLayout(props: { children: React.ReactNode }) {
