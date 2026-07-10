@@ -19,7 +19,7 @@ export default function NotFound() {
         className="flex gap-x-1 items-center group"
         href="/"
       >
-        <Text className="text-ui-fg-interactive">Vissza a főoldalra</Text>
+        <Text className="text-matcha-accent">Vissza a főoldalra</Text>
         <ArrowUpRightMini
           className="group-hover:rotate-45 ease-in-out duration-150"
           color="var(--fg-interactive)"

@@ -87,7 +87,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                   )}
                   <span
                     className={clx({
-                      "text-ui-fg-interactive":
+                      "text-matcha-accent":
                         selectedPrice.price_type === "sale",
                     })}
                   >

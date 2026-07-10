@@ -1,5 +1,4 @@
 import { ArrowUpRightMini } from "@medusajs/icons"
-import { Text } from "@medusajs/ui"
 import LocalizedClientLink from "../localized-client-link"
 
 type InteractiveLinkProps = {
@@ -8,6 +7,8 @@ type InteractiveLinkProps = {
   onClick?: () => void
 }
 
+// Brand-styled "more" link (used for "Összes termék", empty states, 404s) —
+// replaces the Medusa UI default blue with the matcha accent.
 const InteractiveLink = ({
   href,
   children,
@@ -16,16 +17,13 @@ const InteractiveLink = ({
 }: InteractiveLinkProps) => {
   return (
     <LocalizedClientLink
-      className="flex gap-x-1 items-center group"
+      className="inline-flex gap-x-1 items-center group font-heading font-bold text-sm uppercase tracking-wider text-matcha-accent hover:text-matcha transition-colors"
       href={href}
       onClick={onClick}
       {...props}
     >
-      <Text className="text-ui-fg-interactive">{children}</Text>
-      <ArrowUpRightMini
-        className="group-hover:rotate-45 ease-in-out duration-150"
-        color="var(--fg-interactive)"
-      />
+      <span>{children}</span>
+      <ArrowUpRightMini className="group-hover:rotate-45 ease-in-out duration-150" />
     </LocalizedClientLink>
   )
 }

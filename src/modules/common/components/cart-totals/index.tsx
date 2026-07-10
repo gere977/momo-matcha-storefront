@@ -38,7 +38,7 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
           <div className="flex items-center justify-between">
             <span>Kedvezmény</span>
             <span
-              className="text-ui-fg-interactive"
+              className="text-matcha-accent"
               data-testid="cart-discount"
               data-value={discount_total || 0}
             >
