@@ -13,6 +13,21 @@ const S3_PATHNAME = process.env.MEDUSA_CLOUD_S3_PATHNAME
  */
 const nextConfig = {
   reactStrictMode: true,
+  async redirects() {
+    // The two guides moved from /pages/* into the /tudastar content hub.
+    return [
+      {
+        source: "/:countryCode/pages/matcha-keszites",
+        destination: "/:countryCode/tudastar/matcha-keszites",
+        permanent: true,
+      },
+      {
+        source: "/:countryCode/pages/matcha-vs-kave",
+        destination: "/:countryCode/tudastar/matcha-vs-kave",
+        permanent: true,
+      },
+    ]
+  },
   logging: {
     fetches: {
       fullUrl: true,

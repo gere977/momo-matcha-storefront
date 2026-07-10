@@ -30,10 +30,36 @@ export const metadata: Metadata = {
   },
 }
 
+// Organization entity signal for search + AI knowledge graphs. Social
+// profiles go into NEXT_PUBLIC_SOCIAL_LINKS (comma-separated URLs) once the
+// brand accounts exist — no code change needed.
+const socialLinks = (process.env.NEXT_PUBLIC_SOCIAL_LINKS ?? "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean)
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Momo Matcha",
+  url: getBaseURL(),
+  logo: `${getBaseURL()}/images/logo.jpg`,
+  description:
+    "Prémium, bio ceremonial matcha Ujiból, Japánból — klasszikus és ízesített matchák magyar webshopja.",
+  email: "info@momomatcha.hu",
+  ...(socialLinks.length ? { sameAs: socialLinks } : {}),
+}
+
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="hu" data-mode="light" className={`${nunito.variable} ${quicksand.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
         <GsapScrollEffects />
         <AnalyticsTracker />
         <main className="relative">{props.children}</main>

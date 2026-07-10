@@ -3,6 +3,7 @@ import { listCollections } from "@lib/data/collections"
 import { Text, clx } from "@medusajs/ui"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import NewsletterSignup from "@modules/layout/components/newsletter-signup"
 
 export default async function Footer() {
   const { collections } = await listCollections({
@@ -24,6 +25,9 @@ export default async function Footer() {
             <Text className="txt-small text-matcha-text/70 mt-2">
               Rituálék a lassú élethez.
             </Text>
+            <div className="mt-6 max-w-xs">
+              <NewsletterSignup />
+            </div>
           </div>
           <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3">
             {productCategories && productCategories?.length > 0 && (
@@ -134,12 +138,17 @@ export default async function Footer() {
                   </LocalizedClientLink>
                 </li>
                 <li>
-                  <LocalizedClientLink href="/pages/matcha-keszites" className="hover:text-matcha">
+                  <LocalizedClientLink href="/tudastar" className="hover:text-matcha">
+                    Matcha tudástár
+                  </LocalizedClientLink>
+                </li>
+                <li>
+                  <LocalizedClientLink href="/tudastar/matcha-keszites" className="hover:text-matcha">
                     Matcha készítés útmutató
                   </LocalizedClientLink>
                 </li>
                 <li>
-                  <LocalizedClientLink href="/pages/matcha-vs-kave" className="hover:text-matcha">
+                  <LocalizedClientLink href="/tudastar/matcha-vs-kave" className="hover:text-matcha">
                     Matcha vs. kávé
                   </LocalizedClientLink>
                 </li>

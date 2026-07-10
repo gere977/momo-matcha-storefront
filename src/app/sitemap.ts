@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next"
 import { getBaseURL } from "@lib/util/env"
 import { contentPageSlugs } from "@lib/content/pages"
+import { articles } from "@lib/content/articles"
 
 const COUNTRY_CODE = process.env.NEXT_PUBLIC_DEFAULT_REGION || "hu"
 
@@ -60,5 +61,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       entry(`/categories/${c.handle}`, c.updated_at, 0.6)
     ),
     ...contentPageSlugs.map((slug) => entry(`/pages/${slug}`, undefined, 0.4)),
+    entry("/tudastar", undefined, 0.7),
+    ...Object.entries(articles).map(([slug, article]) =>
+      entry(`/tudastar/${slug}`, article.dateModified, 0.8)
+    ),
   ]
 }
