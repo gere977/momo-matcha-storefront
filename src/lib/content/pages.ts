@@ -316,11 +316,117 @@ const about: ContentPage = {
   ],
 }
 
+// --- SEO guide pages ("matcha tudástár") --------------------------------
+// Target Hungarian search intent: "matcha készítés", "matcha vs kávé".
+
+const matchaKeszites: ContentPage = {
+  title: "Hogyan készíts tökéletes matchát otthon",
+  subtitle:
+    "Lépésről lépésre útmutató a hagyományos matchához és a habos matcha lattéhoz — kezdőknek is.",
+  blocks: [
+    { type: "heading", text: "Mire lesz szükséged?" },
+    {
+      type: "list",
+      items: [
+        "1–2 g (kb. fél teáskanál) ceremonial grade matcha",
+        "70–80 ml forró, de nem forrásban lévő víz (kb. 75–80 °C)",
+        "Bambusz habverő (chasen) — vagy szükségmegoldásként kis kézi habosító",
+        "Tál (chawan) vagy szélesebb bögre, apró szűrő a csomómentességhez",
+      ],
+    },
+    {
+      type: "paragraph",
+      html:
+        "A jó hír: a matcha elkészítése nem bonyolult — a titok mindössze a <strong>vízhőfok</strong> és a <strong>habverés</strong>. A forrásban lévő víz megégeti a finom teaport és keserűvé teszi, ezért hagyd a felforralt vizet 2–3 percig hűlni, mielőtt a matchára öntenéd.",
+    },
+
+    { type: "heading", text: "A klasszikus matcha (usucha) 4 lépésben" },
+    {
+      type: "list",
+      items: [
+        "1. Szitáld a tálba a matchát — így garantáltan csomómentes lesz.",
+        "2. Öntsd fel 70–80 ml, kb. 75–80 °C-os vízzel.",
+        "3. Habverd a chasennel gyors, W alakú mozdulatokkal 15–30 másodpercig, amíg selymes, apró buborékos hab képződik a tetején.",
+        "4. Idd frissen, közvetlenül a tálból — ez a rituálé lényege. 🍵",
+      ],
+    },
+
+    { type: "heading", text: "Matcha latte — a krémesebb út" },
+    {
+      type: "paragraph",
+      html:
+        "Készítsd el a fenti alapot fele annyi (kb. 30–40 ml) vízzel, hogy tömény matcha-koncentrátumot kapj, majd öntsd fel 150–200 ml habosított tejjel vagy növényi itallal (a zabtej a közönségkedvenc). Jegesen is isteni: a koncentrátumot öntsd jégkockákra, majd jöhet rá a hideg tej. Az <strong>Epres</strong> és a <strong>Csokoládés</strong> ízesített matcháink kifejezetten lattéhoz készültek.",
+    },
+
+    { type: "heading", text: "A leggyakoribb hibák" },
+    {
+      type: "list",
+      items: [
+        "Forrásban lévő víz — keserű lesz tőle. 75–80 °C az ideális.",
+        "Kihagyott szitálás — csomós, egyenetlen ital az eredmény.",
+        "Túl sok por — 1–2 g bőven elég egy adaghoz.",
+        "Rossz tárolás — a matcha fény- és hőérzékeny; zárt dobozban, felbontás után hűtőben tartsd.",
+      ],
+    },
+    {
+      type: "paragraph",
+      html:
+        'Készen állsz az első kortyra? Nézd meg <a href="/hu/store"><strong>matcha válogatásunkat</strong></a> — mindegyik Uji teakertjeiből érkezik, és a Matcha Szettben a bambusz habverőt is megtalálod.',
+    },
+  ],
+}
+
+const matchaVsKave: ContentPage = {
+  title: "Matcha vs. kávé — miben más az energia?",
+  subtitle:
+    "Koffein, L-teanin, fókusz és a délutáni zuhanás — őszinte összehasonlítás.",
+  blocks: [
+    { type: "heading", text: "Mennyi koffein van a matchában?" },
+    {
+      type: "paragraph",
+      html:
+        "Egy adag (1–2 g) matcha kb. <strong>35–70 mg koffeint</strong> tartalmaz, míg egy átlagos kávé 80–120 mg-ot. Vagyis a matcha nagyjából fél kávényi koffeint ad — a különbség mégsem elsősorban a mennyiségben van, hanem abban, ahogyan a szervezeted felszívja.",
+    },
+
+    { type: "heading", text: "Az L-teanin: a nyugodt fókusz titka" },
+    {
+      type: "paragraph",
+      html:
+        "A matcha természetes <strong>L-teanint</strong> tartalmaz — egy aminosavat, amely lassítja a koffein felszívódását, és sokan úgy tapasztalják, hogy egyenletesebb, nyugodtabb éberséget ad. Nincs hirtelen csúcs, és jellemzően elmarad a kávé után ismerős délutáni zuhanás is: az energia fokozatosan, 4–6 óra alatt cseng le.",
+    },
+
+    { type: "heading", text: "Mikor melyiket?" },
+    {
+      type: "list",
+      items: [
+        "Reggeli rituáléhoz, hosszú fókuszt kívánó munkához: matcha.",
+        "Gyors, azonnali lökethez: kávé.",
+        "Érzékeny gyomor vagy koffeinérzékenység esetén: a legtöbben a matchát kíméletesebbnek érzik.",
+        "Délután, amikor a kávé már az alvást kockáztatná: egy gyengébb matcha jó kompromisszum lehet.",
+      ],
+    },
+
+    { type: "heading", text: "Íz és rituálé" },
+    {
+      type: "paragraph",
+      html:
+        "A jó ceremonial grade matcha természetesen édeskés, umami-gazdag, keserűség nélkül — egészen más élmény, mint a pörkölt kávé. És van egy nem mérhető összetevője is: a habverés fél perce lelassít, jelenlétre hív. A kávéfőző gombnyomás; a matcha <strong>rituálé</strong>.",
+    },
+    {
+      type: "paragraph",
+      html:
+        'Kipróbálnád? Kezdd az <a href="/hu/products/original-premium-momo-matcha"><strong>Original matchánkkal</strong></a>, vagy nézd meg a <a href="/hu/store"><strong>teljes válogatást</strong></a>.',
+    },
+  ],
+}
+
 export const contentPages: Record<string, ContentPage> = {
   aszf,
   shipping,
   refunds,
   about,
+  "matcha-keszites": matchaKeszites,
+  "matcha-vs-kave": matchaVsKave,
 }
 
 export const contentPageSlugs = Object.keys(contentPages)

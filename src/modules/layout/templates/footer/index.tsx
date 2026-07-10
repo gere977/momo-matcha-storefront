@@ -133,6 +133,16 @@ export default async function Footer() {
                     Visszaküldés
                   </LocalizedClientLink>
                 </li>
+                <li>
+                  <LocalizedClientLink href="/pages/matcha-keszites" className="hover:text-matcha">
+                    Matcha készítés útmutató
+                  </LocalizedClientLink>
+                </li>
+                <li>
+                  <LocalizedClientLink href="/pages/matcha-vs-kave" className="hover:text-matcha">
+                    Matcha vs. kávé
+                  </LocalizedClientLink>
+                </li>
               </ul>
             </div>
           </div>
