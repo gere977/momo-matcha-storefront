@@ -1,15 +1,15 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import { articles, articleSlugs } from "@lib/content/articles"
+import { articles } from "@lib/content/articles"
 
 type Params = Promise<{ countryCode: string; slug: string }>
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://momomatcha.hu"
 
-export function generateStaticParams() {
-  return articleSlugs.map((slug) => ({ slug }))
-}
+// Rendered on demand (same as the /tudastar hub). A generateStaticParams
+// that only returned `slug` without `countryCode` made production render
+// 500 — don't partially prerender under the country segment.
 
 export async function generateMetadata(props: {
   params: Params
