@@ -11,9 +11,9 @@ import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 
 export const metadata: Metadata = {
-  title: "Momo Matcha | Find Your Ritual",
+  title: "Momo Matcha | Találd meg a rituálédat",
   description:
-    "Prémium, bio szertartásos matcha Ujiból, Japánból. Rituálék a lassú élethez.",
+    "Prémium, bio szertartásos matcha Ujiból, Japánból. Klasszikus és ízesített matchák, gyors szállítással — rituálék a lassú élethez.",
 }
 
 export default async function Home(props: {

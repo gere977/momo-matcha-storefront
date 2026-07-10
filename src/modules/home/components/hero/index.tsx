@@ -1,5 +1,9 @@
+import Image from "next/image"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
+// Hero entrance runs as pure CSS (`hero-in` keyframes in globals.css) so the
+// LCP image and headline are visible without waiting for the JS bundle —
+// GSAP only drives the scroll parallax on [data-hero-section].
 const Hero = () => {
   return (
     <section
@@ -14,29 +18,26 @@ const Hero = () => {
       <div className="content-container relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-6 items-center py-16 md:py-20 min-h-[82vh]">
         {/* Copy */}
         <div className="text-center md:text-left">
-          <span
-            data-hero-el
-            className="opacity-0 translate-y-[30px] inline-block mb-5 px-4 py-1.5 rounded-full bg-matcha-accent text-white text-[11px] font-bold uppercase tracking-[2px] shadow-sm"
-          >
+          <span className="hero-in inline-block mb-5 px-4 py-1.5 rounded-full bg-matcha-accent text-white text-[11px] font-bold uppercase tracking-[2px] shadow-sm">
             Új · ízesített matchák 🍓
           </span>
           <h1
-            data-hero-el
-            className="opacity-0 translate-y-[30px] font-heading font-bold text-6xl md:text-7xl leading-[1.02] text-matcha-dark"
+            className="hero-in font-heading font-bold text-6xl md:text-7xl leading-[1.02] text-matcha-dark"
+            style={{ animationDelay: "120ms" }}
           >
             Találd meg a{" "}
             <span className="text-matcha-accent">rituálédat</span>
           </h1>
           <p
-            data-hero-el
-            className="opacity-0 translate-y-[30px] mt-5 text-lg text-matcha-text/75 max-w-md mx-auto md:mx-0"
+            className="hero-in mt-5 text-lg text-matcha-text/75 max-w-md mx-auto md:mx-0"
+            style={{ animationDelay: "240ms" }}
           >
             Prémium, bio matcha Japánból — a klasszikus szertartásostól a
             gyümölcsös ízesítettekig.
           </p>
           <div
-            data-hero-el
-            className="opacity-0 translate-y-[30px] mt-8 flex flex-wrap gap-3 justify-center md:justify-start"
+            className="hero-in mt-8 flex flex-wrap gap-3 justify-center md:justify-start"
+            style={{ animationDelay: "360ms" }}
           >
             <LocalizedClientLink
               href="/store"
@@ -54,13 +55,20 @@ const Hero = () => {
         </div>
 
         {/* Lifestyle photo with an offset color card behind it */}
-        <div data-hero-el className="opacity-0 translate-y-[30px] relative mx-auto w-full max-w-sm">
+        <div
+          className="hero-in relative mx-auto w-full max-w-sm"
+          style={{ animationDelay: "200ms" }}
+        >
           <div className="absolute -inset-3 rotate-3 rounded-large bg-strawberry/30" />
           <div className="absolute -inset-3 -rotate-2 rounded-large bg-matcha/20" />
-          <img
+          <Image
             src="/images/lifestyle-drinking.png"
-            alt="Momo Matcha"
-            className="relative rounded-large shadow-2xl w-full object-cover"
+            alt="Matcha készítése kézzel, bambusz habverővel"
+            width={299}
+            height={437}
+            priority
+            sizes="(max-width: 768px) 90vw, 384px"
+            className="relative rounded-large shadow-2xl w-full h-auto object-cover"
           />
         </div>
       </div>

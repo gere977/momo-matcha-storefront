@@ -29,8 +29,12 @@ export async function POST(req: NextRequest) {
       },
       body: JSON.stringify({
         path: body.path,
+        event: body.event,
         referrer: body.referrer,
         session_id: body.session_id,
+        utm_source: body.utm_source,
+        utm_medium: body.utm_medium,
+        utm_campaign: body.utm_campaign,
       }),
       cache: "no-store",
     })

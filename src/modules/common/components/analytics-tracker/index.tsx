@@ -2,24 +2,12 @@
 
 import { usePathname } from "next/navigation"
 import { useEffect, useRef } from "react"
-
-const SESSION_KEY = "momo_session"
-
-function getSessionId(): string {
-  try {
-    let id = window.localStorage.getItem(SESSION_KEY)
-    if (!id) {
-      id = Math.random().toString(36).slice(2) + Date.now().toString(36)
-      window.localStorage.setItem(SESSION_KEY, id)
-    }
-    return id
-  } catch {
-    return "anon"
-  }
-}
+import { trackEvent } from "@lib/util/analytics"
 
 // Fires one beacon per route change to /api/track (first-party analytics -
-// no cookies, no external service).
+// no cookies, no external service). UTM params from the landing URL are
+// captured once per session and attached to every event for campaign
+// attribution in the admin Statisztika page.
 const AnalyticsTracker = () => {
   const pathname = usePathname()
   const lastTracked = useRef<string | null>(null)
@@ -31,18 +19,18 @@ const AnalyticsTracker = () => {
     lastTracked.current = pathname
 
     // Strip the country code segment so stats group by real page
-    const normalized = pathname.replace(/^\/[a-z]{2}(\/|$)/, "/")
+    const normalized = pathname.replace(/^\/[a-z]{2}(\/|$)/, "/") || "/"
 
-    fetch("/api/track", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        path: normalized || "/",
-        referrer: document.referrer || null,
-        session_id: getSessionId(),
-      }),
-      keepalive: true,
-    }).catch(() => {})
+    trackEvent("page_view", normalized, document.referrer || null)
+
+    // Explicit funnel events on top of the pageview, so the admin funnel
+    // doesn't depend on path heuristics alone.
+    if (normalized.includes("/checkout")) {
+      trackEvent("begin_checkout", normalized)
+    }
+    if (/\/order\/.+\/confirmed/.test(normalized)) {
+      trackEvent("purchase", normalized)
+    }
   }, [pathname])
 
   return null

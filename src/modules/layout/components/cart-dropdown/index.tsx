@@ -10,6 +10,7 @@ import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
 import DeleteButton from "@modules/common/components/delete-button"
+import FreeShippingBar from "@modules/common/components/free-shipping-bar"
 import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
@@ -175,6 +176,7 @@ const CartDropdown = ({
                     ))}
                 </div>
                 <div className="p-4 flex flex-col gap-y-4 text-small-regular">
+                  <FreeShippingBar cart={cartState} />
                   <div className="flex items-center justify-between">
                     <span className="text-ui-fg-base font-semibold">
                       Részösszeg{" "}

@@ -38,6 +38,7 @@ export default async function ProductPreview({
           thumbnail={product.thumbnail}
           images={product.images}
           size="full"
+          alt={product.title}
           isFeatured={isFeatured}
         />
         <div className="flex txt-compact-medium p-5 justify-between items-center">

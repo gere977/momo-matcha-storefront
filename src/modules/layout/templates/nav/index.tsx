@@ -1,4 +1,5 @@
 import { Suspense } from "react"
+import Image from "next/image"
 
 import { listRegions } from "@lib/data/regions"
 import { listLocales } from "@lib/data/locales"
@@ -49,10 +50,13 @@ export default async function Nav() {
             >
               {/* mix-blend-multiply drops the logo's white background into the
                   cream nav bar without needing a transparent PNG. */}
-              <img
+              <Image
                 src="/images/logo.jpg"
                 alt="Momo Matcha"
-                className="h-14 w-auto"
+                width={56}
+                height={56}
+                priority
+                className="h-14 w-14"
                 style={{ mixBlendMode: "multiply" }}
               />
             </LocalizedClientLink>

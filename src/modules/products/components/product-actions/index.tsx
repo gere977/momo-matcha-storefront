@@ -7,6 +7,7 @@ import { Button } from "@medusajs/ui"
 import Divider from "@modules/common/components/divider"
 import OptionSelect from "@modules/products/components/product-actions/option-select"
 import { isEqual } from "lodash"
+import { trackEvent } from "@lib/util/analytics"
 import { useParams, usePathname, useSearchParams } from "next/navigation"
 import { useEffect, useMemo, useRef, useState } from "react"
 import ProductPrice from "../product-price"
@@ -132,8 +133,38 @@ export default function ProductActions({
       countryCode,
     })
 
+    trackEvent(
+      "add_to_cart",
+      pathname.replace(/^\/[a-z]{2}(\/|$)/, "/") || "/"
+    )
+
     setIsAdding(false)
   }
+
+  // "Value per serving" framing: a serving is ~2g of matcha, so the size
+  // options can be compared honestly (100g is the best price per serving).
+  const perServing = useMemo(() => {
+    const amount = selectedVariant?.calculated_price?.calculated_amount
+    const currency = selectedVariant?.calculated_price?.currency_code
+    if (typeof amount !== "number" || !currency) return null
+
+    const grams = Number(
+      (selectedVariant?.options ?? [])
+        .map((o: any) => /^(\d+)\s*g$/i.exec(String(o.value ?? "").trim())?.[1])
+        .find(Boolean)
+    )
+    if (!grams || Number.isNaN(grams)) return null
+
+    const servings = Math.max(1, Math.round(grams / 2))
+    const perServingAmount = amount / servings
+    const formatted = new Intl.NumberFormat("hu-HU", {
+      style: "currency",
+      currency: currency.toUpperCase(),
+      maximumFractionDigits: 0,
+    }).format(perServingAmount)
+
+    return { servings, formatted }
+  }, [selectedVariant])
 
   return (
     <>
@@ -162,6 +193,13 @@ export default function ProductActions({
 
         <ProductPrice product={product} variant={selectedVariant} />
 
+        {perServing && (
+          <p className="text-xs text-matcha-text/60 -mt-1">
+            ≈ {perServing.formatted} / adag ({perServing.servings} adag, 2 g
+            adagonként)
+          </p>
+        )}
+
         <Button
           onClick={handleAddToCart}
           disabled={
@@ -182,6 +220,25 @@ export default function ProductActions({
             ? "Elfogyott"
             : "Kosárba"}
         </Button>
+
+        {/* Trust row — the reassurances Hungarian shoppers look for before
+            committing: COD, return window, delivery time, free shipping. */}
+        <ul className="mt-2 flex flex-col gap-1.5 text-xs text-matcha-text/70">
+          <li className="flex items-center gap-2">
+            <span aria-hidden>📦</span> 1–3 munkanapos kézbesítés (GLS /
+            FoxPost)
+          </li>
+          <li className="flex items-center gap-2">
+            <span aria-hidden>💳</span> Fizess bankkártyával vagy utánvéttel
+          </li>
+          <li className="flex items-center gap-2">
+            <span aria-hidden>🚚</span> 15 000 Ft felett ingyenes szállítás
+          </li>
+          <li className="flex items-center gap-2">
+            <span aria-hidden>↩️</span> 14 napos elállási jog
+          </li>
+        </ul>
+
         <MobileActions
           product={product}
           variant={selectedVariant}

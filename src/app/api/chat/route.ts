@@ -36,6 +36,30 @@ SZABÁLYOK:
 - Ne ígérj olyat, ami nincs a tudásbázisban (pl. konkrét szállítási díj, akció, készlet). Ilyenkor irányítsd a momomatcha.hu oldalra vagy az e-mailre.
 - Légy tömör (2–5 mondat).`
 
+// Lightweight per-IP rate limit so a script can't burn the Gemini quota.
+// In-memory is fine on a single serverless instance at this traffic level;
+// a cold start just resets the window.
+const RATE_LIMIT = 10 // requests
+const RATE_WINDOW_MS = 60_000
+const rateBuckets = new Map<string, { count: number; resetAt: number }>()
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now()
+  // Opportunistic cleanup so the map doesn't grow unbounded.
+  if (rateBuckets.size > 5000) {
+    rateBuckets.forEach((bucket, key) => {
+      if (bucket.resetAt < now) rateBuckets.delete(key)
+    })
+  }
+  const bucket = rateBuckets.get(ip)
+  if (!bucket || bucket.resetAt < now) {
+    rateBuckets.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS })
+    return false
+  }
+  bucket.count++
+  return bucket.count > RATE_LIMIT
+}
+
 export async function POST(req: NextRequest) {
   const apiKey = process.env.GEMINI_API_KEY
   if (!apiKey) {
@@ -45,11 +69,27 @@ export async function POST(req: NextRequest) {
     })
   }
 
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      {
+        reply:
+          "Túl sok üzenetet küldtél egymás után — várj egy kicsit, vagy írj nekünk: info@momomatcha.hu 🍵",
+      },
+      { status: 429 }
+    )
+  }
+
   let messages: { role: string; content: string }[] = []
   try {
     const body = await req.json()
     messages = Array.isArray(body?.messages) ? body.messages : []
   } catch {
+    return NextResponse.json({ reply: "Hibás kérés." }, { status: 400 })
+  }
+
+  if (messages.length > 40) {
     return NextResponse.json({ reply: "Hibás kérés." }, { status: 400 })
   }
 
