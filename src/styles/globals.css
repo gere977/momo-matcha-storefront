@@ -9,6 +9,17 @@
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
+html {
+  /* Anchor links (#velemenyek, #faq) glide instead of teleporting. */
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   background-color: theme("colors.matcha.bg");
   color: theme("colors.matcha.text");

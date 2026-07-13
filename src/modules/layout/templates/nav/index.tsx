@@ -7,6 +7,7 @@ import { getLocale } from "@lib/data/locale-actions"
 import { StoreRegion } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
+import NavLink from "@modules/layout/components/nav-link"
 import SideMenu from "@modules/layout/components/side-menu"
 
 export default async function Nav() {
@@ -30,15 +31,9 @@ export default async function Nav() {
               <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
             </div>
             <div className="hidden small:flex items-center gap-x-6 h-full">
-              <LocalizedClientLink className="hover:text-matcha-accent transition-colors" href="/">
-                Főoldal
-              </LocalizedClientLink>
-              <LocalizedClientLink className="hover:text-matcha-accent transition-colors" href="/collections/matcha">
-                Matcha Teák
-              </LocalizedClientLink>
-              <LocalizedClientLink className="hover:text-matcha-accent transition-colors" href="/categories/kiegeszitok">
-                Kiegészítők
-              </LocalizedClientLink>
+              <NavLink href="/">Főoldal</NavLink>
+              <NavLink href="/collections/matcha">Matcha Teák</NavLink>
+              <NavLink href="/categories/kiegeszitok">Kiegészítők</NavLink>
             </div>
           </div>
 
@@ -64,13 +59,9 @@ export default async function Nav() {
 
           <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
             <div className="hidden small:flex items-center gap-x-6 h-full">
-              <LocalizedClientLink
-                className="hover:text-matcha-accent transition-colors text-matcha-text"
-                href="/account"
-                data-testid="nav-account-link"
-              >
+              <NavLink href="/account" data-testid="nav-account-link">
                 Fiókom
-              </LocalizedClientLink>
+              </NavLink>
             </div>
             <Suspense
               fallback={
