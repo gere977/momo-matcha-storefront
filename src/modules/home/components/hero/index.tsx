@@ -73,6 +73,7 @@ const Hero = () => {
             width={299}
             height={437}
             priority
+            fetchPriority="high"
             sizes="(max-width: 768px) 90vw, 384px"
             className="relative rounded-large shadow-2xl w-full h-auto object-cover"
           />

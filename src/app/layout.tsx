@@ -3,6 +3,7 @@ import { Metadata } from "next"
 import { Nunito, Quicksand } from "next/font/google"
 import GsapScrollEffects from "@modules/common/components/gsap-scroll-effects"
 import AnalyticsTracker from "@modules/common/components/analytics-tracker"
+import { Analytics } from "@vercel/analytics/next"
 import "styles/globals.css"
 
 // Rounded, friendly genZ display font for headings + the wordmark. Nunito has
@@ -62,6 +63,9 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         />
         <GsapScrollEffects />
         <AnalyticsTracker />
+        {/* Vercel Web Analytics — cookieless page views + Web Vitals,
+            complements the first-party analytics-lite tracker. */}
+        <Analytics />
         <main className="relative">{props.children}</main>
       </body>
     </html>

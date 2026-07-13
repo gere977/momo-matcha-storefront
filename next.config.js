@@ -33,6 +33,13 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+  experimental: {
+    // Barrel imports like `import { Button } from "@medusajs/ui"` pull the
+    // whole library (incl. an unused Prism syntax highlighter) into every
+    // page's client bundle — Lighthouse flagged ~150KB unused JS. This
+    // rewrites them to per-module imports so only used components ship.
+    optimizePackageImports: ["@medusajs/ui", "@medusajs/icons"],
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
