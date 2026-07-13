@@ -48,7 +48,7 @@ const FreeShippingBar = ({ cart }: { cart: HttpTypes.StoreCart }) => {
         aria-label="Ingyenes szállítás állapota"
       >
         <div
-          className="h-full rounded-full bg-matcha transition-all duration-500"
+          className="h-full rounded-full bg-matcha transition-[width] duration-500 ease-out-quart"
           style={{ width: `${progress}%` }}
         />
       </div>

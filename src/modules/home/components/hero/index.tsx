@@ -36,18 +36,24 @@ const Hero = () => {
             gyümölcsös ízesítettekig.
           </p>
           <div
-            className="hero-in mt-8 flex flex-wrap gap-3 justify-center md:justify-start"
+            className="hero-in mt-8 flex flex-wrap items-center gap-3 justify-center md:justify-start"
             style={{ animationDelay: "360ms" }}
           >
             <LocalizedClientLink
               href="/store"
-              className="inline-block px-9 py-4 rounded-full bg-matcha-accent text-white font-bold uppercase tracking-wider text-sm hover:-translate-y-0.5 transition-all shadow-lg shadow-matcha-accent/25"
+              className="group inline-flex items-center gap-3 pl-9 pr-3 py-3 rounded-full bg-matcha-accent text-white font-bold uppercase tracking-wider text-sm hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-transform duration-200 ease-out-quart shadow-lg shadow-matcha-accent/25"
             >
               Vásárolj most
+              <span
+                aria-hidden
+                className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-200 ease-out-quart group-hover:translate-x-0.5"
+              >
+                →
+              </span>
             </LocalizedClientLink>
             <LocalizedClientLink
               href="/collections/matcha"
-              className="inline-block px-9 py-4 rounded-full bg-white text-matcha-dark font-bold uppercase tracking-wider text-sm border border-matcha-kraft hover:bg-matcha-kraft/30 transition-all"
+              className="inline-block px-9 py-4 rounded-full bg-white text-matcha-dark font-bold uppercase tracking-wider text-sm border border-matcha-kraft hover:bg-matcha-kraft/30 active:scale-[0.98] transition-[background-color,transform] duration-200 ease-out-quart"
             >
               Matcha teák
             </LocalizedClientLink>

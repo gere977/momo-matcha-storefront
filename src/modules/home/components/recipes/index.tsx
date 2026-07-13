@@ -52,7 +52,7 @@ const Recipes = () => {
           {RECIPES.map((r) => (
             <div
               key={r.title}
-              className="bg-white rounded-large overflow-hidden border border-matcha-kraft/40 hover:shadow-lg hover:-translate-y-1 transition-all"
+              className="bg-white rounded-large overflow-hidden border border-matcha-kraft/40 hover:shadow-lg hover:shadow-matcha-kraft/40 hover:-translate-y-1 transition-[transform,box-shadow] duration-200 ease-out-quart"
             >
               <div
                 className="h-40 flex items-center justify-center text-6xl"

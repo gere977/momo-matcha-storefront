@@ -2,6 +2,11 @@ const path = require("path")
 
 module.exports = {
   darkMode: "class",
+  future: {
+    // Gate hover: styles behind (hover:hover) so taps on touch devices don't
+    // leave cards stuck in their hover state.
+    hoverOnlyWhenSupported: true,
+  },
   presets: [require("@medusajs/ui-preset")],
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx}",
@@ -12,6 +17,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      transitionTimingFunction: {
+        // Strong curves — the built-in CSS easings are too weak for UI motion.
+        "out-quart": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "in-out-quart": "cubic-bezier(0.77, 0, 0.175, 1)",
+        drawer: "cubic-bezier(0.32, 0.72, 0, 1)",
+      },
       transitionProperty: {
         width: "width margin",
         height: "height",

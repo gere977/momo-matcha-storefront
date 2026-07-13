@@ -28,10 +28,24 @@ export default function GsapScrollEffects() {
     const revealSelector =
       "[data-hero-el], [data-reveal-col], [data-product-card], [data-story-content] > *"
 
+    // The hidden state is baked into classNames (`opacity-0 translate-y-*`) so
+    // server and client agree at hydration. Once a reveal finishes, both the
+    // classes and GSAP's inline styles must go: a leftover inline transform
+    // outranks `hover:-translate-y-*` utilities and freezes card hover lifts.
+    const settleRevealed = (targets: gsap.DOMTarget) => {
+      const els = gsap.utils.toArray<HTMLElement>(targets)
+      els.forEach((el) => {
+        Array.from(el.classList)
+          .filter((c) => c === "opacity-0" || c.startsWith("translate-y-"))
+          .forEach((c) => el.classList.remove(c))
+      })
+      gsap.set(els, { clearProps: "opacity,transform" })
+    }
+
     if (prefersReduced) {
-      // No animation, but the elements still start hidden via className - reveal
-      // them instantly instead of leaving reduced-motion users looking at nothing.
-      gsap.set(revealSelector, { opacity: 1, y: 0, clearProps: "opacity,transform" })
+      // No animation - reveal instantly instead of leaving reduced-motion
+      // users looking at nothing.
+      settleRevealed(revealSelector)
       return
     }
 
@@ -45,6 +59,7 @@ export default function GsapScrollEffects() {
           stagger: 0.18,
           ease: "power3.out",
           delay: 0.2,
+          onComplete: () => settleRevealed(heroEls),
         })
       }
 
@@ -74,6 +89,7 @@ export default function GsapScrollEffects() {
             trigger: revealCols[0].parentElement,
             start: "top 80%",
           },
+          onComplete: () => settleRevealed(revealCols),
         })
       }
 
@@ -89,6 +105,7 @@ export default function GsapScrollEffects() {
             trigger: productCards[0].closest("ul") ?? productCards[0].parentElement,
             start: "top 85%",
           },
+          onComplete: () => settleRevealed(productCards),
         })
       }
 
@@ -117,6 +134,7 @@ export default function GsapScrollEffects() {
               trigger: storyContent,
               start: "top 75%",
             },
+            onComplete: () => settleRevealed(storyContent.children),
           })
         }
       }

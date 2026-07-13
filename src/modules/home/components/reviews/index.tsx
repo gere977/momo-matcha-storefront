@@ -84,7 +84,7 @@ const Reviews = async () => {
           {reviews.map((r) => (
             <div
               key={r.id}
-              className="bg-white rounded-2xl p-7 border border-matcha-kraft/30 flex flex-col gap-4 hover:shadow-lg hover:-translate-y-1 transition-all"
+              className="bg-white rounded-2xl p-7 border border-matcha-kraft/30 flex flex-col gap-4 hover:shadow-lg hover:shadow-matcha-kraft/40 hover:-translate-y-1 transition-[transform,box-shadow] duration-200 ease-out-quart"
             >
               <div className="flex gap-0.5" aria-label={`${r.rating} csillag`}>
                 {Array.from({ length: Math.max(1, Math.min(5, r.rating)) }).map(

@@ -33,7 +33,7 @@ export default function TudastarPage() {
             <LocalizedClientLink
               key={slug}
               href={`/tudastar/${slug}`}
-              className="group bg-white rounded-2xl border border-matcha-kraft/40 p-8 flex flex-col gap-3 hover:shadow-xl hover:-translate-y-1 hover:border-matcha transition-all"
+              className="group bg-white rounded-2xl border border-matcha-kraft/40 p-8 flex flex-col gap-3 hover:shadow-xl hover:shadow-matcha-dark/10 hover:-translate-y-1 hover:border-matcha transition-[transform,box-shadow,border-color] duration-200 ease-out-quart"
             >
               <span className="text-[11px] font-bold uppercase tracking-[2px] text-matcha">
                 {article.category}

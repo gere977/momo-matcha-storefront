@@ -96,7 +96,7 @@ const CountrySelect = ({ toggleState, regions }: CountrySelectProps) => {
           <Transition
             show={state}
             as={Fragment}
-            leave="transition ease-in duration-150"
+            leave="transition ease-out-quart duration-100"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >

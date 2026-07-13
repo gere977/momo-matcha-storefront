@@ -2,10 +2,48 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+:root {
+  /* Strong easing curves shared with tailwind.config.js */
+  --ease-out-quart: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
 body {
   background-color: theme("colors.matcha.bg");
   color: theme("colors.matcha.text");
   font-family: var(--font-body), theme("fontFamily.sans");
+}
+
+@layer base {
+  /* Every pressable element gives physical feedback — :where() keeps
+     specificity at zero so component classes can still override. */
+  :where(button, [role="button"]) {
+    transition: transform 160ms var(--ease-out-quart);
+  }
+
+  :where(button, [role="button"]):active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  /* Visible keyboard focus, tinted to the brand instead of browser blue. */
+  :where(a, button, [role="button"], input, textarea, select, summary):focus-visible {
+    outline: 2px solid theme("colors.matcha.DEFAULT");
+    outline-offset: 2px;
+  }
+
+  /* No orphaned single words on big display text. */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :where(button, [role="button"]):active:not(:disabled) {
+      transform: none;
+    }
+  }
 }
 
 @layer utilities {
@@ -61,7 +99,7 @@ body {
   }
 
   .contrast-btn {
-    @apply px-4 py-2 border border-black rounded-full hover:bg-black hover:text-white transition-colors duration-200 ease-in;
+    @apply px-4 py-2 border border-black rounded-full hover:bg-black hover:text-white transition-colors duration-200 ease-out;
   }
 
   .text-xsmall-regular {
@@ -134,8 +172,62 @@ body {
   animation: hero-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* Floating panel entrance (chat widget) — scales from its trigger corner,
+   never from scale(0): things don't appear out of nowhere. */
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.panel-in {
+  transform-origin: bottom right;
+  animation: panel-in 250ms var(--ease-out-quart) both;
+}
+
+/* Cascading entrance for menu items — short 40ms steps so the stagger reads
+   as one gesture, not a slideshow. Decorative only; never blocks interaction. */
+@keyframes stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-stagger] > * {
+  animation: stagger-in 350ms var(--ease-out-quart) both;
+}
+
+[data-stagger] > *:nth-child(1) { animation-delay: 50ms; }
+[data-stagger] > *:nth-child(2) { animation-delay: 90ms; }
+[data-stagger] > *:nth-child(3) { animation-delay: 130ms; }
+[data-stagger] > *:nth-child(4) { animation-delay: 170ms; }
+[data-stagger] > *:nth-child(5) { animation-delay: 210ms; }
+[data-stagger] > *:nth-child(6) { animation-delay: 250ms; }
+[data-stagger] > *:nth-child(n + 7) { animation-delay: 290ms; }
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-in {
+  .hero-in,
+  [data-stagger] > * {
     animation: none;
+  }
+
+  /* Keep the fade (aids comprehension), drop the movement. */
+  @keyframes panel-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 }

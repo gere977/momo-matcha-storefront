@@ -67,7 +67,7 @@ const Features = () => {
           <div
             key={f.title}
             data-reveal-col
-            className="opacity-0 translate-y-[40px] text-center bg-matcha-cream rounded-large border border-matcha-kraft/50 p-8 hover:-translate-y-1 hover:shadow-lg hover:shadow-matcha-kraft/40 transition-all"
+            className="opacity-0 translate-y-[40px] text-center bg-matcha-cream rounded-large border border-matcha-kraft/50 p-8 hover:-translate-y-1 hover:shadow-lg hover:shadow-matcha-kraft/40 transition-[transform,box-shadow] duration-200 ease-out-quart"
           >
             <div
               className={`w-16 h-16 mx-auto mb-5 rounded-full flex items-center justify-center ${ICON_STYLES[i % ICON_STYLES.length]}`}

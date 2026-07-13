@@ -32,7 +32,7 @@ export default async function ProductPreview({
     <LocalizedClientLink href={`/products/${product.handle}`} className="group">
       <div
         data-testid="product-wrapper"
-        className="bg-white rounded-2xl overflow-hidden border border-matcha-kraft/60 transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1 group-hover:border-matcha"
+        className="bg-white rounded-2xl overflow-hidden border border-matcha-kraft/60 transition-[transform,box-shadow,border-color] duration-200 ease-out-quart group-hover:shadow-xl group-hover:shadow-matcha-dark/10 group-hover:-translate-y-1 group-hover:border-matcha"
       >
         <Thumbnail
           thumbnail={product.thumbnail}

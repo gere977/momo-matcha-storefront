@@ -50,23 +50,32 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                 </Popover.Button>
               </div>
 
-              {open && (
+              <Transition
+                show={open}
+                as={Fragment}
+                enter="transition-opacity ease-out-quart duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="transition-opacity ease-out-quart duration-200"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
                 <div
                   className="fixed inset-0 z-[50] bg-matcha-dark/25 backdrop-blur-sm pointer-events-auto"
                   onClick={close}
                   data-testid="side-menu-backdrop"
                 />
-              )}
+              </Transition>
 
               <Transition
                 show={open}
                 as={Fragment}
-                enter="transition ease-out duration-200"
-                enterFrom="opacity-0 -translate-x-6"
-                enterTo="opacity-100 translate-x-0"
-                leave="transition ease-in duration-150"
-                leaveFrom="opacity-100 translate-x-0"
-                leaveTo="opacity-0 -translate-x-6"
+                enter="transition-transform ease-drawer duration-300"
+                enterFrom="-translate-x-full"
+                enterTo="translate-x-0"
+                leave="transition-transform ease-drawer duration-200"
+                leaveFrom="translate-x-0"
+                leaveTo="-translate-x-full"
               >
                 <PopoverPanel className="flex flex-col fixed top-0 left-0 w-full sm:w-[380px] h-screen z-[51] text-matcha-text">
                   <div
@@ -90,7 +99,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                         </button>
                       </div>
 
-                      <ul className="flex flex-col">
+                      <ul className="flex flex-col" data-stagger>
                         {SideMenuItems.map((item) => (
                           <li key={item.label}>
                             <LocalizedClientLink
@@ -100,7 +109,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                               className="group flex items-center justify-between font-heading text-2xl py-2.5 text-matcha-dark hover:text-matcha-accent transition-colors"
                             >
                               {item.label}
-                              <ArrowRightMini className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-matcha-accent" />
+                              <ArrowRightMini className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-[opacity,transform] duration-200 ease-out-quart text-matcha-accent" />
                             </LocalizedClientLink>
                           </li>
                         ))}

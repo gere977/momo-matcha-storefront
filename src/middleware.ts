@@ -124,13 +124,19 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // if one of the country codes is in the url and the cache id is not set, set the cache id and redirect
+  // If the country code is in the url but the cache id cookie is missing, set
+  // it without a redirect: mutating the request cookie and forwarding it via
+  // NextResponse.next({ request }) makes cookies() in this same render see the
+  // new id, so the per-visitor cache tags still work. (The starter did a 307
+  // self-redirect here, costing every new visitor a full round trip.)
   if (urlHasCountryCode && !cacheIdCookie) {
-    response.cookies.set("_medusa_cache_id", cacheId, {
+    request.cookies.set("_medusa_cache_id", cacheId)
+    const nextResponse = NextResponse.next({ request })
+    nextResponse.cookies.set("_medusa_cache_id", cacheId, {
       maxAge: 60 * 60 * 24,
     })
 
-    return response
+    return nextResponse
   }
 
   // check if the url is a static asset
@@ -143,10 +149,17 @@ export async function middleware(request: NextRequest) {
 
   const queryString = request.nextUrl.search ? request.nextUrl.search : ""
 
-  // If no country code is set, we redirect to the relevant region.
+  // If no country code is set, we redirect to the relevant region. Set the
+  // cache id cookie on this redirect too, so the follow-up request doesn't
+  // need a second redirect to get it.
   if (!urlHasCountryCode && countryCode) {
     redirectUrl = `${request.nextUrl.origin}/${countryCode}${redirectPath}${queryString}`
     response = NextResponse.redirect(`${redirectUrl}`, 307)
+    if (!cacheIdCookie) {
+      response.cookies.set("_medusa_cache_id", cacheId, {
+        maxAge: 60 * 60 * 24,
+      })
+    }
   } else if (!urlHasCountryCode && !countryCode) {
     // Handle case where no valid country code exists (empty regions)
     return new NextResponse(

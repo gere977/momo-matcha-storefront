@@ -51,14 +51,14 @@ const ChatWidget = () => {
       <button
         onClick={() => setOpen((o) => !o)}
         aria-label="Ügyfélszolgálati chat"
-        className="fixed bottom-5 right-5 z-[60] w-14 h-14 rounded-full bg-matcha-accent text-white text-2xl shadow-xl shadow-matcha-accent/30 flex items-center justify-center hover:-translate-y-0.5 transition-transform"
+        className="fixed bottom-5 right-5 z-[60] w-14 h-14 rounded-full bg-matcha-accent text-white text-2xl shadow-xl shadow-matcha-accent/30 flex items-center justify-center hover:-translate-y-0.5 active:scale-95 active:translate-y-0 transition-transform duration-200 ease-out-quart"
       >
         {open ? "✕" : "🍵"}
       </button>
 
       {/* Panel */}
       {open && (
-        <div className="fixed bottom-24 right-5 z-[60] w-[92vw] max-w-[370px] h-[520px] max-h-[70vh] flex flex-col rounded-large overflow-hidden bg-matcha-cream border border-matcha-kraft shadow-2xl">
+        <div className="panel-in fixed bottom-24 right-5 z-[60] w-[92vw] max-w-[370px] h-[520px] max-h-[70vh] flex flex-col rounded-large overflow-hidden bg-matcha-cream border border-matcha-kraft shadow-2xl shadow-matcha-dark/20">
           <div className="px-5 py-4 bg-matcha-dark text-matcha-cream">
             <p className="font-heading font-bold text-lg leading-none">Momo Matcha</p>
             <p className="text-xs text-matcha-cream/70 mt-1">Kérdezz bátran — általában azonnal válaszolok 🍵</p>
@@ -102,7 +102,7 @@ const ChatWidget = () => {
               <button
                 onClick={send}
                 disabled={loading || !input.trim()}
-                className="shrink-0 h-10 px-4 rounded-full bg-matcha-accent text-white font-bold text-sm disabled:opacity-40 hover:-translate-y-0.5 transition-transform"
+                className="shrink-0 h-10 px-4 rounded-full bg-matcha-accent text-white font-bold text-sm disabled:opacity-40 hover:-translate-y-0.5 active:scale-95 active:translate-y-0 transition-transform duration-200 ease-out-quart"
               >
                 Küldés
               </button>
