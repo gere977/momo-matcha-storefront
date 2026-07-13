@@ -29,10 +29,13 @@ export default async function ProductPreview({
   })
 
   return (
-    <LocalizedClientLink href={`/products/${product.handle}`} className="group">
+    <LocalizedClientLink
+      href={`/products/${product.handle}`}
+      className="group flex h-full flex-col"
+    >
       <div
         data-testid="product-wrapper"
-        className="bg-white rounded-2xl overflow-hidden border border-matcha-kraft/60 transition-[transform,box-shadow,border-color] duration-200 ease-out-quart group-hover:shadow-xl group-hover:shadow-matcha-dark/10 group-hover:-translate-y-1 group-hover:border-matcha"
+        className="flex h-full flex-col bg-white rounded-2xl overflow-hidden border border-matcha-kraft/60 transition-[transform,box-shadow,border-color] duration-200 ease-out-quart group-hover:shadow-xl group-hover:shadow-matcha-dark/10 group-hover:-translate-y-1 group-hover:border-matcha"
       >
         <Thumbnail
           thumbnail={product.thumbnail}
@@ -41,14 +44,14 @@ export default async function ProductPreview({
           alt={product.title}
           isFeatured={isFeatured}
         />
-        <div className="flex txt-compact-medium p-5 justify-between items-center">
+        <div className="flex min-h-[8rem] flex-1 flex-col items-start justify-between gap-2 p-4 txt-compact-medium small:min-h-[6.75rem] small:p-5">
           <Text
-            className="font-body font-semibold text-matcha-text"
+            className="min-h-[4.05em] overflow-hidden font-body text-[13px] font-semibold leading-[1.35] text-matcha-text [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] small:min-h-[2.7em] small:text-sm small:[-webkit-line-clamp:2]"
             data-testid="product-title"
           >
             {product.title}
           </Text>
-          <div className="flex items-center gap-x-2 font-bold text-matcha">
+          <div className="flex shrink-0 self-end items-center gap-x-2 whitespace-nowrap font-bold tabular-nums text-matcha">
             {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
           </div>
         </div>

@@ -35,7 +35,7 @@ const Story = () => {
           href="/pages/about"
           className="opacity-0 translate-y-[30px] inline-block mt-2 px-8 py-3.5 rounded-full bg-matcha-cream text-matcha-dark font-bold uppercase tracking-wider text-xs hover:bg-white hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-[background-color,transform] duration-200 ease-out-quart"
         >
-          Ismerje meg a matchát
+          Ismerd meg a matchát
         </LocalizedClientLink>
       </div>
     </section>

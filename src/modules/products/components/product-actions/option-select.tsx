@@ -26,6 +26,27 @@ const selectLabel = (title: string) => {
   return accusative ? `Válassz ${accusative}` : `Válassz: ${title}`
 }
 
+const sortNumericOptions = (values: string[]) => {
+  const parsed = values.map((value) => {
+    const match = /^(\d+(?:[.,]\d+)?)\s*(g|kg|ml|l)?$/i.exec(value.trim())
+    if (!match) return null
+
+    const amount = Number(match[1].replace(",", "."))
+    const unit = match[2]?.toLowerCase()
+    const multiplier = unit === "kg" || unit === "l" ? 1000 : 1
+    return { value, amount: amount * multiplier }
+  })
+
+  // Preserve the catalog order for flavors, colors and other non-numeric
+  // options. Only size-like values benefit from a smallest-to-largest sort.
+  if (parsed.some((value) => value === null)) return values
+
+  return parsed
+    .filter((entry): entry is { value: string; amount: number } => entry !== null)
+    .sort((a, b) => a.amount - b.amount)
+    .map((entry) => entry.value)
+}
+
 const OptionSelect: React.FC<OptionSelectProps> = ({
   option,
   current,
@@ -34,7 +55,9 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
   "data-testid": dataTestId,
   disabled,
 }) => {
-  const filteredOptions = (option.values ?? []).map((v) => v.value)
+  const filteredOptions = sortNumericOptions(
+    (option.values ?? []).map((v) => v.value)
+  )
 
   return (
     <div className="flex flex-col gap-y-3">
