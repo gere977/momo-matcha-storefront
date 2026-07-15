@@ -1,4 +1,8 @@
 import { NextResponse } from "next/server"
+import {
+  getAbsoluteArtworkUrl,
+  getProductSocialImage,
+} from "@lib/util/product-artwork"
 
 // Google Merchant Center product feed (Shopping free listings + ads).
 // Register https://momomatcha.hu/product-feed.xml as a scheduled-fetch feed
@@ -66,6 +70,10 @@ export async function GET() {
 
   for (const product of products) {
     const link = `${BASE_URL}/${COUNTRY}/products/${product.handle}`
+    const productImage = getAbsoluteArtworkUrl(
+      getProductSocialImage(product.handle, product.thumbnail),
+      BASE_URL
+    )
     const description = (product.description ?? product.title ?? "")
       .replace(/\s+/g, " ")
       .trim()
@@ -96,7 +104,7 @@ export async function GET() {
     <g:title>${esc(title)}</g:title>
     <g:description>${esc(description)}</g:description>
     <g:link>${esc(link)}</g:link>
-    ${product.thumbnail ? `<g:image_link>${esc(product.thumbnail)}</g:image_link>` : ""}
+    ${productImage ? `<g:image_link>${esc(productImage)}</g:image_link>` : ""}
     <g:price>${amount.toFixed(2)} ${esc(currency)}</g:price>
     <g:availability>${inStock ? "in_stock" : "out_of_stock"}</g:availability>
     <g:condition>new</g:condition>

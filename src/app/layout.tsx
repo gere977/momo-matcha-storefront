@@ -52,7 +52,7 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: "Momo Matcha",
   url: getBaseURL(),
-  logo: `${getBaseURL()}/images/logo.jpg`,
+  logo: `${getBaseURL()}/images/logo-transparent.png`,
   description:
     "Prémium, bio ceremonial matcha Ujiból, Japánból — klasszikus és ízesített matchák magyar webshopja.",
   email: "info@momomatcha.hu",

@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { FAQS } from "./data"
+import { HOME_FAQS } from "./data"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 const Faq = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
@@ -17,7 +18,7 @@ const Faq = () => {
         </div>
 
         <div className="max-w-2xl mx-auto flex flex-col bg-matcha-cream rounded-large border border-matcha-kraft/50 px-6 sm:px-8">
-          {FAQS.map((item, i) => {
+          {HOME_FAQS.map((item, i) => {
             const isOpen = openIndex === i
             return (
               <div key={item.q} className="border-b border-matcha-kraft/40">
@@ -57,6 +58,14 @@ const Faq = () => {
               </div>
             )
           })}
+        </div>
+        <div className="mt-8 text-center">
+          <LocalizedClientLink
+            href="/gyik"
+            className="inline-flex items-center gap-2 text-sm font-bold text-matcha-accent hover:text-matcha transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-matcha focus-visible:ring-offset-4"
+          >
+            Minden kérdés és válasz <span aria-hidden="true">→</span>
+          </LocalizedClientLink>
         </div>
       </div>
     </section>

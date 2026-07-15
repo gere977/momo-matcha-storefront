@@ -10,12 +10,14 @@ import CountrySelect from "../country-select"
 import LanguageSelect from "../language-select"
 import { HttpTypes } from "@medusajs/types"
 import { Locale } from "@lib/data/locales"
+import Image from "next/image"
 
 const SideMenuItems = [
   { label: "Főoldal", href: "/" },
   { label: "Matcha Teák", href: "/collections/matcha" },
   { label: "Kiegészítők", href: "/categories/kiegeszitok" },
   { label: "Minden termék", href: "/store" },
+  { label: "GYIK", href: "/gyik" },
   { label: "Fiókom", href: "/account" },
   { label: "Kosár", href: "/cart" },
 ]
@@ -84,11 +86,12 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                   >
                     <div>
                       <div className="flex justify-between items-center mb-10">
-                        <img
-                          src="/images/logo.jpg"
+                        <Image
+                          src="/images/logo-transparent.png"
                           alt="Momo Matcha"
-                          className="h-12 w-auto"
-                          style={{ mixBlendMode: "multiply" }}
+                          width={82}
+                          height={56}
+                          className="h-12 w-auto object-contain"
                         />
                         <button
                           data-testid="close-menu-button"

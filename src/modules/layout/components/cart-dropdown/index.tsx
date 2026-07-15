@@ -7,6 +7,7 @@ import {
   Transition,
 } from "@headlessui/react"
 import { convertToLocale } from "@lib/util/money"
+import { getProductCartImage } from "@lib/util/product-artwork"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
 import DeleteButton from "@modules/common/components/delete-button"
@@ -126,7 +127,10 @@ const CartDropdown = ({
                           className="w-24"
                         >
                           <Thumbnail
-                            thumbnail={item.thumbnail}
+                            thumbnail={getProductCartImage(
+                              item.product_handle,
+                              item.thumbnail
+                            )}
                             images={item.variant?.product?.images}
                             size="square"
                           />

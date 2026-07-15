@@ -45,7 +45,10 @@ function buildJsonLd(slug: string, countryCode: string) {
     "@type": "Organization",
     name: "Momo Matcha",
     url: BASE_URL,
-    logo: { "@type": "ImageObject", url: `${BASE_URL}/images/logo.jpg` },
+    logo: {
+      "@type": "ImageObject",
+      url: `${BASE_URL}/images/logo-transparent.png`,
+    },
   }
 
   const main =

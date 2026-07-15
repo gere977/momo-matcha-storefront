@@ -6,6 +6,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import { convertToLocale } from "@lib/util/money"
 import { publicOrderNumber } from "@lib/util/order-number"
 import { HttpTypes } from "@medusajs/types"
+import { getProductCartImage } from "@lib/util/product-artwork"
 
 type OrderCardProps = {
   order: HttpTypes.StoreOrder
@@ -52,7 +53,11 @@ const OrderCard = ({ order }: OrderCardProps) => {
               className="flex flex-col gap-y-2"
               data-testid="order-item"
             >
-              <Thumbnail thumbnail={i.thumbnail} images={[]} size="full" />
+              <Thumbnail
+                thumbnail={getProductCartImage(i.product_handle, i.thumbnail)}
+                images={[]}
+                size="full"
+              />
               <div className="flex items-center text-small-regular text-ui-fg-base">
                 <span
                   className="text-ui-fg-base font-semibold"

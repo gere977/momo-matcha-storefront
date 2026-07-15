@@ -43,16 +43,13 @@ export default async function Nav() {
               className="flex items-center leading-none"
               data-testid="nav-store-link"
             >
-              {/* mix-blend-multiply drops the logo's white background into the
-                  cream nav bar without needing a transparent PNG. */}
               <Image
-                src="/images/logo.jpg"
+                src="/images/logo-transparent.png"
                 alt="Momo Matcha"
-                width={56}
+                width={82}
                 height={56}
                 priority
-                className="h-14 w-14"
-                style={{ mixBlendMode: "multiply" }}
+                className="h-14 w-[82px] object-contain"
               />
             </LocalizedClientLink>
           </div>

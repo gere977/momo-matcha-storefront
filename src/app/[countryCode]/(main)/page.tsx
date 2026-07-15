@@ -8,7 +8,7 @@ import Reviews from "@modules/home/components/reviews"
 import Recipes from "@modules/home/components/recipes"
 import Faq from "@modules/home/components/faq"
 import ComingSoon from "@modules/home/components/coming-soon"
-import { FAQS } from "@modules/home/components/faq/data"
+import { HOME_FAQS } from "@modules/home/components/faq/data"
 import { listCollections } from "@lib/data/collections"
 import { getRegion } from "@lib/data/regions"
 
@@ -17,7 +17,7 @@ import { getRegion } from "@lib/data/regions"
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: FAQS.map((f) => ({
+  mainEntity: HOME_FAQS.map((f) => ({
     "@type": "Question",
     name: f.q,
     acceptedAnswer: { "@type": "Answer", text: f.a },

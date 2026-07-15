@@ -4,6 +4,10 @@ import { listProducts } from "@lib/data/products"
 import { getRegion, listRegions } from "@lib/data/regions"
 import ProductTemplate from "@modules/products/templates"
 import { HttpTypes } from "@medusajs/types"
+import {
+  getAbsoluteArtworkUrl,
+  getProductSocialImage,
+} from "@lib/util/product-artwork"
 
 type Props = {
   params: Promise<{ countryCode: string; handle: string }>
@@ -93,6 +97,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     product.description?.replace(/\s+/g, " ").trim().slice(0, 160) ||
     `${product.title} — prémium, bio ceremonial matcha Ujiból, Japánból. Rendelj a Momo Matcha webshopból!`
 
+  const socialImage = getAbsoluteArtworkUrl(
+    getProductSocialImage(handle, product.thumbnail)
+  )
+
   return {
     title: `${product.title} | Momo Matcha`,
     description,
@@ -102,7 +110,13 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     openGraph: {
       title: `${product.title} | Momo Matcha`,
       description,
-      images: product.thumbnail ? [product.thumbnail] : [],
+      images: socialImage ? [{ url: socialImage, alt: product.title }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${product.title} | Momo Matcha`,
+      description,
+      images: socialImage ? [socialImage] : [],
     },
   }
 }
@@ -159,7 +173,10 @@ function buildProductJsonLd(
     "@type": "Product",
     name: product.title,
     description: product.description ?? undefined,
-    image: product.thumbnail ?? undefined,
+    image: getAbsoluteArtworkUrl(
+      getProductSocialImage(product.handle, product.thumbnail),
+      baseUrl
+    ),
     brand: { "@type": "Brand", name: "Momo Matcha" },
     ...(reviews && reviews.count > 0 && reviews.average
       ? {

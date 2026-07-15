@@ -138,6 +138,11 @@ export default async function Footer() {
                   </LocalizedClientLink>
                 </li>
                 <li>
+                  <LocalizedClientLink href="/gyik" className="hover:text-matcha">
+                    Gyakori kérdések
+                  </LocalizedClientLink>
+                </li>
+                <li>
                   <LocalizedClientLink href="/tudastar" className="hover:text-matcha">
                     Matcha tudástár
                   </LocalizedClientLink>
