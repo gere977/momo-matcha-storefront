@@ -493,6 +493,7 @@ body {
   --momo-family-green: oklch(0.39 0.13 151);
   position: relative;
   isolation: isolate;
+  scroll-margin-top: 7.5rem;
   min-height: 43rem;
   overflow: hidden;
   border: 1px solid oklch(1 0 0 / 0.82);

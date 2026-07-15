@@ -40,7 +40,7 @@ const Hero = () => {
             style={{ animationDelay: "360ms" }}
           >
             <LocalizedClientLink
-              href="/store"
+              href="#matcha-csalad"
               className="group inline-flex items-center gap-3 pl-9 pr-3 py-3 rounded-full bg-matcha-accent text-white font-bold uppercase tracking-wider text-sm hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-transform duration-200 ease-out-quart shadow-lg shadow-matcha-accent/25"
             >
               Vásárolj most

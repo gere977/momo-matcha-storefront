@@ -35,8 +35,8 @@ export default async function ProductRail({
     collection.handle === "matcha" && familyProducts.length === 4
 
   return (
-    <div className="content-container py-16 small:py-24 bg-matcha-bg">
-      <div className="flex flex-col items-center text-center mb-12">
+    <div className="content-container bg-matcha-bg pb-16 pt-8 small:pb-24 small:pt-10">
+      <div className="mb-9 flex flex-col items-center text-center small:mb-11">
         <h2 className="font-heading font-bold text-4xl small:text-5xl text-matcha-text mb-2">
           {collection.title}
         </h2>

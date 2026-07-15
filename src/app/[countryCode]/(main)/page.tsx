@@ -54,11 +54,11 @@ export default async function Home(props: {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Hero />
-      <Features />
-      <Story />
       <ul className="flex flex-col gap-x-6">
         <FeaturedProducts collections={collections} region={region} />
       </ul>
+      <Features />
+      <Story />
       <ComingSoon />
       <Reviews />
       <Recipes />
