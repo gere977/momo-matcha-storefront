@@ -49,7 +49,7 @@ const ProductCardScene = ({
       "momo-card-scene relative w-full overflow-hidden",
       `momo-card-scene--${artwork.scene}`,
       {
-        "aspect-[11/14]": isFeatured,
+        "momo-card-scene--featured aspect-[11/14]": isFeatured,
         "aspect-[9/16]": !isFeatured,
       }
     )}

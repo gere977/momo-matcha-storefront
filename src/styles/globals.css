@@ -469,6 +469,24 @@ body {
   transform: translateY(3%) scale(1.8) rotate(0.8deg);
 }
 
+@media (min-width: 992px) {
+  .momo-card-scene--featured .momo-card-art {
+    transform: translateY(3%) scale(1.12) rotate(-0.5deg);
+  }
+
+  .momo-card-scene--featured .momo-card-art--original {
+    transform: translateY(7%) scale(1.45) rotate(-0.5deg);
+  }
+
+  .group:hover .momo-card-scene--featured .momo-card-art {
+    transform: translateY(-1%) scale(1.17) rotate(0.8deg);
+  }
+
+  .group:hover .momo-card-scene--featured .momo-card-art--original {
+    transform: translateY(3%) scale(1.5) rotate(0.8deg);
+  }
+}
+
 /* Lovable product splash, adapted to the real Medusa product flow. The
    illustrated background and motion values intentionally mirror the source
    project; only the class names are scoped to avoid leaking into the store. */
