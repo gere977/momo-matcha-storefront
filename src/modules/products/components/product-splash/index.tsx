@@ -20,13 +20,18 @@ const droplets = [
   { dx: 150, dy: -95, size: 17 },
 ]
 
+const productImageOverrides: Record<string, string> = {
+  "original-premium-momo-matcha": "/images/products/momo-original-tin.png",
+  "epres-premium-momo-matcha": "/images/products/momo-strawberry-tin.png",
+  "vanilias-premium-momo-matcha": "/images/products/momo-vanilla-tin.png",
+  "csokoladas-premium-momo-matcha": "/images/products/momo-chocolate-tin.png",
+  "matcha-szett": "/images/products/momo-accessories-set.png",
+}
+
 const ProductSplash = ({ product, images }: ProductSplashProps) => {
   const [splashKey, setSplashKey] = useState(0)
-  const isOriginal = /original/i.test(
-    `${product.handle ?? ""} ${product.title}`
-  )
-  const productImage = isOriginal
-    ? "/images/products/momo-original-tin.png"
+  const productImage = product.handle
+    ? productImageOverrides[product.handle] ?? images[0]?.url
     : images[0]?.url
 
   const replay = () => setSplashKey((key) => key + 1)

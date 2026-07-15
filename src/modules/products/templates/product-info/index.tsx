@@ -10,9 +10,17 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   const isOriginal = /original/i.test(
     `${product.handle ?? ""} ${product.title}`
   )
-  const specs = isOriginal
-    ? ["30 g fémdoboz", "Ceremóniás minőség", "100% bio", "Uji, Japán"]
-    : ["30 g fémdoboz", "Prémium minőség", "Japán matcha", "Momo Matcha"]
+  const specs =
+    product.handle === "matcha-szett"
+      ? [
+          "4 részes szett",
+          "Kerámia és bambusz",
+          "Matcha rituáléhoz",
+          "Momo Matcha",
+        ]
+      : isOriginal
+      ? ["30 g fémdoboz", "Ceremóniás minőség", "100% bio", "Uji, Japán"]
+      : ["30 g fémdoboz", "Prémium minőség", "Japán matcha", "Momo Matcha"]
 
   return (
     <div id="product-info">

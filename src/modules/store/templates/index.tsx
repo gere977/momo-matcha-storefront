@@ -19,24 +19,42 @@ const StoreTemplate = ({
   const sort = sortBy || "created_at"
 
   return (
-    <div
-      className="flex flex-col small:flex-row small:items-start py-6 content-container"
-      data-testid="category-container"
-    >
-      <RefinementList sortBy={sort} />
-      <div className="w-full">
-        <div className="mb-8 text-2xl-semi">
-          <h1 data-testid="store-page-title">Minden termék</h1>
+    <main className="momo-store-page">
+      <div
+        className="content-container relative z-10 pb-20 pt-8 small:pb-28 small:pt-14"
+        data-testid="category-container"
+      >
+        <header className="mb-9 max-w-3xl small:mb-12 small:pl-[17.25rem]">
+          <p className="mb-3 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-matcha-accent xsmall:text-xs">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-matcha-accent" />
+            Japánból, gondosan válogatva
+          </p>
+          <h1
+            className="text-balance font-editorial text-4xl font-bold leading-[0.98] tracking-[-0.035em] text-[#234c38] xsmall:text-5xl small:text-6xl"
+            data-testid="store-page-title"
+          >
+            Találd meg a <span className="italic">matchád.</span>
+          </h1>
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-[#51665a] xsmall:text-base">
+            Tiszta vagy ízesített matcha, plusz minden kellék a saját lassú
+            rituálédhoz.
+          </p>
+        </header>
+
+        <div className="flex flex-col small:flex-row small:items-start">
+          <RefinementList sortBy={sort} />
+          <div className="w-full min-w-0">
+            <Suspense fallback={<SkeletonProductGrid />}>
+              <PaginatedProducts
+                sortBy={sort}
+                page={pageNumber}
+                countryCode={countryCode}
+              />
+            </Suspense>
+          </div>
         </div>
-        <Suspense fallback={<SkeletonProductGrid />}>
-          <PaginatedProducts
-            sortBy={sort}
-            page={pageNumber}
-            countryCode={countryCode}
-          />
-        </Suspense>
       </div>
-    </div>
+    </main>
   )
 }
 

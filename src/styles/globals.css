@@ -265,6 +265,210 @@ body {
   }
 }
 
+/* Store catalog uses the same illustrated visual language as the product
+   splash while keeping every product card optically consistent. */
+.momo-store-page {
+  --momo-store-primary: oklch(0.42 0.11 152);
+  --momo-store-accent: oklch(0.72 0.16 15);
+  --momo-store-sun: oklch(0.63 0.22 27);
+  --momo-store-cream: oklch(0.972 0.02 90);
+  position: relative;
+  isolation: isolate;
+  min-height: 70vh;
+  overflow: hidden;
+  background: radial-gradient(
+      58% 52% at 8% 18%,
+      color-mix(in oklab, var(--momo-store-accent) 24%, transparent),
+      transparent 64%
+    ),
+    radial-gradient(
+      55% 50% at 92% 82%,
+      color-mix(in oklab, var(--momo-store-primary) 22%, transparent),
+      transparent 66%
+    ),
+    var(--momo-store-cream);
+}
+
+.momo-store-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(oklch(0 0 0 / 0.045) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.32;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+.momo-store-card {
+  border: 1px solid color-mix(in oklab, var(--momo-store-primary) 18%, white);
+  box-shadow: 0 16px 44px oklch(0.32 0.06 150 / 0.1),
+    inset 0 1px 0 oklch(1 0 0 / 0.85);
+}
+
+.group:hover .momo-store-card {
+  box-shadow: 0 26px 64px oklch(0.3 0.07 150 / 0.18),
+    inset 0 1px 0 oklch(1 0 0 / 0.95);
+}
+
+.momo-card-scene {
+  --momo-card-primary: oklch(0.42 0.11 152);
+  --momo-card-wave: oklch(0.39 0.13 151);
+  --momo-card-accent: oklch(0.75 0.17 18);
+  --momo-card-sun: oklch(0.64 0.22 27);
+  isolation: isolate;
+  background: radial-gradient(
+      88% 66% at 15% 18%,
+      color-mix(in oklab, var(--momo-card-accent) 44%, transparent),
+      transparent 66%
+    ),
+    radial-gradient(
+      90% 62% at 90% 88%,
+      color-mix(in oklab, var(--momo-card-primary) 26%, transparent),
+      transparent 68%
+    ),
+    oklch(0.975 0.018 89);
+}
+
+.momo-card-scene::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: radial-gradient(
+    oklch(0 0 0 / 0.055) 0.8px,
+    transparent 0.8px
+  );
+  background-size: 3px 3px;
+  opacity: 0.28;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+.momo-card-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: linear-gradient(
+    118deg,
+    oklch(1 0 0 / 0.22),
+    transparent 28%,
+    transparent 72%,
+    oklch(0.22 0.05 150 / 0.08)
+  );
+  pointer-events: none;
+}
+
+.momo-card-scene--original {
+  --momo-card-accent: oklch(0.8 0.11 132);
+}
+
+.momo-card-scene--strawberry {
+  --momo-card-accent: oklch(0.78 0.16 8);
+}
+
+.momo-card-scene--vanilla {
+  --momo-card-accent: oklch(0.86 0.09 82);
+}
+
+.momo-card-scene--chocolate {
+  --momo-card-accent: oklch(0.64 0.11 50);
+}
+
+.momo-card-scene--accessories {
+  --momo-card-accent: oklch(0.82 0.09 107);
+}
+
+.momo-card-sun {
+  position: absolute;
+  left: 9%;
+  top: 8%;
+  z-index: 0;
+  width: 31%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 34% 32%,
+    oklch(0.76 0.21 27),
+    var(--momo-card-sun) 62%,
+    oklch(0.53 0.19 27)
+  );
+  box-shadow: 0 0 50px
+    color-mix(in oklab, var(--momo-card-sun) 40%, transparent);
+  transition: transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.momo-card-mountains {
+  color: var(--momo-card-primary);
+  opacity: 0.38;
+  transition: transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.momo-card-wave {
+  color: var(--momo-card-wave);
+  filter: drop-shadow(0 -10px 30px oklch(0.42 0.11 152 / 0.18));
+  transform-origin: 50% 100%;
+  transition: transform 550ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.momo-card-art {
+  object-position: 50% 55%;
+  filter: drop-shadow(0 26px 24px oklch(0.25 0.06 150 / 0.28));
+  transform: translateY(3%) scale(1.34) rotate(-0.5deg);
+  transform-origin: 50% 58%;
+  transition: transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 500ms ease;
+}
+
+.momo-card-art--accessories {
+  object-position: 50% 52%;
+  transform: translateY(1%) scale(0.92);
+}
+
+.momo-card-art--original {
+  transform: translateY(7%) scale(1.74) rotate(-0.5deg);
+}
+
+.momo-card-origin {
+  position: absolute;
+  right: 8%;
+  top: 6%;
+  z-index: 25;
+  color: color-mix(in oklab, var(--momo-card-primary) 88%, black);
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  opacity: 0.7;
+}
+
+.group:hover .momo-card-sun {
+  transform: scale(1.08);
+}
+
+.group:hover .momo-card-mountains {
+  transform: translateY(-2.5%);
+}
+
+.group:hover .momo-card-wave {
+  transform: scaleY(1.07);
+}
+
+.group:hover .momo-card-art {
+  filter: drop-shadow(0 34px 30px oklch(0.25 0.06 150 / 0.34));
+  transform: translateY(-1%) scale(1.39) rotate(0.8deg);
+}
+
+.group:hover .momo-card-art--accessories {
+  transform: translateY(-2%) scale(0.97) rotate(0.5deg);
+}
+
+.group:hover .momo-card-art--original {
+  transform: translateY(3%) scale(1.8) rotate(0.8deg);
+}
+
 /* Lovable product splash, adapted to the real Medusa product flow. The
    illustrated background and motion values intentionally mirror the source
    project; only the class names are scoped to avoid leaking into the store. */
@@ -449,9 +653,14 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .momo-card-art,
+  .momo-card-mountains,
+  .momo-card-sun,
+  .momo-card-wave,
   .momo-product-tin,
   .momo-product-liquid {
     animation: none;
+    transition: none;
   }
 
   .momo-product-ripple,
