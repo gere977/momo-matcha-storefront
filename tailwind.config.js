@@ -98,6 +98,7 @@ module.exports = {
         ],
         heading: ["var(--font-heading)", "Quicksand", "sans-serif"],
         body: ["var(--font-body)", "sans-serif"],
+        editorial: ["var(--font-editorial)", "Georgia", "serif"],
       },
       keyframes: {
         ring: {

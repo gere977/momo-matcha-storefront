@@ -22,11 +22,14 @@ export default function ProductPrice({
   }
 
   return (
-    <div className="flex flex-col text-ui-fg-base">
+    <div className="flex flex-col text-[#234c38]">
       <span
-        className={clx("text-xl-semi", {
-          "text-matcha-accent": selectedPrice.price_type === "sale",
-        })}
+        className={clx(
+          "font-editorial text-4xl font-bold leading-none xsmall:text-[2.75rem]",
+          {
+            "text-matcha-accent": selectedPrice.price_type === "sale",
+          }
+        )}
       >
         {!variant && "Már "}
         <span

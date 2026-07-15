@@ -38,7 +38,15 @@ body {
   }
 
   /* Visible keyboard focus, tinted to the brand instead of browser blue. */
-  :where(a, button, [role="button"], input, textarea, select, summary):focus-visible {
+  :where(
+      a,
+      button,
+      [role="button"],
+      input,
+      textarea,
+      select,
+      summary
+    ):focus-visible {
     outline: 2px solid theme("colors.matcha.DEFAULT");
     outline-offset: 2px;
   }
@@ -218,13 +226,27 @@ body {
   animation: stagger-in 350ms var(--ease-out-quart) both;
 }
 
-[data-stagger] > *:nth-child(1) { animation-delay: 50ms; }
-[data-stagger] > *:nth-child(2) { animation-delay: 90ms; }
-[data-stagger] > *:nth-child(3) { animation-delay: 130ms; }
-[data-stagger] > *:nth-child(4) { animation-delay: 170ms; }
-[data-stagger] > *:nth-child(5) { animation-delay: 210ms; }
-[data-stagger] > *:nth-child(6) { animation-delay: 250ms; }
-[data-stagger] > *:nth-child(n + 7) { animation-delay: 290ms; }
+[data-stagger] > *:nth-child(1) {
+  animation-delay: 50ms;
+}
+[data-stagger] > *:nth-child(2) {
+  animation-delay: 90ms;
+}
+[data-stagger] > *:nth-child(3) {
+  animation-delay: 130ms;
+}
+[data-stagger] > *:nth-child(4) {
+  animation-delay: 170ms;
+}
+[data-stagger] > *:nth-child(5) {
+  animation-delay: 210ms;
+}
+[data-stagger] > *:nth-child(6) {
+  animation-delay: 250ms;
+}
+[data-stagger] > *:nth-child(n + 7) {
+  animation-delay: 290ms;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .hero-in,
@@ -240,5 +262,200 @@ body {
     to {
       opacity: 1;
     }
+  }
+}
+
+/* Lovable product splash, adapted to the real Medusa product flow. The
+   illustrated background and motion values intentionally mirror the source
+   project; only the class names are scoped to avoid leaking into the store. */
+.momo-product-page {
+  --momo-product-primary: oklch(0.42 0.11 152);
+  --momo-product-accent: oklch(0.72 0.16 15);
+  --momo-product-sun: oklch(0.63 0.22 27);
+  --momo-product-cream: oklch(0.972 0.02 90);
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(
+      60% 55% at 12% 20%,
+      color-mix(in oklab, var(--momo-product-accent) 35%, transparent) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      55% 50% at 88% 85%,
+      color-mix(in oklab, var(--momo-product-primary) 30%, transparent) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      40% 35% at 90% 10%,
+      color-mix(in oklab, var(--momo-product-sun) 18%, transparent) 0%,
+      transparent 65%
+    ),
+    var(--momo-product-cream);
+}
+
+.momo-product-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(oklch(0 0 0 / 0.05) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.35;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+.momo-product-tin {
+  animation: momo-tin-fall 1.4s cubic-bezier(0.5, 0, 0.75, 0) both,
+    momo-tin-float 6s ease-in-out 1.4s infinite;
+}
+
+@keyframes momo-tin-fall {
+  0% {
+    transform: translateY(-120%) rotate(-8deg);
+  }
+  55% {
+    transform: translateY(6%) rotate(2deg);
+  }
+  70% {
+    transform: translateY(-4%) rotate(-1deg);
+  }
+  85% {
+    transform: translateY(2%) rotate(0.5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+}
+
+@keyframes momo-tin-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(1deg);
+  }
+}
+
+.momo-product-liquid {
+  transform-origin: 50% 100%;
+  animation: momo-pool-wobble 1.2s ease-out 1.35s both;
+}
+
+@keyframes momo-pool-wobble {
+  0% {
+    transform: scaleY(1) scaleX(1);
+  }
+  20% {
+    transform: scaleY(1.35) scaleX(0.94);
+  }
+  45% {
+    transform: scaleY(0.82) scaleX(1.06);
+  }
+  70% {
+    transform: scaleY(1.12) scaleX(0.97);
+  }
+  100% {
+    transform: scaleY(1) scaleX(1);
+  }
+}
+
+.momo-product-ripple {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  width: 55%;
+  aspect-ratio: 3 / 1;
+  border: 2px solid
+    color-mix(in oklab, var(--momo-product-primary) 55%, transparent);
+  border-radius: 50%;
+  transform: translate(-50%, 50%) scale(0.15);
+  opacity: 0;
+  pointer-events: none;
+  animation: momo-ripple-out 1.6s ease-out 1.35s forwards;
+}
+
+.momo-product-ripple-2 {
+  animation-delay: 1.55s;
+}
+.momo-product-ripple-3 {
+  animation-delay: 1.75s;
+}
+
+@keyframes momo-ripple-out {
+  0% {
+    opacity: 0.9;
+    transform: translate(-50%, 50%) scale(0.15);
+  }
+  80% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 50%) scale(1.8);
+  }
+}
+
+.momo-product-droplet {
+  position: absolute;
+  left: 50%;
+  bottom: 14%;
+  border-radius: 50% 50% 55% 45% / 60% 60% 40% 40%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    color-mix(in oklab, var(--momo-product-primary) 70%, white),
+    var(--momo-product-primary)
+  );
+  box-shadow: 0 4px 10px
+    color-mix(in oklab, var(--momo-product-primary) 40%, transparent);
+  opacity: 0;
+  transform: translate(-50%, 0);
+  pointer-events: none;
+  animation: momo-droplet-fly 1.4s cubic-bezier(0.25, 0.9, 0.4, 1) 1.35s
+    forwards;
+}
+
+@keyframes momo-droplet-fly {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.2);
+  }
+  15% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
+    transform: translate(calc(-50% + var(--dx, 0px)), var(--dy, -80px)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(
+        calc(-50% + var(--dx, 0px) * 1.2),
+        calc(var(--dy, -80px) * -0.3 + 30px)
+      )
+      scale(0.5);
+  }
+}
+
+.momo-product-sun {
+  background: radial-gradient(
+    circle at 35% 35%,
+    oklch(0.75 0.22 27),
+    var(--momo-product-sun) 60%,
+    oklch(0.5 0.2 27)
+  );
+  box-shadow: 0 0 80px
+    color-mix(in oklab, var(--momo-product-sun) 45%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .momo-product-tin,
+  .momo-product-liquid {
+    animation: none;
+  }
+
+  .momo-product-ripple,
+  .momo-product-droplet {
+    display: none;
   }
 }

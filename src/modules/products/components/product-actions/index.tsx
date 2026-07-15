@@ -13,6 +13,7 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import ProductPrice from "../product-price"
 import MobileActions from "./mobile-actions"
 import { useRouter } from "next/navigation"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 type ProductActionsProps = {
   product: HttpTypes.StoreProduct
@@ -39,6 +40,7 @@ export default function ProductActions({
 
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
+  const [quantity, setQuantity] = useState(1)
   const countryCode = useParams().countryCode as string
 
   // If there is only 1 variant, preselect the options
@@ -129,14 +131,11 @@ export default function ProductActions({
 
     await addToCart({
       variantId: selectedVariant.id,
-      quantity: 1,
+      quantity,
       countryCode,
     })
 
-    trackEvent(
-      "add_to_cart",
-      pathname.replace(/^\/[a-z]{2}(\/|$)/, "/") || "/"
-    )
+    trackEvent("add_to_cart", pathname.replace(/^\/[a-z]{2}(\/|$)/, "/") || "/")
 
     setIsAdding(false)
   }
@@ -168,7 +167,7 @@ export default function ProductActions({
 
   return (
     <>
-      <div className="flex flex-col gap-y-2" ref={actionsRef}>
+      <div className="flex flex-col gap-y-4" ref={actionsRef}>
         <div>
           {(product.variants?.length ?? 0) > 1 && (
             <div className="flex flex-col gap-y-4">
@@ -191,7 +190,41 @@ export default function ProductActions({
           )}
         </div>
 
-        <ProductPrice product={product} variant={selectedVariant} />
+        <div className="flex flex-wrap items-end justify-center gap-4 pt-2 small:justify-start small:gap-6">
+          <div>
+            <div className="mb-1 text-[10px] uppercase tracking-[0.2em] text-[#607368] xsmall:text-xs">
+              Ár
+            </div>
+            <ProductPrice product={product} variant={selectedVariant} />
+          </div>
+
+          <div
+            className="flex h-11 items-center overflow-hidden rounded-full border border-[#557563] bg-white/70 text-[#234c38] backdrop-blur-sm"
+            aria-label="Mennyiség"
+          >
+            <button
+              type="button"
+              onClick={() => setQuantity((current) => Math.max(1, current - 1))}
+              className="h-11 w-11 text-lg hover:bg-matcha-accent/10"
+              aria-label="Mennyiség csökkentése"
+              disabled={isAdding || quantity <= 1}
+            >
+              −
+            </button>
+            <span className="w-10 text-center font-semibold" aria-live="polite">
+              {quantity}
+            </span>
+            <button
+              type="button"
+              onClick={() => setQuantity((current) => current + 1)}
+              className="h-11 w-11 text-lg hover:bg-matcha-accent/10"
+              aria-label="Mennyiség növelése"
+              disabled={isAdding}
+            >
+              +
+            </button>
+          </div>
+        </div>
 
         {perServing && (
           <p className="text-xs text-matcha-text/60 -mt-1">
@@ -200,44 +233,45 @@ export default function ProductActions({
           </p>
         )}
 
-        <Button
-          onClick={handleAddToCart}
-          disabled={
-            !inStock ||
-            !selectedVariant ||
-            !!disabled ||
-            isAdding ||
-            !isValidVariant
-          }
-          variant="primary"
-          className="w-full h-12 rounded-full bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider text-sm border-none"
-          isLoading={isAdding}
-          data-testid="add-product-button"
-        >
-          {!selectedVariant && Object.keys(options).length === 0
-            ? "Válassz kiszerelést"
-            : !inStock || !isValidVariant
-            ? "Elfogyott"
-            : "Kosárba"}
-        </Button>
+        <div className="flex flex-col justify-center gap-3 pt-2 xsmall:flex-row small:justify-start">
+          <Button
+            onClick={handleAddToCart}
+            disabled={
+              !inStock ||
+              !selectedVariant ||
+              !!disabled ||
+              isAdding ||
+              !isValidVariant
+            }
+            variant="primary"
+            className="group h-14 w-full rounded-full border-none bg-matcha-accent px-8 text-base font-bold normal-case tracking-normal text-white shadow-lg hover:-translate-y-0.5 hover:bg-[#d95c78] hover:shadow-xl xsmall:w-auto"
+            isLoading={isAdding}
+            data-testid="add-product-button"
+          >
+            {!selectedVariant && Object.keys(options).length === 0
+              ? "Válassz kiszerelést"
+              : !inStock || !isValidVariant
+              ? "Elfogyott"
+              : "Kosárba teszem"}
+            <span
+              aria-hidden
+              className="ml-2 transition-transform group-hover:translate-x-1"
+            >
+              →
+            </span>
+          </Button>
 
-        {/* Trust row — the reassurances Hungarian shoppers look for before
-            committing: COD, return window, delivery time, free shipping. */}
-        <ul className="mt-2 flex flex-col gap-1.5 text-xs text-matcha-text/70">
-          <li className="flex items-center gap-2">
-            <span aria-hidden>📦</span> 1–3 munkanapos kézbesítés (GLS /
-            FoxPost)
-          </li>
-          <li className="flex items-center gap-2">
-            <span aria-hidden>💳</span> Fizess bankkártyával vagy utánvéttel
-          </li>
-          <li className="flex items-center gap-2">
-            <span aria-hidden>🚚</span> 15 000 Ft felett ingyenes szállítás
-          </li>
-          <li className="flex items-center gap-2">
-            <span aria-hidden>↩️</span> 14 napos elállási jog
-          </li>
-        </ul>
+          <LocalizedClientLink
+            href="/store"
+            className="inline-flex h-14 w-full items-center justify-center rounded-full border border-[#557563] bg-white/80 px-8 text-base font-bold text-[#234c38] backdrop-blur-sm transition-colors hover:bg-white xsmall:w-auto"
+          >
+            Vissza a boltba
+          </LocalizedClientLink>
+        </div>
+
+        <p className="pt-1 text-center text-xs leading-relaxed text-[#607368] small:text-left">
+          ✓ Ingyenes szállítás 15 000 Ft felett · ✓ 1–3 munkanap alatt házhoz
+        </p>
 
         <MobileActions
           product={product}

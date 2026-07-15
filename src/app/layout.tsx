@@ -1,6 +1,6 @@
 import { getBaseURL } from "@lib/util/env"
 import { Metadata } from "next"
-import { Nunito, Quicksand } from "next/font/google"
+import { Fraunces, Nunito, Quicksand } from "next/font/google"
 import GsapScrollEffects from "@modules/common/components/gsap-scroll-effects"
 import AnalyticsTracker from "@modules/common/components/analytics-tracker"
 import { Analytics } from "@vercel/analytics/next"
@@ -20,6 +20,14 @@ const quicksand = Quicksand({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-body",
+  display: "swap",
+})
+
+const fraunces = Fraunces({
+  subsets: ["latin", "latin-ext"],
+  weight: ["600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-editorial",
   display: "swap",
 })
 
@@ -53,7 +61,11 @@ const organizationJsonLd = {
 
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
-    <html lang="hu" data-mode="light" className={`${nunito.variable} ${quicksand.variable}`}>
+    <html
+      lang="hu"
+      data-mode="light"
+      className={`${nunito.variable} ${quicksand.variable} ${fraunces.variable}`}
+    >
       <body>
         <script
           type="application/ld+json"
