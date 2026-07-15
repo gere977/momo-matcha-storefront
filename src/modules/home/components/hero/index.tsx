@@ -1,8 +1,8 @@
-import Image from "next/image"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import HeroFamilyVisual from "./family-visual"
 
 // Hero entrance runs as pure CSS (`hero-in` keyframes in globals.css) so the
-// LCP image and headline are visible without waiting for the JS bundle —
+// LCP image and headline are visible without waiting for the JS bundle.
 // GSAP only drives the scroll parallax on [data-hero-section].
 const Hero = () => {
   return (
@@ -15,24 +15,23 @@ const Hero = () => {
       <div className="pointer-events-none absolute top-1/3 -right-20 w-[26rem] h-[26rem] rounded-full bg-matcha/25 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-32 left-1/4 w-80 h-80 rounded-full bg-vanilla/50 blur-3xl" />
 
-      <div className="content-container relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-6 items-center py-16 md:py-20 min-h-[82vh]">
+      <div className="content-container relative z-10 grid min-h-[82vh] grid-cols-1 items-center gap-10 py-12 md:grid-cols-[0.82fr_1.18fr] md:gap-8 md:py-16 lg:gap-14">
         {/* Copy */}
         <div className="text-center md:text-left">
           <span className="hero-in inline-block mb-5 px-4 py-1.5 rounded-full bg-matcha-accent text-white text-[11px] font-bold uppercase tracking-[2px] shadow-sm">
-            Új · ízesített matchák 🍓
+            Négy íz, egy Momo család
           </span>
           <h1
-            className="hero-in font-heading font-bold text-6xl md:text-7xl leading-[1.02] text-matcha-dark"
+            className="hero-in font-heading text-5xl font-bold leading-[1.02] text-matcha-dark small:text-6xl lg:text-7xl"
             style={{ animationDelay: "120ms" }}
           >
-            Találd meg a{" "}
-            <span className="text-matcha-accent">rituálédat</span>
+            Találd meg a <span className="text-matcha-accent">rituálédat</span>
           </h1>
           <p
             className="hero-in mt-5 text-lg text-matcha-text/75 max-w-md mx-auto md:mx-0"
             style={{ animationDelay: "240ms" }}
           >
-            Prémium, bio matcha Japánból — a klasszikus szertartásostól a
+            Prémium, bio matcha Japánból. A klasszikus szertartásostól a
             gyümölcsös ízesítettekig.
           </p>
           <div
@@ -40,7 +39,7 @@ const Hero = () => {
             style={{ animationDelay: "360ms" }}
           >
             <LocalizedClientLink
-              href="#matcha-csalad"
+              href="/store"
               className="group inline-flex items-center gap-3 pl-9 pr-3 py-3 rounded-full bg-matcha-accent text-white font-bold uppercase tracking-wider text-sm hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-transform duration-200 ease-out-quart shadow-lg shadow-matcha-accent/25"
             >
               Vásárolj most
@@ -60,23 +59,12 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Lifestyle photo with an offset color card behind it */}
+        {/* The whole product family replaces the old lifestyle portrait. */}
         <div
-          className="hero-in relative mx-auto w-full max-w-sm"
+          className="hero-in relative mx-auto w-full max-w-[44rem]"
           style={{ animationDelay: "200ms" }}
         >
-          <div className="absolute -inset-3 rotate-3 rounded-large bg-strawberry/30" />
-          <div className="absolute -inset-3 -rotate-2 rounded-large bg-matcha/20" />
-          <Image
-            src="/images/lifestyle-drinking.png"
-            alt="Matcha készítése kézzel, bambusz habverővel"
-            width={299}
-            height={437}
-            priority
-            fetchPriority="high"
-            sizes="(max-width: 768px) 90vw, 384px"
-            className="relative rounded-large shadow-2xl w-full h-auto object-cover"
-          />
+          <HeroFamilyVisual />
         </div>
       </div>
     </section>
