@@ -36,7 +36,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
     <div className="momo-product-page">
       <div className="relative z-10">
         <section
-          className="content-container grid items-center gap-8 pb-16 pt-4 xsmall:gap-12 xsmall:pt-8 small:grid-cols-2 small:pb-24"
+          className="content-container grid items-center gap-8 pb-8 pt-4 xsmall:gap-12 xsmall:pb-10 xsmall:pt-8 small:grid-cols-2 small:items-start small:pb-12"
           data-testid="product-container"
         >
           <ProductSplash product={product} images={images} />
@@ -55,9 +55,12 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             >
               <ProductActionsWrapper id={product.id} region={region} />
             </Suspense>
-            <ProductTabs product={product} />
           </div>
         </section>
+
+        <div className="content-container pb-16 small:pb-24">
+          <ProductTabs product={product} />
+        </div>
 
         <Suspense fallback={null}>
           <ProductReviews productId={product.id} />
