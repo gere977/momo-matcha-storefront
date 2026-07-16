@@ -2,10 +2,19 @@ import { Metadata } from "next"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { articles } from "@lib/content/articles"
 
-export const metadata: Metadata = {
-  title: "Matcha tudástár | Momo Matcha",
-  description:
-    "Útmutatók és tudnivalók a matcháról: elkészítés, koffein, minőség, receptek — a Momo Matcha tudástára.",
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ countryCode: string }>
+}): Promise<Metadata> {
+  const { countryCode } = await params
+  return {
+    title: "Matcha tudástár | Momo Matcha",
+    description:
+      "Útmutatók és tudnivalók a matcháról: elkészítés, koffein, minőség, receptek — a Momo Matcha tudástára.",
+    alternates: { canonical: "/hu/tudastar" },
+    robots: countryCode === "hu" ? undefined : { index: false, follow: true },
+  }
 }
 
 // The content hub listing. Articles live in lib/content/articles.ts.

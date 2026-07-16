@@ -7,11 +7,6 @@ import StoreTemplate from "@modules/store/templates"
 // (avoids stale ISR snapshots that made products load only intermittently).
 export const dynamic = "force-dynamic"
 
-export const metadata: Metadata = {
-  title: "Termékek",
-  description: "Fedezd fel az összes termékünket.",
-}
-
 type Params = {
   searchParams: Promise<{
     sortBy?: SortOptions
@@ -20,6 +15,21 @@ type Params = {
   params: Promise<{
     countryCode: string
   }>
+}
+
+export async function generateMetadata(props: Params): Promise<Metadata> {
+  const { countryCode } = await props.params
+
+  return {
+    title: "Prémium matcha teák és matcha szett | Momo Matcha",
+    description:
+      "Original, epres, vaníliás és csokoládés japán matcha fémdobozban, valamint matcha készítő szett. Találd meg a hozzád illő ízt.",
+    alternates: { canonical: "/hu/store" },
+    robots:
+      countryCode === "hu"
+        ? undefined
+        : { index: false, follow: true },
+  }
 }
 
 export default async function StorePage(props: Params) {

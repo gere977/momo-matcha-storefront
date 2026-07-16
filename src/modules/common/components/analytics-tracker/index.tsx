@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation"
 import { useEffect, useRef } from "react"
 import { trackEvent } from "@lib/util/analytics"
+import { CONSENT_EVENT } from "@modules/common/components/consent-manager"
 
 // Fires one beacon per route change to /api/track (first-party analytics -
 // no cookies, no external service). UTM params from the landing URL are
@@ -16,21 +17,32 @@ const AnalyticsTracker = () => {
     if (!pathname || lastTracked.current === pathname) {
       return
     }
-    lastTracked.current = pathname
 
-    // Strip the country code segment so stats group by real page
-    const normalized = pathname.replace(/^\/[a-z]{2}(\/|$)/, "/") || "/"
+    const emit = () => {
+      if (lastTracked.current === pathname) return
 
-    trackEvent("page_view", normalized, document.referrer || null)
+      // Strip the country code segment so stats group by real page
+      const normalized = pathname.replace(/^\/[a-z]{2}(\/|$)/, "/") || "/"
 
-    // Explicit funnel events on top of the pageview, so the admin funnel
-    // doesn't depend on path heuristics alone.
-    if (normalized.includes("/checkout")) {
-      trackEvent("begin_checkout", normalized)
+      trackEvent("page_view", normalized, document.referrer || null)
+
+      // trackEvent becomes a no-op without consent. Only mark the route as
+      // emitted once consent exists so accepting the banner records the
+      // current landing page instead of waiting for the next navigation.
+      try {
+        if (window.localStorage.getItem("momo_consent_v1") !== "all") return
+      } catch {
+        return
+      }
+
+      lastTracked.current = pathname
+      // Purchase is emitted by OrderAnalytics with transaction id, value,
+      // currency and items. A route-only purchase here would double count it.
     }
-    if (/\/order\/.+\/confirmed/.test(normalized)) {
-      trackEvent("purchase", normalized)
-    }
+
+    emit()
+    window.addEventListener(CONSENT_EVENT, emit)
+    return () => window.removeEventListener(CONSENT_EVENT, emit)
   }, [pathname])
 
   return null

@@ -1,6 +1,7 @@
 "use client"
 
 import { Heading, Text, clx } from "@medusajs/ui"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 import PaymentButton from "../payment-button"
 import { useSearchParams } from "next/navigation"
@@ -42,10 +43,29 @@ const Review = ({ cart }: { cart: any }) => {
           <div className="flex items-start gap-x-1 w-full mb-6">
             <div className="w-full">
               <Text className="txt-medium-plus text-matcha-text/70 mb-1">
-                A Rendelés leadása gombra kattintva elfogadod az Általános
-                Szerződési Feltételeinket és a Visszaküldési szabályzatunkat,
-                valamint megerősíted, hogy elolvastad az Adatvédelmi
-                szabályzatunkat.
+                A „Fizetési kötelezettséggel megrendelem” gombra kattintva
+                elfogadod az{" "}
+                <LocalizedClientLink
+                  href="/pages/aszf"
+                  className="font-semibold text-matcha-accent underline decoration-matcha-accent/30 underline-offset-4 hover:decoration-matcha-accent"
+                >
+                  Általános Szerződési Feltételeket
+                </LocalizedClientLink>
+                , a{" "}
+                <LocalizedClientLink
+                  href="/pages/refunds"
+                  className="font-semibold text-matcha-accent underline decoration-matcha-accent/30 underline-offset-4 hover:decoration-matcha-accent"
+                >
+                  visszaküldési szabályzatot
+                </LocalizedClientLink>
+                , és megerősíted, hogy elolvastad az{" "}
+                <LocalizedClientLink
+                  href="/pages/adatkezeles"
+                  className="font-semibold text-matcha-accent underline decoration-matcha-accent/30 underline-offset-4 hover:decoration-matcha-accent"
+                >
+                  adatkezelési tájékoztatót
+                </LocalizedClientLink>
+                .
               </Text>
             </div>
           </div>

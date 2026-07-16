@@ -11,6 +11,7 @@ import PaymentContainer, {
 } from "@modules/checkout/components/payment-container"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
+import { toHungarianCheckoutError } from "@lib/util/checkout-error"
 
 const Payment = ({
   cart,
@@ -99,7 +100,7 @@ const Payment = ({
         )
       }
     } catch (err: any) {
-      setError(err.message)
+      setError(toHungarianCheckoutError(err))
     } finally {
       setIsLoading(false)
     }

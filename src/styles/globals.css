@@ -1051,6 +1051,9 @@ body {
     right: -4%;
     left: -4%;
     padding: 0.45rem 0.35rem;
+    background: rgb(255 252 243 / 94%);
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .momo-hero-family-label strong {
@@ -1059,6 +1062,19 @@ body {
 
   .momo-hero-family-label small {
     display: none;
+  }
+}
+
+@media (hover: none) {
+  .momo-hero-family-label {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .momo-hero-family-cans:has(.momo-hero-family-can:hover)
+    .momo-hero-family-can:not(:hover) {
+    filter: none;
+    opacity: 1;
   }
 }
 

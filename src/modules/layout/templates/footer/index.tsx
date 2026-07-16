@@ -4,6 +4,7 @@ import { Text, clx } from "@medusajs/ui"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import NewsletterSignup from "@modules/layout/components/newsletter-signup"
+import ConsentSettingsButton from "@modules/common/components/consent-settings-button"
 
 export default async function Footer() {
   const { collections } = await listCollections({
@@ -58,7 +59,7 @@ export default async function Footer() {
                       >
                         <LocalizedClientLink
                           className={clx(
-                            "hover:text-ui-fg-base",
+                            "text-matcha-text/70 hover:text-matcha",
                             children && "txt-small-plus"
                           )}
                           href={`/categories/${c.handle}`}
@@ -72,7 +73,7 @@ export default async function Footer() {
                               children.map((child) => (
                                 <li key={child.id}>
                                   <LocalizedClientLink
-                                    className="hover:text-ui-fg-base"
+                                    className="text-matcha-text/70 hover:text-matcha"
                                     href={`/categories/${child.handle}`}
                                     data-testid="category-link"
                                   >
@@ -104,7 +105,7 @@ export default async function Footer() {
                   {collections?.slice(0, 6).map((c) => (
                     <li key={c.id}>
                       <LocalizedClientLink
-                        className="hover:text-ui-fg-base"
+                        className="text-matcha-text/70 hover:text-matcha"
                         href={`/collections/${c.handle}`}
                       >
                         {c.title}
@@ -126,6 +127,17 @@ export default async function Footer() {
                   <LocalizedClientLink href="/pages/aszf" className="hover:text-matcha">
                     ÁSZF
                   </LocalizedClientLink>
+                </li>
+                <li>
+                  <LocalizedClientLink
+                    href="/pages/adatkezeles"
+                    className="hover:text-matcha"
+                  >
+                    Adatkezelés és sütik
+                  </LocalizedClientLink>
+                </li>
+                <li>
+                  <ConsentSettingsButton />
                 </li>
                 <li>
                   <LocalizedClientLink href="/pages/shipping" className="hover:text-matcha">

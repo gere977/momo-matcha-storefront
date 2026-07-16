@@ -143,15 +143,35 @@ export default function ProductActions({
 
     setIsAdding(true)
 
-    await addToCart({
-      variantId: selectedVariant.id,
-      quantity,
-      countryCode,
-    })
+    try {
+      await addToCart({
+        variantId: selectedVariant.id,
+        quantity,
+        countryCode,
+      })
 
-    trackEvent("add_to_cart", pathname.replace(/^\/[a-z]{2}(\/|$)/, "/") || "/")
-
-    setIsAdding(false)
+      const amount = selectedVariant.calculated_price?.calculated_amount
+      const currency = selectedVariant.calculated_price?.currency_code
+      void trackEvent(
+        "add_to_cart",
+        pathname.replace(/^\/[a-z]{2}(\/|$)/, "/") || "/",
+        document.referrer,
+        {
+          value: typeof amount === "number" ? amount * quantity : undefined,
+          currency: currency ?? undefined,
+          items: [
+            {
+              item_id: selectedVariant.id,
+              item_name: product.title,
+              price: amount ?? undefined,
+              quantity,
+            },
+          ],
+        }
+      )
+    } finally {
+      setIsAdding(false)
+    }
   }
 
   // "Value per serving" framing: a serving is ~2g of matcha, so the size
@@ -285,9 +305,10 @@ export default function ProductActions({
           </LocalizedClientLink>
         </div>
 
-        <p className="pt-1 text-center text-xs leading-relaxed text-matcha-mist small:text-left">
-          ✓ Ingyenes szállítás 15 000 Ft felett · ✓ 1–3 munkanap alatt házhoz
-        </p>
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 pt-1 text-center text-xs leading-relaxed text-matcha-mist small:justify-start small:text-left">
+          <span>Ingyenes szállítás 15 000 Ft felett</span>
+          <span>Szállítási mód és várható idő a pénztárban</span>
+        </div>
 
         <MobileActions
           product={product}

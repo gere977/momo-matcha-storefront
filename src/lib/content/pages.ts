@@ -6,9 +6,36 @@
 // route. Paragraph `html` is authored by us and therefore trusted — it is
 // rendered via dangerouslySetInnerHTML to allow simple inline <strong>/<a>/<br>.
 //
-// NOTE: the ÁSZF still contains bracketed placeholders ([CÉG NEVE], [ADÓSZÁM],
-// [EMAIL], [TELEFONSZÁM], ...) ported 1:1 from the old Shopify theme. Replace
-// them with the real company data before going live.
+// Public operator details. The tax/registration/phone values intentionally
+// have no made-up fallback: add them in Vercel before legal sign-off and they
+// will appear automatically on the legal pages.
+const OPERATOR_NAME =
+  process.env.NEXT_PUBLIC_LEGAL_NAME ||
+  "Gere Viktor Sándor egyéni vállalkozó"
+const OPERATOR_ADDRESS =
+  process.env.NEXT_PUBLIC_LEGAL_ADDRESS ||
+  "2321 Szigetbecse, Erdősor utca 9."
+const OPERATOR_EMAIL =
+  process.env.NEXT_PUBLIC_LEGAL_EMAIL || "info@momomatcha.hu"
+const OPERATOR_TAX_NUMBER = process.env.NEXT_PUBLIC_LEGAL_TAX_NUMBER
+const OPERATOR_REGISTRATION_NUMBER =
+  process.env.NEXT_PUBLIC_LEGAL_REGISTRATION_NUMBER
+const OPERATOR_PHONE = process.env.NEXT_PUBLIC_LEGAL_PHONE
+
+const operatorDetails = [
+  `Név: <strong>${OPERATOR_NAME}</strong>`,
+  `Székhely: <strong>${OPERATOR_ADDRESS}</strong>`,
+  OPERATOR_TAX_NUMBER
+    ? `Adószám: <strong>${OPERATOR_TAX_NUMBER}</strong>`
+    : "",
+  OPERATOR_REGISTRATION_NUMBER
+    ? `Egyéni vállalkozói nyilvántartási szám: <strong>${OPERATOR_REGISTRATION_NUMBER}</strong>`
+    : "",
+  `E-mail: <strong><a href="mailto:${OPERATOR_EMAIL}">${OPERATOR_EMAIL}</a></strong>`,
+  OPERATOR_PHONE ? `Telefonszám: <strong>${OPERATOR_PHONE}</strong>` : "",
+]
+  .filter(Boolean)
+  .join("<br>")
 
 export type ContentBlock =
   | { type: "heading"; text: string }
@@ -24,25 +51,19 @@ export type ContentPage = {
 
 const aszf: ContentPage = {
   title: "Általános Szerződési Feltételek",
-  updated: "Hatályos: 2025. január 1-től",
+  updated: "Utolsó frissítés: 2026. július 16.",
   blocks: [
     { type: "heading", text: "1. Az Üzemeltető adatai" },
     {
       type: "paragraph",
-      html:
-        "Cégnév: <strong>[CÉG NEVE]</strong><br>" +
-        "Székhely: <strong>[SZÉKHELY]</strong><br>" +
-        "Adószám: <strong>[ADÓSZÁM]</strong><br>" +
-        "Cégjegyzékszám: <strong>[CÉGJEGYZÉKSZÁM]</strong><br>" +
-        "E-mail: <strong>[EMAIL]</strong><br>" +
-        "Telefonszám: <strong>[TELEFONSZÁM]</strong>",
+      html: operatorDetails,
     },
 
     { type: "heading", text: "2. Az ÁSZF hatálya és elfogadása" },
     {
       type: "paragraph",
       html:
-        "Jelen Általános Szerződési Feltételek (továbbiakban: ÁSZF) a <strong>[CÉG NEVE]</strong> (továbbiakban: Szolgáltató) által üzemeltetett <strong>momo-matcha.hu</strong> weboldalon (továbbiakban: Webáruház) elérhető szolgáltatások igénybevételének feltételeit tartalmazza.",
+        `Jelen Általános Szerződési Feltételek (továbbiakban: ÁSZF) a <strong>${OPERATOR_NAME}</strong> (továbbiakban: Szolgáltató) által üzemeltetett <strong>momomatcha.hu</strong> weboldalon (továbbiakban: Webáruház) elérhető szolgáltatások igénybevételének feltételeit tartalmazza.`,
     },
     {
       type: "paragraph",
@@ -69,7 +90,7 @@ const aszf: ContentPage = {
     {
       type: "paragraph",
       html:
-        "3.4. A Szolgáltató nem vállal felelősséget a hibásan megadott adatokból eredő következményekért. Elgépelés esetén a Vásárló a visszaigazolás kézhezvételét követően haladéktalanul értesítheti a Szolgáltatót az [EMAIL] e-mail-címen.",
+        `3.4. A Szolgáltató nem vállal felelősséget a hibásan megadott adatokból eredő következményekért. Elgépelés esetén a Vásárló a visszaigazolás kézhezvételét követően haladéktalanul értesítheti a Szolgáltatót az <a href="mailto:${OPERATOR_EMAIL}">${OPERATOR_EMAIL}</a> e-mail-címen.`,
     },
 
     { type: "heading", text: "4. Árak és fizetés" },
@@ -115,7 +136,7 @@ const aszf: ContentPage = {
     {
       type: "paragraph",
       html:
-        "6.2. Az elállási szándékát a Vásárló az [EMAIL] e-mail-címen vagy postai úton jelezheti a Szolgáltató felé. Az elállás határidőben érvényesítettnek minősül, ha a Vásárló az értesítést a 14 napos határidő lejárta előtt elküldi.",
+        `6.2. Az elállási szándékát a Vásárló az <a href="mailto:${OPERATOR_EMAIL}">${OPERATOR_EMAIL}</a> e-mail-címen vagy postai úton jelezheti a Szolgáltató felé. Az elállás határidőben érvényesítettnek minősül, ha a Vásárló az értesítést a 14 napos határidő lejárta előtt elküldi.`,
     },
     {
       type: "paragraph",
@@ -154,14 +175,16 @@ const aszf: ContentPage = {
     {
       type: "paragraph",
       html:
-        "A megrendelés során megadott személyes adatokat a Szolgáltató kizárólag a megrendelés teljesítése és az azt követő ügyfélszolgálati feladatok ellátása céljából kezeli, a hatályos GDPR (2016/679/EU rendelet) és az információs önrendelkezési jogról és az információszabadságról szóló 2011. évi CXII. törvény rendelkezéseinek megfelelően. A részletes adatkezelési tájékoztató a weboldalon külön oldalon érhető el.",
+        'A személyes adatok kezelésének céljait, jogalapját, időtartamát és az érintetti jogokat az <a href="/hu/pages/adatkezeles">Adatkezelési és süti tájékoztató</a> tartalmazza.',
     },
 
     { type: "heading", text: "9. Panaszkezelés és jogvita" },
     {
       type: "paragraph",
       html:
-        "9.1. Panasz vagy reklamáció esetén a Vásárló az [EMAIL] e-mail-címen, illetve a [TELEFONSZÁM] telefonszámon keresheti a Szolgáltatót. A Szolgáltató a panaszt 30 napon belül megvizsgálja és írásban válaszol.",
+        `9.1. Panasz vagy reklamáció esetén a Vásárló az <a href="mailto:${OPERATOR_EMAIL}">${OPERATOR_EMAIL}</a> e-mail-címen${
+          OPERATOR_PHONE ? `, illetve a ${OPERATOR_PHONE} telefonszámon` : ""
+        } keresheti a Szolgáltatót. A Szolgáltató a panaszt 30 napon belül megvizsgálja és írásban válaszol.`,
     },
     {
       type: "paragraph",
@@ -227,14 +250,14 @@ const shipping: ContentPage = {
     {
       type: "paragraph",
       html:
-        "Átvételkor kérjük, ellenőrizd a csomag épségét. Sérült csomagolás esetén kérheted a felbontás dokumentálását a futár jelenlétében, és jelezd felénk az [EMAIL] címen, hogy mielőbb megoldást találjunk.",
+        `Átvételkor kérjük, ellenőrizd a csomag épségét. Sérült csomagolás esetén kérheted a felbontás dokumentálását a futár jelenlétében, és jelezd felénk az <a href="mailto:${OPERATOR_EMAIL}">${OPERATOR_EMAIL}</a> címen, hogy mielőbb megoldást találjunk.`,
     },
 
     { type: "heading", text: "Kérdésed van?" },
     {
       type: "paragraph",
       html:
-        'Írj nekünk az <a href="mailto:[EMAIL]">[EMAIL]</a> címre — igyekszünk minden megkeresésre egy munkanapon belül válaszolni.',
+        `Írj nekünk az <a href="mailto:${OPERATOR_EMAIL}">${OPERATOR_EMAIL}</a> címre — igyekszünk minden megkeresésre egy munkanapon belül válaszolni.`,
     },
   ],
 }
@@ -254,7 +277,7 @@ const refunds: ContentPage = {
     {
       type: "paragraph",
       html:
-        "Elállási szándékodat az [EMAIL] e-mail-címen vagy postai úton jelezheted. Az elállás határidőben érvényesítettnek minősül, ha az értesítést a 14 napos határidő lejárta előtt elküldöd.",
+        `Elállási szándékodat az <a href="mailto:${OPERATOR_EMAIL}">${OPERATOR_EMAIL}</a> e-mail-címen vagy postai úton jelezheted. Az elállás határidőben érvényesítettnek minősül, ha az értesítést a 14 napos határidő lejárta előtt elküldöd.`,
     },
 
     { type: "heading", text: "A termék visszaküldése" },
@@ -280,6 +303,66 @@ const refunds: ContentPage = {
   ],
 }
 
+const privacy: ContentPage = {
+  title: "Adatkezelési és süti tájékoztató",
+  subtitle: "Érthetően arról, milyen adatot miért kezelünk",
+  updated: "Utolsó frissítés: 2026. július 16.",
+  blocks: [
+    { type: "heading", text: "1. Ki kezeli az adataidat?" },
+    {
+      type: "paragraph",
+      html: `${operatorDetails}<br><br>Adatvédelmi kérdés vagy érintetti kérelem esetén írj az <a href="mailto:${OPERATOR_EMAIL}">${OPERATOR_EMAIL}</a> címre.`,
+    },
+    { type: "heading", text: "2. Milyen adatokat és miért kezelünk?" },
+    {
+      type: "list",
+      items: [
+        "Rendelés teljesítése: név, e-mail, telefonszám, szállítási és számlázási adatok, rendelési és fizetési státusz. Jogalapja a szerződés teljesítése és a kapcsolódó jogi kötelezettségek teljesítése.",
+        "Vásárlói fiók: a regisztráció és a rendelési előzmények megjelenítéséhez szükséges adatok. Jogalapja a szerződés teljesítése, illetve a fiók létrehozására irányuló kérésed.",
+        "Ügyfélszolgálat és panaszkezelés: a megkeresésed tartalma és elérhetőséged. Jogalapja a szerződés teljesítése, jogi kötelezettség vagy jogos érdek.",
+        "Hírlevél és várólista: az e-mail-címed, a feliratkozás forrása, időpontja és hozzájárulási státusza. Jogalapja a hozzájárulásod, amelyet bármikor visszavonhatsz.",
+        "Termékértékelés: név vagy megjelenített név, csillagérték, szöveges vélemény és a kapcsolódó termék/rendelés azonosítója. A publikálás moderálás után történik.",
+        "Webshop működése és biztonsága: munkamenet-, kosár- és régióazonosítók, valamint korlátozott technikai naplók. Jogalapja a szolgáltatás működtetéséhez fűződő jogos érdek, illetve a szerződés teljesítése.",
+        "Hozzájárulásos analitika és hirdetési mérés: csak az elfogadásod után aktivált mérési azonosítók és események. Ezeket a süti beállításaidnál bármikor kikapcsolhatod.",
+      ],
+    },
+    { type: "heading", text: "3. Mennyi ideig őrizzük meg?" },
+    {
+      type: "paragraph",
+      html:
+        "A rendelési és számlázási adatokat a vonatkozó számviteli és adójogi megőrzési idő végéig; a fiókadataidat a fiók törléséig; a hozzájáruláson alapuló marketingadatokat a leiratkozásig; a saját, személyazonosításra nem törekvő forgalmi eseményeket legfeljebb 90 napig kezeljük. Panasz esetén az adatokat a jogi igények érvényesíthetőségéhez szükséges ideig őrizzük meg.",
+    },
+    { type: "heading", text: "4. Kik segítenek a szolgáltatásban?" },
+    {
+      type: "paragraph",
+      html:
+        "A webshop működéséhez adatfeldolgozókat veszünk igénybe, különösen a tárhely és alkalmazásfuttatás (Vercel, Railway), adatbázis (Neon), e-mail-küldés (Resend), online fizetés (Barion), valamint kézbesítés (a pénztárban kiválasztott futárszolgálat) területén. Hozzájárulásod esetén a forgalmi és hirdetési események mérésében a Google Analytics és a Meta Platforms eszközei is részt vehetnek. Csak a feladat elvégzéséhez szükséges adatokat adjuk át. Harmadik országba történő adattovábbításnál a szolgáltató által biztosított, GDPR szerinti megfelelő garanciákra támaszkodunk.",
+    },
+    { type: "heading", text: "5. Sütik és hasonló technológiák" },
+    {
+      type: "paragraph",
+      html:
+        "A feltétlenül szükséges sütik tartják meg a kosarat, a munkamenetet, a kiválasztott régiót és a biztonsági beállításokat; ezek nélkül a webshop nem működik megfelelően. Analitikai és hirdetési sütit csak előzetes hozzájárulás után használunk. A választásodat a süti beállításoknál később is módosíthatod.",
+    },
+    { type: "heading", text: "6. Milyen jogaid vannak?" },
+    {
+      type: "list",
+      items: [
+        "Tájékoztatást és másolatot kérhetsz a rólad kezelt adatokról.",
+        "Kérheted a pontatlan adatok helyesbítését, valamint – a jogszabályi korlátok között – a törlést vagy a kezelés korlátozását.",
+        "Tiltakozhatsz a jogos érdeken alapuló adatkezelés ellen, és kérheted az adathordozhatóságot.",
+        "A hozzájárulásodat bármikor visszavonhatod; ez nem érinti a visszavonás előtti adatkezelés jogszerűségét.",
+        "Panaszt tehetsz a Nemzeti Adatvédelmi és Információszabadság Hatóságnál (NAIH), vagy bírósághoz fordulhatsz.",
+      ],
+    },
+    {
+      type: "paragraph",
+      html:
+        'NAIH: <a href="https://www.naih.hu" target="_blank" rel="noopener">naih.hu</a>. Kérelmedre indokolatlan késedelem nélkül, legkésőbb a jogszabályban meghatározott határidőn belül válaszolunk.',
+    },
+  ],
+}
+
 const about: ContentPage = {
   title: "A mi történetünk",
   subtitle: "Rituálék a lassú élethez",
@@ -290,20 +373,20 @@ const about: ContentPage = {
         "A Momo Matcha egy egyszerű meggyőződésből született: a reggel akkor a legszebb, ha nem rohanunk át rajta. Egy csésze jól elkészített matcha lelassít, jelenlétre hív — apró rituálé, ami az egész napodnak irányt ad.",
     },
 
-    { type: "heading", text: "Uji dombjairól" },
+    { type: "heading", text: "Japánból a mindennapokba" },
     {
       type: "paragraph",
       html:
-        "Matcháink Japánból, <strong>Uji</strong> ősi teakertjeiből érkeznek, ahol évszázadok óta termesztenek ceremoniális minőségű zöld teát. Az árnyékolt táblákon nevelt levelek mélyzöld színt, gazdag umami ízt és selymes állagot adnak — ez a matcha esszenciája.",
+        "A Momo célja, hogy a japán matcha ne egy bonyolult, távoli szertartás legyen, hanem egy könnyen elkészíthető, szerethető napi pillanat. A pontos származási és minősítési adatokat minden termék saját oldalán tüntetjük fel.",
     },
 
     { type: "heading", text: "Amit fontosnak tartunk" },
     {
       type: "list",
       items: [
-        "Bio, ceremoniális minőség — kizárólag megbízható ujii gazdaságoktól.",
-        "Frissesség — kis tételben, légmentesen csomagolva, hogy a zamat megmaradjon.",
-        "Átláthatóság — tudod, honnan jön, amit a csészédbe teszel.",
+        "Őszinte termékinformáció — az összetevőket és elkészítési módot könnyen megtalálod.",
+        "Frissesség — jól záródó fémdobozban, fénytől és nedvességtől védve.",
+        "Kísérletezés — klasszikus és játékos ízek, forrón vagy jéggel.",
       ],
     },
 
@@ -318,6 +401,7 @@ const about: ContentPage = {
 
 export const contentPages: Record<string, ContentPage> = {
   aszf,
+  adatkezeles: privacy,
   shipping,
   refunds,
   about,

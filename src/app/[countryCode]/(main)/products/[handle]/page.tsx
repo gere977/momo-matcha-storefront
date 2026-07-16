@@ -95,7 +95,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   // branded default rather than repeating the title.
   const description =
     product.description?.replace(/\s+/g, " ").trim().slice(0, 160) ||
-    `${product.title} — prémium, bio ceremonial matcha Ujiból, Japánból. Rendelj a Momo Matcha webshopból!`
+    `${product.title} — japán matcha fémdobozban, elkészítési tippekkel és gyors magyarországi szállítással.`
 
   const socialImage = getAbsoluteArtworkUrl(
     getProductSocialImage(handle, product.thumbnail)
@@ -105,8 +105,12 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     title: `${product.title} | Momo Matcha`,
     description,
     alternates: {
-      canonical: `/${params.countryCode}/products/${handle}`,
+      canonical: `/hu/products/${handle}`,
     },
+    robots:
+      params.countryCode === "hu"
+        ? undefined
+        : { index: false, follow: true },
     openGraph: {
       title: `${product.title} | Momo Matcha`,
       description,

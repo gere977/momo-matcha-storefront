@@ -11,14 +11,7 @@ type OverviewProps = {
   orders: HttpTypes.StoreOrder[] | null
 }
 
-const getMomoPoints = (orders: HttpTypes.StoreOrder[] | null) => {
-  const totalSpentHuf = (orders ?? []).reduce((sum, order) => sum + (order.total ?? 0), 0)
-  return Math.floor(totalSpentHuf / 1000) * 10
-}
-
 const Overview = ({ customer, orders }: OverviewProps) => {
-  const points = getMomoPoints(orders)
-
   return (
     <div data-testid="overview-page-wrapper">
       <div className="hidden small:block">
@@ -42,29 +35,13 @@ const Overview = ({ customer, orders }: OverviewProps) => {
           </span>
         </div>
 
-        <div
-          className="relative overflow-hidden rounded-2xl text-white p-8 mb-10"
-          style={{
-            background: "linear-gradient(135deg, #7C9B5E 0%, #3B5A2E 100%)",
-          }}
-        >
-          <p className="text-xs font-semibold tracking-[2px] uppercase text-white/75 mb-2">
-            MoMo Pontjaim
-          </p>
-          <div className="flex items-baseline gap-2 mb-1">
-            <span className="font-heading text-6xl leading-none">{points}</span>
-            <span className="text-lg text-white/70 font-semibold">pont</span>
-          </div>
-          <p className="text-sm text-white/60">
-            10 pont minden elköltött 1.000 Ft után - beváltás hamarosan
-          </p>
-        </div>
-
         <div className="flex flex-col py-8 border-t border-matcha-kraft/40">
           <div className="flex flex-col gap-y-4 h-full col-span-1 row-span-2 flex-1">
             <div className="flex items-start gap-x-16 mb-6">
               <div className="flex flex-col gap-y-4">
-                <h3 className="font-heading text-2xl text-matcha-text">Profil</h3>
+                <h3 className="font-heading text-2xl text-matcha-text">
+                  Profil
+                </h3>
                 <div className="flex items-end gap-x-2">
                   <span
                     className="text-3xl-semi leading-none text-matcha"
@@ -80,7 +57,9 @@ const Overview = ({ customer, orders }: OverviewProps) => {
               </div>
 
               <div className="flex flex-col gap-y-4">
-                <h3 className="font-heading text-2xl text-matcha-text">Címek</h3>
+                <h3 className="font-heading text-2xl text-matcha-text">
+                  Címek
+                </h3>
                 <div className="flex items-end gap-x-2">
                   <span
                     className="text-3xl-semi leading-none text-matcha"
@@ -119,7 +98,9 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                         >
                           <Container className="bg-white border border-matcha-kraft/40 flex justify-between items-center p-4 rounded-xl">
                             <div className="grid grid-cols-3 grid-rows-2 text-small-regular gap-x-4 flex-1">
-                              <span className="font-semibold text-matcha-text/50">Dátum</span>
+                              <span className="font-semibold text-matcha-text/50">
+                                Dátum
+                              </span>
                               <span className="font-semibold text-matcha-text/50">
                                 Rendelésszám
                               </span>
@@ -137,7 +118,10 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                               >
                                 #{publicOrderNumber(order.display_id)}
                               </span>
-                              <span data-testid="order-amount" className="font-semibold text-matcha-dark">
+                              <span
+                                data-testid="order-amount"
+                                className="font-semibold text-matcha-dark"
+                              >
                                 {convertToLocale({
                                   amount: order.total,
                                   currency_code: order.currency_code,
@@ -160,7 +144,10 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                     )
                   })
                 ) : (
-                  <span className="text-matcha-text/50" data-testid="no-orders-message">
+                  <span
+                    className="text-matcha-text/50"
+                    data-testid="no-orders-message"
+                  >
                     Még nincs rendelésed
                   </span>
                 )}

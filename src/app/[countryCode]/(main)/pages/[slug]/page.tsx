@@ -8,7 +8,7 @@ type Params = Promise<{ countryCode: string; slug: string }>
 export async function generateMetadata(props: {
   params: Params
 }): Promise<Metadata> {
-  const { slug } = await props.params
+  const { countryCode, slug } = await props.params
   const page = contentPages[slug]
 
   if (!page) {
@@ -18,6 +18,13 @@ export async function generateMetadata(props: {
   return {
     title: `${page.title} | Momo Matcha`,
     description: page.subtitle ?? page.title,
+    alternates: {
+      canonical: `/hu/pages/${slug}`,
+    },
+    robots:
+      countryCode === "hu"
+        ? undefined
+        : { index: false, follow: true },
   }
 }
 

@@ -16,6 +16,29 @@ const nextConfig = {
   async redirects() {
     // The two guides moved from /pages/* into the /tudastar content hub.
     return [
+      // Retire the pre-migration English storefront. Keeping these URLs alive
+      // lets stale product photos/copy (and old review snippets) remain in the
+      // search index and social previews.
+      {
+        source: "/en",
+        destination: "/hu",
+        permanent: true,
+      },
+      {
+        source: "/en/:path*",
+        destination: "/hu/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:countryCode/content/privacy-policy",
+        destination: "/:countryCode/pages/adatkezeles",
+        permanent: true,
+      },
+      {
+        source: "/:countryCode/content/terms-of-use",
+        destination: "/:countryCode/pages/aszf",
+        permanent: true,
+      },
       {
         source: "/:countryCode/pages/matcha-keszites",
         destination: "/:countryCode/tudastar/matcha-keszites",

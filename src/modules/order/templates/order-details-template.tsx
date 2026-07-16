@@ -7,6 +7,7 @@ import Help from "@modules/order/components/help"
 import Items from "@modules/order/components/items"
 import OrderDetails from "@modules/order/components/order-details"
 import OrderSummary from "@modules/order/components/order-summary"
+import ReorderButton from "@modules/order/components/reorder-button"
 import ShippingDetails from "@modules/order/components/shipping-details"
 import React from "react"
 
@@ -37,6 +38,7 @@ const OrderDetailsTemplate: React.FC<OrderDetailsTemplateProps> = ({
       >
         <OrderDetails order={order} showStatus />
         <Items order={order} />
+        <ReorderButton order={order} />
         <ShippingDetails order={order} />
         <OrderSummary order={order} />
         <Help />

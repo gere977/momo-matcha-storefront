@@ -97,7 +97,9 @@ const ShippingAddress = ({
       {customer && (addressesInRegion?.length || 0) > 0 && (
         <Container className="mb-6 flex flex-col gap-y-4 p-5">
           <p className="text-small-regular">
-            {`Hi ${customer.first_name}, do you want to use one of your saved addresses?`}
+            {`Szia${
+              customer.first_name ? `, ${customer.first_name}` : ""
+            }! Használnád az egyik mentett címedet?`}
           </p>
           <AddressSelect
             addresses={customer.addresses}
@@ -174,7 +176,7 @@ const ShippingAddress = ({
           data-testid="shipping-country-select"
         />
         <Input
-          label="State / Province"
+          label="Megye / régió"
           name="shipping_address.province"
           autoComplete="address-level1"
           value={formData["shipping_address.province"]}
@@ -196,7 +198,7 @@ const ShippingAddress = ({
           label="E-mail"
           name="email"
           type="email"
-          title="Enter a valid email address."
+          title="Adj meg egy érvényes e-mail-címet."
           autoComplete="email"
           value={formData.email}
           onChange={handleChange}

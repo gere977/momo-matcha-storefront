@@ -63,7 +63,14 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   const metadata = {
     title: `${collection.title} | Momo Matcha`,
-    description: `${collection.title} – Momo Matcha prémium matcha webshop`,
+    description: `${collection.title} – japán matcha teák és matcha készítő szettek a Momo Matcha webshopból.`,
+    alternates: {
+      canonical: `/hu/collections/${params.handle}`,
+    },
+    robots:
+      params.countryCode === "hu"
+        ? undefined
+        : { index: false, follow: true },
   } as Metadata
 
   return metadata

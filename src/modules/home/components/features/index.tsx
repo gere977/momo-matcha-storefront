@@ -1,83 +1,48 @@
-const FEATURES = [
+const PROOFS = [
   {
-    title: "100% Bio",
-    body: "Egyenesen Uji, Japán forrásából — a ceremoniális matcha szülőhelyéről.",
-    icon: (
-      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M28 6 C28 6, 10 18, 10 32 C10 42.5 18 50 28 50 C38 50 46 42.5 46 32 C46 18 28 6 28 6 Z"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M28 18 C28 18, 20 28, 28 38"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
+    value: "4 íz",
+    label: "a tiszta umamitól a krémes kakaósig",
   },
   {
-    title: "Prémium",
-    body: "Kőőrléssel selymes porrá alakítva a legfinomabb, leggazdagabb ízért.",
-    icon: (
-      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M14 20 C14 14 20 10 28 10 C36 10 42 14 42 20 C42 26 38 30 34 32 L34 44 L22 44 L22 32 C18 30 14 26 14 20 Z"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <line x1="20" y1="38" x2="36" y2="38" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-        <line x1="22" y1="44" x2="34" y2="44" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      </svg>
-    ),
+    value: "1–2 g",
+    label: "matcha elég egy otthoni adaghoz",
   },
   {
-    title: "Fókusz & Nyugalom",
-    body: "Tiszta energia remegés nélkül — az L-teanin megőrzi az egyensúlyt és az éberséget.",
-    icon: (
-      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="28" cy="28" r="14" stroke="currentColor" strokeWidth="1.8" />
-        <circle cx="28" cy="28" r="6" stroke="currentColor" strokeWidth="1.4" />
-        <line x1="28" y1="8" x2="28" y2="13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-        <line x1="28" y1="43" x2="28" y2="48" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-        <circle cx="28" cy="28" r="2.5" fill="currentColor" />
-      </svg>
-    ),
+    value: "2 perc",
+    label: "és kész lehet a meleg vagy jeges italod",
   },
-]
-
-// Flavor-tinted icon circle per feature.
-const ICON_STYLES = [
-  "bg-matcha/15 text-matcha",
-  "bg-strawberry/20 text-strawberry",
-  "bg-sun/15 text-sun",
-]
+  {
+    value: "15 000 Ft",
+    label: "felett a szállítás a miénk",
+  },
+] as const
 
 const Features = () => {
   return (
-    <section className="bg-matcha-bg py-20 sm:py-24 px-6">
-      <div className="content-container grid grid-cols-1 small:grid-cols-3 gap-6 sm:gap-8">
-        {FEATURES.map((f, i) => (
+    <section
+      className="border-y border-matcha-kraft/45 bg-[#fffaf0] px-6"
+      aria-label="Momo Matcha röviden"
+    >
+      <div className="content-container grid grid-cols-2 py-5 small:grid-cols-4 small:py-0">
+        {PROOFS.map((proof, index) => (
           <div
-            key={f.title}
-            data-reveal-col
-            className="opacity-0 translate-y-[40px] text-center bg-matcha-cream rounded-large border border-matcha-kraft/50 p-8 hover:-translate-y-1 hover:shadow-lg hover:shadow-matcha-kraft/40 transition-[transform,box-shadow] duration-200 ease-out-quart"
+            key={proof.value}
+            className={`px-3 py-4 small:px-7 small:py-6 ${
+              index % 2 === 1 ? "border-l border-matcha-kraft/50" : ""
+            } ${
+              index > 1
+                ? "border-t border-matcha-kraft/50 small:border-t-0"
+                : ""
+            } ${
+              index > 0 ? "small:border-l small:border-matcha-kraft/50" : ""
+            }`}
           >
-            <div
-              className={`w-16 h-16 mx-auto mb-5 rounded-full flex items-center justify-center ${ICON_STYLES[i % ICON_STYLES.length]}`}
-            >
-              <div className="w-9 h-9">{f.icon}</div>
-            </div>
-            <h3 className="font-heading font-semibold text-2xl text-matcha-dark mb-2">
-              {f.title}
-            </h3>
-            <p className="text-sm text-matcha-text/70 leading-relaxed">{f.body}</p>
+            <strong className="block font-heading text-xl font-bold text-matcha-dark small:text-2xl">
+              {proof.value}
+            </strong>
+            <span className="mt-1 block max-w-[13rem] text-xs leading-snug text-matcha-text/55 small:text-sm">
+              {proof.label}
+            </span>
           </div>
         ))}
       </div>

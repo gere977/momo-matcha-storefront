@@ -43,7 +43,7 @@ export const FAQS: FaqItem[] = [
     category: "matcha",
     featured: true,
     q: "Honnan származik a Momo Matcha?",
-    a: "Matcháink Japánból, Uji régiójából érkeznek. Uji évszázadok óta a japán teakultúra egyik legismertebb központja; klímája és árnyékolási hagyományai különösen alkalmasak prémium matcha készítésére.",
+    a: "A jelenlegi Momo matchák Japánból származnak. Az egyes termékekhez igazolt, pontos származási és összetevő-információt mindig az adott termékoldalon és a csomagoláson tüntetjük fel.",
   },
   {
     id: "izesitett-matcha",

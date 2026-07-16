@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 // Footer newsletter capture — signups land in the backend waitlist table
 // with source "newsletter" (exportable from the admin Feliratkozók page).
@@ -60,6 +61,17 @@ const NewsletterSignup = () => {
           {state === "sending" ? "…" : "Feliratkozom"}
         </button>
       </div>
+      <p className="text-[11px] leading-relaxed text-matcha-text/55">
+        A Feliratkozom gombbal kéred a Momo leveleket. Bármikor egy kattintással
+        leiratkozhatsz. Részletek az{" "}
+        <LocalizedClientLink
+          href="/pages/adatkezeles"
+          className="underline underline-offset-2 hover:text-matcha-dark"
+        >
+          adatkezelési tájékoztatóban
+        </LocalizedClientLink>
+        .
+      </p>
       {state === "error" && (
         <p className="text-xs text-red-600">{message}</p>
       )}

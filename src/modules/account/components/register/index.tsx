@@ -24,8 +24,8 @@ const Register = ({ setCurrentView }: Props) => {
         Regisztráció
       </h1>
       <p className="text-center text-base-regular text-matcha-text/70 mb-4">
-        Csatlakozz a Momo Matcha közösséghez és gyűjts MoMo Pontokat minden
-        vásárlással.
+        Csatlakozz a Momo Matcha közösséghez, és lásd egy helyen a
+        rendeléseidet és címeidet.
       </p>
       <form className="w-full flex flex-col" action={formAction}>
         <div className="flex flex-col w-full gap-y-2">
@@ -71,14 +71,14 @@ const Register = ({ setCurrentView }: Props) => {
         <span className="text-center text-matcha-text/70 text-small-regular mt-6">
           A fiók létrehozásával elfogadod a Momo Matcha{" "}
           <LocalizedClientLink
-            href="/content/privacy-policy"
+            href="/pages/adatkezeles"
             className="underline text-matcha"
           >
-            Adatvédelmi szabályzatát
+            Adatkezelési tájékoztatóját
           </LocalizedClientLink>{" "}
           és{" "}
           <LocalizedClientLink
-            href="/content/terms-of-use"
+            href="/pages/aszf"
             className="underline text-matcha"
           >
             ÁSZF-jét

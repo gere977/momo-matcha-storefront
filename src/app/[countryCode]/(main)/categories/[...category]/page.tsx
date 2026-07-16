@@ -54,14 +54,18 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
     const description =
       productCategory.description ??
-      `${productCategory.name} – Momo Matcha prémium matcha webshop`
+      `${productCategory.name} – japán matcha teák és kiegészítők a Momo Matcha webshopból.`
 
     return {
       title,
       description,
       alternates: {
-        canonical: `${params.category.join("/")}`,
+        canonical: `/hu/categories/${params.category.join("/")}`,
       },
+      robots:
+        params.countryCode === "hu"
+          ? undefined
+          : { index: false, follow: true },
     }
   } catch (error) {
     notFound()

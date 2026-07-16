@@ -24,7 +24,8 @@ export async function generateMetadata(props: {
   return {
     title: `${article.title} | Momo Matcha`,
     description: article.description,
-    alternates: { canonical: `/${countryCode}/tudastar/${slug}` },
+    alternates: { canonical: `/hu/tudastar/${slug}` },
+    robots: countryCode === "hu" ? undefined : { index: false, follow: true },
     openGraph: {
       title: article.title,
       description: article.description,
@@ -37,9 +38,9 @@ export async function generateMetadata(props: {
 
 // Article (or HowTo) + BreadcrumbList JSON-LD, per the AEO plan: dates and
 // publisher in schema, question-form headings + direct answers in the body.
-function buildJsonLd(slug: string, countryCode: string) {
+function buildJsonLd(slug: string) {
   const article = articles[slug]
-  const url = `${BASE_URL}/${countryCode}/tudastar/${slug}`
+  const url = `${BASE_URL}/hu/tudastar/${slug}`
 
   const publisher = {
     "@type": "Organization",
@@ -86,8 +87,8 @@ function buildJsonLd(slug: string, countryCode: string) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Főoldal", item: `${BASE_URL}/${countryCode}` },
-      { "@type": "ListItem", position: 2, name: "Tudástár", item: `${BASE_URL}/${countryCode}/tudastar` },
+      { "@type": "ListItem", position: 1, name: "Főoldal", item: `${BASE_URL}/hu` },
+      { "@type": "ListItem", position: 2, name: "Tudástár", item: `${BASE_URL}/hu/tudastar` },
       { "@type": "ListItem", position: 3, name: article.title, item: url },
     ],
   }
@@ -110,7 +111,7 @@ export default async function ArticlePage(props: { params: Params }) {
 
   return (
     <div className="bg-matcha-cream">
-      {buildJsonLd(slug, countryCode).map((obj, i) => (
+      {buildJsonLd(slug).map((obj, i) => (
         <script
           key={i}
           type="application/ld+json"

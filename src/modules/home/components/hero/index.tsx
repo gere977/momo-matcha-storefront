@@ -31,8 +31,8 @@ const Hero = () => {
             className="hero-in mt-5 text-lg text-matcha-text/75 max-w-md mx-auto md:mx-0"
             style={{ animationDelay: "240ms" }}
           >
-            Prémium, bio matcha Japánból. A klasszikus szertartásostól a
-            gyümölcsös ízesítettekig.
+            Original és ízesített matchák 30 g-os fémdobozban. Tisztán, lattéban
+            vagy jéggel — te választasz.
           </p>
           <div
             className="hero-in mt-8 flex flex-wrap items-center gap-3 justify-center md:justify-start"

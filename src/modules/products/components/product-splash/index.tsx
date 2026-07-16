@@ -33,6 +33,7 @@ const ProductSplash = ({ product, images }: ProductSplashProps) => {
   const productImage = product.handle
     ? productImageOverrides[product.handle] ?? images[0]?.url
     : images[0]?.url
+  const isAccessorySet = product.handle === "matcha-szett"
 
   const replay = () => setSplashKey((key) => key + 1)
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
@@ -125,9 +126,13 @@ const ProductSplash = ({ product, images }: ProductSplashProps) => {
         {productImage && (
           <Image
             src={productImage}
-            alt={`${product.title} fémdoboz`}
-            width={576}
-            height={464}
+            alt={
+              isAccessorySet
+                ? `${product.title} matcha kiegészítők`
+                : `${product.title} fémdoboz`
+            }
+            width={isAccessorySet ? 681 : 576}
+            height={isAccessorySet ? 577 : 576}
             priority
             sizes="(max-width: 512px) 224px, (max-width: 1024px) 288px, 440px"
             className="momo-product-tin relative z-30 mb-4 h-auto w-56 object-contain drop-shadow-[0_40px_60px_rgba(0,0,0,0.3)] xsmall:mb-6 xsmall:w-72 small:w-full small:max-w-[440px]"
@@ -136,12 +141,12 @@ const ProductSplash = ({ product, images }: ProductSplashProps) => {
 
         <div className="absolute right-2 top-2 z-40 flex h-16 w-16 rotate-12 flex-col items-center justify-center rounded-full bg-matcha-accent text-center font-editorial font-bold text-white shadow-lg xsmall:right-6 xsmall:top-4 xsmall:h-20 xsmall:w-20 small:h-24 small:w-24">
           <span className="text-sm leading-none xsmall:text-base small:text-lg">
-            100%
+            {isAccessorySet ? "4" : "100%"}
           </span>
           <span className="mt-1 text-[8px] tracking-wider xsmall:text-[9px] small:text-[10px]">
-            JAPÁN
+            {isAccessorySet ? "RÉSZES" : "JAPÁN"}
             <br />
-            MATCHA
+            {isAccessorySet ? "SZETT" : "MATCHA"}
           </span>
         </div>
       </div>

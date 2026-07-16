@@ -3,6 +3,7 @@ import { Suspense } from "react"
 import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
 import RefinementList from "@modules/store/components/refinement-list"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
+import MomoFamilyBundle from "@modules/products/components/momo-family-bundle"
 
 import PaginatedProducts from "./paginated-products"
 
@@ -40,6 +41,14 @@ const StoreTemplate = ({
             rituálédhoz.
           </p>
         </header>
+
+        <Suspense
+          fallback={
+            <div className="mb-10 h-72 rounded-[2rem] bg-white/60 small:ml-[17.25rem] small:mb-14" />
+          }
+        >
+          <MomoFamilyBundle countryCode={countryCode} placement="store" />
+        </Suspense>
 
         <div className="flex flex-col small:flex-row small:items-start">
           <RefinementList sortBy={sort} />

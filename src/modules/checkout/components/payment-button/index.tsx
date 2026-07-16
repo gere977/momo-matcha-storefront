@@ -7,6 +7,7 @@ import { Button } from "@medusajs/ui"
 import { useElements, useStripe } from "@stripe/react-stripe-js"
 import React, { useState } from "react"
 import ErrorMessage from "../error-message"
+import { toHungarianCheckoutError } from "@lib/util/checkout-error"
 
 type PaymentButtonProps = {
   cart: HttpTypes.StoreCart
@@ -78,10 +79,10 @@ const RedirectPaymentButton = ({
       isLoading={submitting}
       onClick={handlePayment}
       size="large"
-      className="rounded-full bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider border-none"
+      className="min-h-12 whitespace-normal rounded-full border-none bg-matcha-accent px-5 text-center text-sm font-bold leading-tight text-white hover:bg-matcha"
       data-testid={dataTestId}
     >
-      Tovább a fizetéshez
+      Fizetési kötelezettséggel megrendelem
     </Button>
   )
 }
@@ -101,7 +102,7 @@ const StripePaymentButton = ({
   const onPaymentCompleted = async () => {
     await placeOrder()
       .catch((err) => {
-        setErrorMessage(err.message)
+        setErrorMessage(toHungarianCheckoutError(err))
       })
       .finally(() => {
         setSubmitting(false)
@@ -159,7 +160,7 @@ const StripePaymentButton = ({
             onPaymentCompleted()
           }
 
-          setErrorMessage(error.message || null)
+          setErrorMessage(toHungarianCheckoutError(error))
           return
         }
 
@@ -181,10 +182,10 @@ const StripePaymentButton = ({
         onClick={handlePayment}
         size="large"
         isLoading={submitting}
-        className="rounded-full bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider border-none"
+        className="min-h-12 whitespace-normal rounded-full border-none bg-matcha-accent px-5 text-center text-sm font-bold leading-tight text-white hover:bg-matcha"
         data-testid={dataTestId}
       >
-        Megrendelés leadása
+        Fizetési kötelezettséggel megrendelem
       </Button>
       <ErrorMessage
         error={errorMessage}
@@ -201,7 +202,7 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
   const onPaymentCompleted = async () => {
     await placeOrder()
       .catch((err) => {
-        setErrorMessage(err.message)
+        setErrorMessage(toHungarianCheckoutError(err))
       })
       .finally(() => {
         setSubmitting(false)
@@ -221,10 +222,10 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
         isLoading={submitting}
         onClick={handlePayment}
         size="large"
-        className="rounded-full bg-matcha-accent hover:bg-matcha text-white font-bold uppercase tracking-wider border-none"
+        className="min-h-12 whitespace-normal rounded-full border-none bg-matcha-accent px-5 text-center text-sm font-bold leading-tight text-white hover:bg-matcha"
         data-testid="submit-order-button"
       >
-        Megrendelés leadása
+        Fizetési kötelezettséggel megrendelem
       </Button>
       <ErrorMessage
         error={errorMessage}

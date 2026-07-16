@@ -3,7 +3,7 @@ import { Metadata } from "next"
 import { Fraunces, Nunito, Quicksand } from "next/font/google"
 import GsapScrollEffects from "@modules/common/components/gsap-scroll-effects"
 import AnalyticsTracker from "@modules/common/components/analytics-tracker"
-import { Analytics } from "@vercel/analytics/next"
+import ConsentManager from "@modules/common/components/consent-manager"
 import "styles/globals.css"
 
 // Rounded, friendly genZ display font for headings + the wordmark. Nunito has
@@ -54,7 +54,7 @@ const organizationJsonLd = {
   url: getBaseURL(),
   logo: `${getBaseURL()}/images/logo-transparent.png`,
   description:
-    "Prémium, bio ceremonial matcha Ujiból, Japánból — klasszikus és ízesített matchák magyar webshopja.",
+    "Japán matcha fémdobozban — klasszikus és játékos ízek magyar webshopja.",
   email: "info@momomatcha.hu",
   ...(socialLinks.length ? { sameAs: socialLinks } : {}),
 }
@@ -75,9 +75,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         />
         <GsapScrollEffects />
         <AnalyticsTracker />
-        {/* Vercel Web Analytics — cookieless page views + Web Vitals,
-            complements the first-party analytics-lite tracker. */}
-        <Analytics />
+        <ConsentManager />
         <main className="relative">{props.children}</main>
       </body>
     </html>

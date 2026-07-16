@@ -3,10 +3,19 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import FaqBrowser from "@modules/faq/components/faq-browser"
 import { FAQS } from "@modules/home/components/faq/data"
 
-export const metadata: Metadata = {
-  title: "Gyakori kérdések | Momo Matcha",
-  description:
-    "Válaszok a matcha elkészítéséről, koffeintartalmáról, tárolásáról, valamint a Momo Matcha rendelésről és szállításról.",
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ countryCode: string }>
+}): Promise<Metadata> {
+  const { countryCode } = await params
+  return {
+    title: "Gyakori kérdések | Momo Matcha",
+    description:
+      "Válaszok a matcha elkészítéséről, koffeintartalmáról, tárolásáról, valamint a Momo Matcha rendelésről és szállításról.",
+    alternates: { canonical: "/hu/gyik" },
+    robots: countryCode === "hu" ? undefined : { index: false, follow: true },
+  }
 }
 
 const faqJsonLd = {
