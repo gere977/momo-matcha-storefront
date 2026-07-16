@@ -426,10 +426,6 @@ body {
   transform: translateY(1%) scale(0.92);
 }
 
-.momo-card-art--original {
-  transform: translateY(7%) scale(1.74) rotate(-0.5deg);
-}
-
 .momo-card-origin {
   position: absolute;
   right: 8%;
@@ -465,25 +461,13 @@ body {
   transform: translateY(-2%) scale(0.97) rotate(0.5deg);
 }
 
-.group:hover .momo-card-art--original {
-  transform: translateY(3%) scale(1.8) rotate(0.8deg);
-}
-
 @media (min-width: 992px) {
   .momo-card-scene--featured .momo-card-art {
     transform: translateY(3%) scale(1.12) rotate(-0.5deg);
   }
 
-  .momo-card-scene--featured .momo-card-art--original {
-    transform: translateY(7%) scale(1.45) rotate(-0.5deg);
-  }
-
   .group:hover .momo-card-scene--featured .momo-card-art {
     transform: translateY(-1%) scale(1.17) rotate(0.8deg);
-  }
-
-  .group:hover .momo-card-scene--featured .momo-card-art--original {
-    transform: translateY(3%) scale(1.5) rotate(0.8deg);
   }
 }
 
@@ -652,7 +636,7 @@ body {
 }
 
 .momo-family-flavor--original .momo-family-tin {
-  transform: translateY(8%) scale(1.44) rotate(-1.6deg);
+  transform: translateY(6%) scale(1.13) rotate(-1.6deg);
 }
 
 .momo-family-flavor--strawberry .momo-family-tin {
@@ -681,7 +665,7 @@ body {
 
 .momo-family-flavor--original .momo-family-link:hover .momo-family-tin,
 .momo-family-flavor--original .momo-family-link:focus-visible .momo-family-tin {
-  transform: translateY(1%) scale(1.51) rotate(0deg);
+  transform: translateY(-1%) scale(1.19) rotate(0deg);
 }
 
 .momo-family-caption {

@@ -86,15 +86,18 @@ const ProductCardScene = ({
       />
     </svg>
 
+    {/* The sizes hint must cover the CSS transform: .momo-card-art scales
+        the tin ~1.34-1.39x beyond its layout box, so ask for ~40% more
+        pixels than the container width or the browser picks a source
+        that ends up visibly upscaled (blurry). */}
     <Image
       src={artwork.image}
       alt={title}
       fill
-      quality={72}
-      sizes="(max-width: 576px) 46vw, (max-width: 992px) 30vw, 320px"
+      quality={80}
+      sizes="(max-width: 576px) 64vw, (max-width: 992px) 42vw, 450px"
       className={clx("momo-card-art z-20 object-contain", {
         "momo-card-art--accessories": artwork.scene === "accessories",
-        "momo-card-art--original": artwork.scene === "original",
       })}
     />
 
