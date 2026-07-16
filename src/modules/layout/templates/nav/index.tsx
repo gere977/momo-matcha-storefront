@@ -34,6 +34,7 @@ export default async function Nav() {
               <NavLink href="/">Főoldal</NavLink>
               <NavLink href="/collections/matcha">Matcha Teák</NavLink>
               <NavLink href="/categories/kiegeszitok">Kiegészítők</NavLink>
+              <NavLink href="/store">Minden termék</NavLink>
             </div>
           </div>
 

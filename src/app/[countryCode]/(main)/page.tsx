@@ -7,19 +7,9 @@ import Reviews from "@modules/home/components/reviews"
 import Recipes from "@modules/home/components/recipes"
 import Faq from "@modules/home/components/faq"
 import ComingSoon from "@modules/home/components/coming-soon"
-import { HOME_FAQS } from "@modules/home/components/faq/data"
 
-// FAQPage structured data for rich results, built from the same copy the
-// accordion renders.
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: HOME_FAQS.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
-}
+// No FAQPage JSON-LD here: /gyik marks up the full FAQ set, and duplicating
+// the same questions on two URLs risks Google ignoring both.
 
 export const metadata: Metadata = {
   title: "Momo Matcha | Találd meg a rituálédat",
@@ -30,10 +20,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
       <Hero />
       <Features />
       <Story />

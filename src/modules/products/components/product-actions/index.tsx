@@ -119,6 +119,20 @@ export default function ProductActions({
     return false
   }, [selectedVariant])
 
+  // Cap the quantity stepper at the available stock so the add-to-cart call
+  // can't fail with an inventory error at checkout time.
+  const maxQuantity = useMemo(() => {
+    if (!selectedVariant) return 99
+    if (!selectedVariant.manage_inventory || selectedVariant.allow_backorder) {
+      return 99
+    }
+    return Math.max(1, selectedVariant.inventory_quantity ?? 0)
+  }, [selectedVariant])
+
+  useEffect(() => {
+    setQuantity((current) => Math.min(current, maxQuantity))
+  }, [maxQuantity])
+
   const actionsRef = useRef<HTMLDivElement>(null)
 
   const inView = useIntersection(actionsRef, "0px")
@@ -192,14 +206,14 @@ export default function ProductActions({
 
         <div className="flex flex-wrap items-end justify-center gap-4 pt-2 small:justify-start small:gap-6">
           <div>
-            <div className="mb-1 text-[10px] uppercase tracking-[0.2em] text-[#607368] xsmall:text-xs">
+            <div className="mb-1 text-[10px] uppercase tracking-[0.2em] text-matcha-mist xsmall:text-xs">
               Ár
             </div>
             <ProductPrice product={product} variant={selectedVariant} />
           </div>
 
           <div
-            className="flex h-11 items-center overflow-hidden rounded-full border border-[#557563] bg-white/70 text-[#234c38] backdrop-blur-sm"
+            className="flex h-11 items-center overflow-hidden rounded-full border border-matcha-moss bg-white/70 text-matcha-deep backdrop-blur-sm"
             aria-label="Mennyiség"
           >
             <button
@@ -216,10 +230,12 @@ export default function ProductActions({
             </span>
             <button
               type="button"
-              onClick={() => setQuantity((current) => current + 1)}
+              onClick={() =>
+                setQuantity((current) => Math.min(maxQuantity, current + 1))
+              }
               className="h-11 w-11 text-lg hover:bg-matcha-accent/10"
               aria-label="Mennyiség növelése"
-              disabled={isAdding}
+              disabled={isAdding || quantity >= maxQuantity}
             >
               +
             </button>
@@ -263,13 +279,13 @@ export default function ProductActions({
 
           <LocalizedClientLink
             href="/store"
-            className="inline-flex h-14 w-full items-center justify-center rounded-full border border-[#557563] bg-white/80 px-8 text-base font-bold text-[#234c38] backdrop-blur-sm transition-colors hover:bg-white xsmall:w-auto"
+            className="inline-flex h-14 w-full items-center justify-center rounded-full border border-matcha-moss bg-white/80 px-8 text-base font-bold text-matcha-deep backdrop-blur-sm transition-colors hover:bg-white xsmall:w-auto"
           >
             Vissza a boltba
           </LocalizedClientLink>
         </div>
 
-        <p className="pt-1 text-center text-xs leading-relaxed text-[#607368] small:text-left">
+        <p className="pt-1 text-center text-xs leading-relaxed text-matcha-mist small:text-left">
           ✓ Ingyenes szállítás 15 000 Ft felett · ✓ 1–3 munkanap alatt házhoz
         </p>
 

@@ -31,7 +31,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         </div>
 
         <h1
-          className="font-editorial text-[2.4rem] font-bold leading-[1.02] tracking-[-0.025em] text-[#234c38] xsmall:text-5xl small:text-6xl"
+          className="font-editorial text-[2.4rem] font-bold leading-[1.02] tracking-[-0.025em] text-matcha-deep xsmall:text-5xl small:text-6xl"
           data-testid="product-title"
         >
           {titleParts.map((part, index) =>
@@ -46,7 +46,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         </h1>
 
         <Text
-          className="max-w-xl whitespace-pre-line text-base leading-relaxed text-[#51665a] xsmall:text-lg"
+          className="max-w-xl whitespace-pre-line text-base leading-relaxed text-matcha-sage xsmall:text-lg"
           data-testid="product-description"
         >
           {product.description}

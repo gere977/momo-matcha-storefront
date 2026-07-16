@@ -55,6 +55,11 @@ module.exports = {
           dark: "#3B5A2E", // deep Fuji green
           kraft: "#E3D6C4", // kraft (pouch tone)
           cream: "#FBF8F1", // lightest cream (cards)
+          // PDP/store redesign palette (deep pine headings, muted sage UI).
+          deep: "#234C38", // headings, price, primary text on light bg
+          moss: "#557563", // borders, outlined controls
+          sage: "#51665A", // muted body copy
+          mist: "#607368", // muted labels, fine print
         },
         // Per-flavor accent tokens for badges / theming.
         sun: "#E23B2E", // rising-sun red (from the logo)

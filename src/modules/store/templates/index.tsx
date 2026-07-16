@@ -30,12 +30,12 @@ const StoreTemplate = ({
             Japánból, gondosan válogatva
           </p>
           <h1
-            className="text-balance font-editorial text-4xl font-bold leading-[0.98] tracking-[-0.035em] text-[#234c38] xsmall:text-5xl small:text-6xl"
+            className="text-balance font-editorial text-4xl font-bold leading-[0.98] tracking-[-0.035em] text-matcha-deep xsmall:text-5xl small:text-6xl"
             data-testid="store-page-title"
           >
             Találd meg a <span className="italic">matchád.</span>
           </h1>
-          <p className="mt-4 max-w-xl text-sm leading-relaxed text-[#51665a] xsmall:text-base">
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-matcha-sage xsmall:text-base">
             Tiszta vagy ízesített matcha, plusz minden kellék a saját lassú
             rituálédhoz.
           </p>

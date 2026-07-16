@@ -1,16 +1,12 @@
 "use client"
 
 import { useState } from "react"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
-const FLAVORS = [
-  { id: "vanilias", label: "Vaníliás", emoji: "🍦" },
-  { id: "oszibarackos", label: "Őszibarackos", emoji: "🍑" },
-]
-
-// Waitlist capture for the upcoming flavors — the emails land in the
+// Waitlist capture for the upcoming peach flavor — the emails land in the
 // backend waitlist_signup table, so launch day starts with an audience.
+// (The vanilla flavor graduated from this section to a live product.)
 const ComingSoon = () => {
-  const [flavor, setFlavor] = useState(FLAVORS[0].id)
   const [email, setEmail] = useState("")
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">(
     "idle"
@@ -24,7 +20,7 @@ const ComingSoon = () => {
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, source: flavor }),
+        body: JSON.stringify({ email, source: "oszibarackos" }),
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) throw new Error(data?.message)
@@ -48,11 +44,18 @@ const ComingSoon = () => {
               HAMAROSAN
             </span>
             <h2 className="font-heading font-bold text-4xl small:text-5xl text-matcha-text mb-3">
-              Új ízek érkeznek
+              🍑 Az őszibarackos úton van
             </h2>
             <p className="text-matcha-text/70 max-w-md mx-auto mb-8">
-              A vaníliás és az őszibarackos matcha már úton van. Iratkozz fel,
-              és elsőként szólunk, amint kóstolható!
+              Iratkozz fel, és elsőként szólunk, amint kóstolható! A vaníliás
+              már megérkezett —{" "}
+              <LocalizedClientLink
+                href="/products/vanilias-premium-momo-matcha"
+                className="font-bold text-matcha-accent hover:underline"
+              >
+                kóstold meg itt
+              </LocalizedClientLink>
+              .
             </p>
 
             {state === "done" ? (
@@ -64,24 +67,6 @@ const ComingSoon = () => {
                 onSubmit={submit}
                 className="flex flex-col items-center gap-4"
               >
-                <div className="flex gap-2" role="radiogroup" aria-label="Ízesítés">
-                  {FLAVORS.map((f) => (
-                    <button
-                      key={f.id}
-                      type="button"
-                      role="radio"
-                      aria-checked={flavor === f.id}
-                      onClick={() => setFlavor(f.id)}
-                      className={`px-5 py-2 rounded-full text-sm font-bold border transition-colors ${
-                        flavor === f.id
-                          ? "bg-matcha text-white border-matcha"
-                          : "bg-white text-matcha-text border-matcha-kraft hover:border-matcha"
-                      }`}
-                    >
-                      {f.emoji} {f.label}
-                    </button>
-                  ))}
-                </div>
                 <div className="flex w-full max-w-md flex-col small:flex-row gap-2">
                   <input
                     type="email"

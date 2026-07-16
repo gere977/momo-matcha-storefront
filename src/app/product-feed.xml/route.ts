@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import {
   getAbsoluteArtworkUrl,
-  getProductSocialImage,
+  getProductCartImage,
 } from "@lib/util/product-artwork"
 
 // Google Merchant Center product feed (Shopping free listings + ads).
@@ -12,6 +12,9 @@ export const revalidate = 3600
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://momomatcha.hu"
 const COUNTRY = process.env.NEXT_PUBLIC_DEFAULT_REGION || "hu"
+
+// Non-tea products need a different Google taxonomy branch than the teas.
+const ACCESSORY_HANDLES = new Set(["matcha-szett"])
 
 function esc(s: string): string {
   return s
@@ -70,10 +73,15 @@ export async function GET() {
 
   for (const product of products) {
     const link = `${BASE_URL}/${COUNTRY}/products/${product.handle}`
+    // Google crops Shopping thumbnails roughly square, so use the tin render
+    // (product fills the frame) rather than the landscape splash scene.
     const productImage = getAbsoluteArtworkUrl(
-      getProductSocialImage(product.handle, product.thumbnail),
+      getProductCartImage(product.handle, product.thumbnail),
       BASE_URL
     )
+    const googleCategory = ACCESSORY_HANDLES.has(product.handle)
+      ? "Home &amp; Garden &gt; Kitchen &amp; Dining &gt; Kitchen Tools &amp; Utensils"
+      : "Food, Beverages &amp; Tobacco &gt; Beverages &gt; Tea &amp; Infusions"
     const description = (product.description ?? product.title ?? "")
       .replace(/\s+/g, " ")
       .trim()
@@ -110,7 +118,7 @@ export async function GET() {
     <g:condition>new</g:condition>
     <g:brand>Momo Matcha</g:brand>
     <g:identifier_exists>false</g:identifier_exists>
-    <g:google_product_category>Food, Beverages &amp; Tobacco &gt; Beverages &gt; Tea &amp; Infusions</g:google_product_category>
+    <g:google_product_category>${googleCategory}</g:google_product_category>
   </item>`
       )
     }

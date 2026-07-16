@@ -22,7 +22,7 @@ export default function ProductPrice({
   }
 
   return (
-    <div className="flex flex-col text-[#234c38]">
+    <div className="flex flex-col text-matcha-deep">
       <span
         className={clx(
           "font-editorial text-4xl font-bold leading-none xsmall:text-[2.75rem]",

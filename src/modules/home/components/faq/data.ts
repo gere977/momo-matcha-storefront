@@ -55,7 +55,7 @@ export const FAQS: FaqItem[] = [
     id: "elkeszites",
     category: "rituale",
     q: "Hogyan készítsem el csomómentesen?",
-    a: "Szitálj 1–2 gramm matchát a tálba, adj hozzá körülbelül 50 ml, 80 °C-os vizet, majd bambusz habverővel gyors, W alakú mozdulatokkal habosítsd fel. Ezután öntsd fel további vízzel vagy tejjel.",
+    a: "Szitálj 1–2 gramm matchát a tálba, adj hozzá 70–80 ml, kb. 75–80 °C-os vizet, majd bambusz habverővel gyors, W alakú mozdulatokkal habosítsd fel. Ezután öntsd fel további vízzel vagy tejjel.",
   },
   {
     id: "vizhomerseklet",
